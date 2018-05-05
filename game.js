@@ -159,3 +159,7 @@ function update() {
     // Control movement and animations for player 2
     //player2Group.forEach(function(player) {controlPlayer(player, 'player2');}, this);
 }
+
+function render() {
+    
+}
