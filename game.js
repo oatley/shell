@@ -1,4 +1,4 @@
-var game = new Phaser.Game(480, 270, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(480, 270, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
 
 // Player objects
 var player1;
@@ -127,8 +127,18 @@ function create() {
     // Start the simple physics
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
+    // Background colour
+    game.stage.backgroundColor = '#943021';
+
+
     // Enable fullscreen functionality
     game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+    game.input.activePointer.leftButton.onDown.add(toggleFullscreen, this);
+    // Keep original size
+    // game.scale.fullScreenScaleMode = Phaser.ScaleManager.NO_SCALE;
+    // Maintain aspect ratio
+    // game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+
 
     // Setup controls
     Player1Controls();
@@ -137,14 +147,11 @@ function create() {
 
     // Capture mouse input for toggleFullscreen
     game.input.mouse.capture = true;
+
+
 }
 
 function update() {
-    console.log(game.input.activePointer.leftButton.isDown);
-    // toggleFullscreen with click
-    if (game.input.activePointer.leftButton.isDown) {
-        toggleFullscreen();
-    }
 
     // Control movement and animations for player 1
     //player1Group.forEach(function(player) {controlPlayer(player, 'player1');}, this);
