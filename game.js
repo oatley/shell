@@ -1,4 +1,16 @@
-var game = new Phaser.Game(480, 270, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
+var config = {
+    width: 480,
+    height: 270,
+    renderer: Phaser.AUTO,
+    antialias: false,
+    multiTexture: true,
+    state: {
+        preload: preload,
+        create: create,
+        update: update
+    }
+}
+var game = new Phaser.Game(config);
 
 // Player objects
 var player1;
@@ -31,7 +43,8 @@ var playerMoveSpeed = 250;
 var playerJumpSpeed = -650; // Negative number
 var playerJumping = false;
 
-
+// maps
+var groundGroup;
 
 function toggleFullscreen() {
     if (game.scale.isFullScreen) {
@@ -74,7 +87,7 @@ function loadImages() {
     // Load images platforms
 
     // Load images ground
-
+    game.load.image('ground', 'assets/sprites/maps/ground.png');
 }
 
 // Load spritesheets
@@ -89,14 +102,19 @@ function loadAnimations() {
 
 }
 
+function createMap1(groundGroup) {
+    var ground = game.add.sprite(0, game.world.height - 64, 'ground');
+    groundGroup.add(ground);
+}
+
 function createBattery(playerGroup) {
     // Positions
     if (playerGroup === player1Group) {
-        var x = game.world.width/2 - 100 ;
-        var y = game.world.height - 100
+        var x = Number(game.world.width/2 - 200) ;
+        var y = Number(game.world.height - 100)
     } else if (playerGroup === player2Group) {
-        var x = game.world.width/2 + 100 ;
-        var y = game.world.height - 100
+        var x = Number(game.world.width/2 + 200) ;
+        var y = Number(game.world.height - 100)
     }
 
     // Design each character with custom stuff
@@ -239,53 +257,49 @@ function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     // Background colour
-    game.stage.backgroundColor = '#943021';
+    game.stage.backgroundColor = '#6bc4ff';
 
+    // Configure fullscreen mode and scale
     game.scale.minWidth = 480;
     game.scale.minHeight = 270;
-    //game.scale.maxWidth = 1920;
-    //game.scale.maxHeight = 1080;
-    //game.scale.pageAlignHorizontally = true;
+    game.scale.maxWidth = 1920;
+    game.scale.maxHeight = 1080;
+    game.scale.pageAlignHorizontally = true;
     game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
-    //game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     game.stage.smoothed = false;
-
-    // Enable fullscreen functionality
-    //game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
-    //console.log(Phaser.ScaleManager);
     game.input.activePointer.leftButton.onDown.add(toggleFullscreen, this);
-    // Keep original size
-    // game.scale.fullScreenScaleMode = Phaser.ScaleManager.NO_SCALE;
-    // Maintain aspect ratio
-    // game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
-
 
     // Setup controls
     player1Controls();
     player2Controls();
     cursors = game.input.keyboard.createCursorKeys();
-
-    // Capture mouse input for toggleFullscreen
     game.input.mouse.capture = true;
 
     // Create player groups
     player1Group = game.add.group();
     player2Group = game.add.group();
+    groundGroup = game.add.group();
+
+    // Create map1
+    createMap1();
 
     // Create characters
     createBattery(player1Group);
 
+    game.world.bringToTop(player1Group);
+    game.world.bringToTop(player2Group);
 
 }
 
 function update() {
+    // Colliders
+    var groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
+    var groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
+
     // Control movement and animations for player 1
     player1Group.forEach(function(player) {controlPlayer(player, player1Group);}, this);
 
     // Control movement and animations for player 2
     //player2Group.forEach(function(player) {controlPlayer(player, 'player2');}, this);
-}
-
-function render() {
-
 }
