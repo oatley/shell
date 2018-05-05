@@ -39,13 +39,14 @@ var attackPlayer2Button;
 // Default player stats
 var playerDirection = 'left';
 var playerJumpSensitivity = -5; // Negative number, default is about -2.8 falling always
-var playerMoveSpeed = 50;
-var playerJumpSpeed = -350; // Negative number
+var playerMoveSpeed = 50; // 50
+var playerJumpSpeed = -650; // Negative number // -350
 var playerJumping = false;
 
 // maps
 var groundGroup;
 var worldBoundsGroup;
+var platformGroup;
 
 var range = Phaser.ArrayUtils.numberArray;
 //var numbers = new Phaser.ArrayUtils();
@@ -112,7 +113,8 @@ function loadAnimations() {
 
 }
 
-function createMap1(groundGroup, worldWrapGroup) {
+// Create a second and 3rd map off screen so the doubles never get out of sync
+function createMap1(groundGroup, worldWrapGroup, platformGroup) {
     for (var i = 0; i < 8; i++) {
         var sky = game.add.sprite(0 + (64*i), 0, 'sky1');
     }
@@ -125,8 +127,20 @@ function createMap1(groundGroup, worldWrapGroup) {
     for (var i = 0; i < 8; i++) {
         var sky = game.add.sprite(0 + (64*i), 192, 'sky4');
     }
-    var mountain = game.add.sprite(0, -64, 'mountain');
+    var mountain = game.add.sprite(0, -48, 'mountain');
     var cloud = game.add.sprite(game.world.width - 128, -32, 'cloud');
+
+
+    var platform = platformGroup.create(game.world.width/2 - 64, -40, 'platform');
+    platform.body.immovable = true;
+    platform.body.setSize(100, 4, 14, 110);
+    var platform2 = platformGroup.create(48, 24, 'platform');
+    platform2.body.immovable = true;
+    platform2.body.setSize(100, 4, 14, 110);
+    var platform3 = platformGroup.create(game.world.width - 128 - 48, 24, 'platform');
+    platform3.body.immovable = true;
+    platform3.body.setSize(100, 4, 14, 110);
+
     for (var i = 0; i < 10; i++) {
         var ground = groundGroup.create(-64 + (64*i), game.world.height - 64, 'ground');
         ground.body.immovable = true;
@@ -175,7 +189,7 @@ function createBattery(playerGroup, x = 0, y = 0) {
     player.events.onOutOfBounds.add(worldWrapDieLoser, this);
 
     //  Player physics properties. Give the little guy a slight bounce.
-    player.body.bounce.y = 0.2;
+    player.body.bounce.y = 0;
     player.body.gravity.y = 1000;
     player.body.collideWorldBounds = false;
     player.body.setSize(32, 60, 16, 0);
@@ -368,6 +382,7 @@ function worldWrap(bounds, player) {
         }
 
         game.world.bringToTop(player.group);
+        game.world.bringToTop(platformGroup);
     }
 }
 
@@ -421,8 +436,12 @@ function create() {
     worldWrapGroup = game.add.group();
     worldWrapGroup.enableBody = true;
 
+    // platforms
+    platformGroup = game.add.group();
+    platformGroup.enableBody = true;
+
     // Create map1
-    createMap1(groundGroup, worldWrapGroup);
+    createMap1(groundGroup, worldWrapGroup, platformGroup);
 
     // Create characters
     //createBattery(player1Group);
@@ -431,6 +450,7 @@ function create() {
     game.world.bringToTop(groundGroup);
     game.world.bringToTop(player1Group);
     game.world.bringToTop(player2Group);
+    game.world.bringToTop(platformGroup);
 
     console.log(player1Group);
     console.log(player2Group);
@@ -443,6 +463,7 @@ function update() {
     var groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
     var groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
     var worldWrapCollision = game.physics.arcade.overlap(player1Group, worldWrapGroup);
+    var platformCollision = game.physics.arcade.collide(player1Group, platformGroup);
 
     // Control movement and animations for player 1
     player1Group.forEach(function(player) {controlPlayer(player, player1Group);}, this);
