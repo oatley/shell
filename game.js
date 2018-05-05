@@ -24,7 +24,7 @@ var leftPlayer2Button;
 var rightPlayer2Button;
 var attackPlayer2Button;
 
-function toggleFullscreen()) {
+function toggleFullscreen() {
     if (game.scale.isFullScreen) {
         game.scale.stopFullScreen();
     } else {
