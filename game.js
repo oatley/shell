@@ -152,7 +152,6 @@ function create() {
 }
 
 function update() {
-
     // Control movement and animations for player 1
     //player1Group.forEach(function(player) {controlPlayer(player, 'player1');}, this);
 
@@ -161,5 +160,5 @@ function update() {
 }
 
 function render() {
-    
+
 }
