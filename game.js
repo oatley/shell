@@ -1,4 +1,4 @@
-var game = new Phaser.Game(1280, 800, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(480, 270, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 // Player objects
 var player1;
@@ -24,8 +24,16 @@ var leftPlayer2Button;
 var rightPlayer2Button;
 var attackPlayer2Button;
 
+function toggleFullscreen()) {
+    if (game.scale.isFullScreen) {
+        game.scale.stopFullScreen();
+    } else {
+        game.scale.startFullScreen(false);
+    }
+}
+
 // Set player 1 controls
-function Player1Controls() {
+function player1Controls() {
     // Keyboard controls
     upPlayer1Button = game.input.keyboard.addKey(Phaser.Keyboard.W);
     downPlayer1Button = game.input.keyboard.addKey(Phaser.Keyboard.S);
@@ -38,7 +46,7 @@ function Player1Controls() {
 }
 
 // Set player 2 controls
-function Player2Controls() {
+function player2Controls() {
     // Keyboard controls
     upPlayer2Button = game.input.keyboard.addKey(Phaser.Keyboard.UP);
     downPlayer2Button = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
@@ -62,7 +70,7 @@ function loadImages() {
 
 // Load spritesheets
 function loadSpriteSheets() {
-
+    game.load.spritesheet('battery', 'assets/sprites/characters/battery-spritesheet.png', 64, 64);
 
 
 }
@@ -119,14 +127,24 @@ function create() {
     // Start the simple physics
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
+    // Enable fullscreen functionality
+    game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+
     // Setup controls
     Player1Controls();
     Player2Controls();
     cursors = game.input.keyboard.createCursorKeys();
 
+    // Capture mouse input for toggleFullscreen
+    game.input.mouse.capture = true;
 }
 
 function update() {
+    // toggleFullscreen with click
+    if (game.input.activePointer.leftButton.isDown) {
+        toggleFullscreen();
+    }
+
     // Control movement and animations for player 1
     player1Group.forEach(function(player) {controlPlayer(player, 'player1');}, this);
 
