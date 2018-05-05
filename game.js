@@ -140,14 +140,15 @@ function create() {
 }
 
 function update() {
+    console.log(game.input.activePointer.leftButton.isDown);
     // toggleFullscreen with click
     if (game.input.activePointer.leftButton.isDown) {
         toggleFullscreen();
     }
 
     // Control movement and animations for player 1
-    player1Group.forEach(function(player) {controlPlayer(player, 'player1');}, this);
+    //player1Group.forEach(function(player) {controlPlayer(player, 'player1');}, this);
 
     // Control movement and animations for player 2
-    player2Group.forEach(function(player) {controlPlayer(player, 'player2');}, this);
+    //player2Group.forEach(function(player) {controlPlayer(player, 'player2');}, this);
 }
