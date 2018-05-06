@@ -17,6 +17,9 @@ var game = new Phaser.Game(config);
 var player1;
 var player2;
 
+var gameOver;
+var youwinscreen;
+
 // Player 1 group
 var player1Group;
 
@@ -92,6 +95,8 @@ function player1Controls() {
     musicMinus1Button = game.input.keyboard.addKey(Phaser.Keyboard.MINUS);
     musicMinus2Button = game.input.keyboard.addKey(Phaser.Keyboard.UNDERSCORE);
 
+    resetGameButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+
     musicMuteButton.onDown.add(muteMusicVolume, this);
     musicPlus1Button.onDown.add(increaseMusicVolume, this);
     musicPlus2Button.onDown.add(increaseMusicVolume, this);
@@ -135,6 +140,8 @@ function loadImages() {
     game.load.image('blank', 'assets/sprites/characters/blank.png');
     game.load.image('green', 'assets/sprites/characters/green.png');
 
+    // Win screen
+    game.load.image('youwin', 'assets/sprites/ui/ui_winscreen.png');
 }
 
 // Load spritesheets
@@ -157,6 +164,8 @@ function muteMusicVolume() {
         music.mute = false;
     } else {
         music.mute = true;
+    }if (player2Group.length > 0) {
+        player2Group.forEach(function(player) {controlPlayer(player, player2Group);}, this);
     }
 }
 
@@ -523,6 +532,8 @@ function controlPlayer(player, group) {
         }
     }
 */
+
+
 // PLatform collisions are based on player only
     if (!downButton.isDown) {
         var platformCollision = game.physics.arcade.collide(player, platformGroup);
@@ -742,6 +753,37 @@ function dealDamage(bounds, player) {
 
 function youLose(player) {
     player.destroy();
+    youwinscreen = game.add.sprite(game.world.width/2, game.world.height/2, 'youwin');
+    youwinscreen.anchor.setTo(0.5, 0.5);
+    gameOver = true;
+}
+
+function startGame() {
+    if (player1Group.length > 0) {
+        player1Group.forEach(function(player) {
+            player.destroy()
+        }, this);
+    }
+
+    // Control movement and animations for player 2
+    if (player2Group.length > 0) {
+        player2Group.forEach(function(player) {
+            player.destroy()
+        }, this);
+    }
+    if (youwinscreen) {
+        youwinscreen.destroy();
+    }
+    gameOver = false;
+    // Create characters
+    //createBattery(player1Group);
+    createMech(player1Group);
+    createKnight(player2Group);
+
+    game.world.bringToTop(groundGroup);
+    game.world.bringToTop(player1Group);
+    game.world.bringToTop(player2Group);
+    game.world.bringToTop(platformGroup);
 }
 
 function create() {
@@ -797,16 +839,7 @@ function create() {
     // Create map1
     createMap1(groundGroup, worldWrapGroup, platformGroup);
 
-    // Create characters
-    //createBattery(player1Group);
-    createMech(player1Group);
-    createKnight(player2Group);
-
-    game.world.bringToTop(groundGroup);
-    game.world.bringToTop(player1Group);
-    game.world.bringToTop(player2Group);
-    game.world.bringToTop(platformGroup);
-
+    startGame();
 
     console.log(player1Group);
     console.log(player2Group);
@@ -832,10 +865,14 @@ function update() {
         player1Group.forEach(function(player) {controlPlayer(player, player1Group);}, this);
     }
 
-
     // Control movement and animations for player 2
     if (player2Group.length > 0) {
         player2Group.forEach(function(player) {controlPlayer(player, player2Group);}, this);
+    }
+
+    if (gameOver && resetGameButton.isDown) {
+        console.log('resetting the game');
+        startGame();
     }
 
 }
