@@ -199,18 +199,24 @@ function createMap1(groundGroup, worldWrapGroup, platformGroup) {
     var platform = platformGroup.create(game.world.width/2 - 64, -40, 'platform');
     platform.body.immovable = true;
     platform.body.setSize(100, 4, 14, 110);
+    platform.body.onCollide = new Phaser.Signal();
+    platform.body.onCollide.add(groundPlayer);
     platform.body.checkCollision.down = false;
     platform.body.checkCollision.left = false;
     platform.body.checkCollision.right = false;
     var platform2 = platformGroup.create(48, 24, 'platform');
     platform2.body.immovable = true;
     platform2.body.setSize(100, 4, 14, 110);
+    platform2.body.onCollide = new Phaser.Signal();
+    platform2.body.onCollide.add(groundPlayer);
     platform2.body.checkCollision.down = false;
     platform2.body.checkCollision.left = false;
     platform2.body.checkCollision.right = false;
     var platform3 = platformGroup.create(game.world.width - 128 - 48, 24, 'platform');
     platform3.body.immovable = true;
     platform3.body.setSize(100, 4, 14, 110);
+    platform3.body.onCollide = new Phaser.Signal();
+    platform3.body.onCollide.add(groundPlayer);
     platform3.body.checkCollision.down = false;
     platform3.body.checkCollision.left = false;
     platform3.body.checkCollision.right = false;
@@ -219,20 +225,24 @@ function createMap1(groundGroup, worldWrapGroup, platformGroup) {
         var ground = groundGroup.create(-64 + (64*i), game.world.height - 64, 'ground');
         ground.body.immovable = true;
         ground.body.setSize(64, 32, 0, 32);
+        ground.body.onCollide = new Phaser.Signal();
+        ground.body.onCollide.add(groundPlayer);
         var roof = groundGroup.create(-64 + (64*i), 0 - 64, 'ground');
         roof.body.setSize(64, 32, 0, 0);
         roof.body.immovable = true;
     }
-    var worldWrapTile = worldWrapGroup.create(-64, game.world.height - 64, 'ground');
+    //var worldWrapTile = worldWrapGroup.create(-64, game.world.height - 64, 'ground');
+    var worldWrapTile = worldWrapGroup.create(-64, 0, 'ground');
     worldWrapTile.body.immovable = true;
     worldWrapTile.body.onOverlap = new Phaser.Signal();
     worldWrapTile.body.onOverlap.add(worldWrap);
-    worldWrapTile.body.setSize(64, 480)
-    var worldWrapTile2 = worldWrapGroup.create(game.world.width, game.world.height -64, 'ground');
+    worldWrapTile.body.setSize(4, 1000, 60)
+    //var worldWrapTile2 = worldWrapGroup.create(game.world.width, game.world.height -64, 'ground');
+    var worldWrapTile2 = worldWrapGroup.create(game.world.width, 0, 'ground');
     worldWrapTile2.body.immovable = true;
     worldWrapTile2.body.onOverlap = new Phaser.Signal();
     worldWrapTile2.body.onOverlap.add(worldWrap)
-    worldWrapTile2.body.setSize(64, 480)
+    worldWrapTile2.body.setSize(4, 1000)
 
 }
 
@@ -259,6 +269,8 @@ function createBattery(playerGroup, x = 0, y = 0) {
     player.playerMoveSpeed = playerMoveSpeed;
     player.playerJumpSpeed = playerJumpSpeed;
     player.playerJumping = playerJumping;
+
+    player.brokenCollide = false;
 
     // World bounds
     player.checkWorldBounds = true;
@@ -318,6 +330,8 @@ function createMech(playerGroup, x = 0, y = 0, level = 'level1') {
     player.playerMoveSpeed = playerMoveSpeed;
     player.playerJumpSpeed = playerJumpSpeed;
     player.playerJumping = playerJumping;
+
+    player.brokenCollide = false;
 
     // World bounds
     player.checkWorldBounds = true;
@@ -507,28 +521,47 @@ function controlPlayer(player, group) {
                player.animations.play(player.playerLevel + '_idle_right');
            }
         }
+
+
     }
 
-       //  Allow the player to jump if they are touching the ground.
-   if (!upButton.isDown && player.playerJumping && player.body.velocity.y < 0) {
-       player.body.velocity.y = player.body.velocity.y * 0.5;
-       player.playerJumping = false;
-   } else if (upButton.isDown && (player.body.touching.down && !player.body.touching.up)) {
-       player.body.velocity.y = player.playerJumpSpeed;
-       player.playerJumping = true;
-   }
+    //  Allow the player to jump if they are touching the ground.
+    console.log(player.isGrounded);
+    if (!upButton.isDown && player.playerJumping && player.body.velocity.y < 0 && player.isGrounded) {
+        player.body.velocity.y = player.body.velocity.y * 0.5;
+        player.playerJumping = false;
+    } else if (upButton.isDown && (player.body.touching.down && !player.body.touching.up && player.isGrounded )) {
+        player.body.velocity.y = player.playerJumpSpeed;
+        player.playerJumping = true;
+        player.isGrounded = false;
+    }
 
 }
 
 function worldWrap(bounds, player) {
+    //player.brokenCollide = true;
+    //console.log(player.brokenCollide);
     if (player.group.length == 1) {
         // game.world.width - 64 is the bounds for rigth side
         // 0 is the bounds for left side
         var y = player.body.y;
         if (player.body.x < 0) {
-            var x = game.world.width -32;
+            if (player.playerLevel == 'level1') {
+                var x = game.world.width -32;
+            } else if (player.playerLevel == 'level2') {
+                var x = game.world.width -48;
+            } else if (player.playerLevel == 'level3') {
+                var x = game.world.width -48;
+            }
+
         } else if (player.body.x > (game.world.width - 128)) {
-            var x = -96;
+            if (player.playerLevel == 'level1') {
+                var x = -96;
+            } else if (player.playerLevel == 'level2') {
+                var x = -80;
+            } else if (player.playerLevel == 'level3') {
+                var x = -80;
+            }
         }
 
         if (player.model == 'mech') {
@@ -540,6 +573,10 @@ function worldWrap(bounds, player) {
         game.world.bringToTop(player.group);
         game.world.bringToTop(platformGroup);
     }
+}
+
+function groundPlayer(bounds, player) {
+    player.isGrounded = true;
 }
 
 function worldWrapDieLoser (player) {
@@ -623,6 +660,7 @@ function create() {
 function update() {
     // Colliders
     var groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
+    //var groundCollision3 = game.physics.arcade.overlap(player1Group, groundGroup);
     var groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
     var worldWrapCollision = game.physics.arcade.overlap(player1Group, worldWrapGroup);
     //var platformCollision = game.physics.arcade.collide(player1Group, platformGroup);
