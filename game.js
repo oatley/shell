@@ -132,6 +132,7 @@ function loadImages() {
 function loadSpriteSheets() {
     game.load.spritesheet('battery', 'assets/sprites/characters/battery-spritesheet.png', 64, 64);
     game.load.spritesheet('mech', 'assets/sprites/characters/sci_spritesheet.png', 128, 128);
+    game.load.spritesheet('knight', 'assets/sprites/characters/knight_spritesheet.png', 128, 128);
 
 
 }
@@ -246,26 +247,31 @@ function createMap1(groundGroup, worldWrapGroup, platformGroup) {
 
 }
 
-function createKnight() {
+function createKnight(playerGroup, x = 0, y = 0, level = 'level1') {
     // Design each character with custom stuff
     // Positions
     if (playerGroup === player1Group && (x == 0 && y == 0) ) {
         var x = Number(game.world.width/2 - 200) ;
         var y = Number(game.world.height - 200)
     } else if (playerGroup === player2Group && (x == 0 && y == 0)) {
-        var x = Number(game.world.width/2 + 200) ;
+        var x = Number(game.world.width/2 + 100) ;
         var y = Number(game.world.height - 200)
     }
 
     // Design each character with custom stuff
-    var player = game.add.sprite(x, y, 'mech');
+    var player = game.add.sprite(x, y, 'knight');
     game.physics.arcade.enable(player);
 
     // Custom attributes
     player.a = 'meow';
     player.model = 'knight';
     player.group = playerGroup;
-    player.playerDirection = playerDirection;
+    if (playerGroup === player1Group) {
+        player.playerDirection = 'right';
+    } else if (playerGroup === player2Group) {
+        player.playerDirection = 'left';
+    }
+    //player.playerDirection = playerDirection;
     player.playerJumpSensitivity = playerJumpSensitivity;
     player.playerMoveSpeed = playerMoveSpeed;
     player.playerJumpSpeed = playerJumpSpeed;
@@ -351,7 +357,11 @@ function createMech(playerGroup, x = 0, y = 0, level = 'level1') {
     player.a = 'meow';
     player.model = 'mech';
     player.group = playerGroup;
-    player.playerDirection = playerDirection;
+    if (playerGroup === player1Group) {
+        player.playerDirection = 'right';
+    } else if (playerGroup === player2Group) {
+        player.playerDirection = 'left';
+    }
     player.playerJumpSensitivity = playerJumpSensitivity;
     player.playerMoveSpeed = playerMoveSpeed;
     player.playerJumpSpeed = playerJumpSpeed;
@@ -420,7 +430,7 @@ function createMech(playerGroup, x = 0, y = 0, level = 'level1') {
 
 function switchAllLevel() {
     player1Group.forEach(function(player) {switchPlayerLevel(player);}, this);
-    //player1Group.forEach(function(player) {switchPlayerLevel(player);}, this);
+    player2Group.forEach(function(player) {switchPlayerLevel(player);}, this);
 }
 
 function switchPlayerLevel(player, level = null) {
@@ -687,6 +697,7 @@ function create() {
     // Create characters
     //createBattery(player1Group);
     createMech(player1Group);
+    createKnight(player2Group);
 
     game.world.bringToTop(groundGroup);
     game.world.bringToTop(player1Group);
@@ -705,15 +716,15 @@ function create() {
 function update() {
     // Colliders
     var groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
-    //var groundCollision3 = game.physics.arcade.overlap(player1Group, groundGroup);
     var groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
     var worldWrapCollision = game.physics.arcade.overlap(player1Group, worldWrapGroup);
-    //var platformCollision = game.physics.arcade.collide(player1Group, platformGroup);
+    var worldWrapCollision = game.physics.arcade.overlap(player2Group, worldWrapGroup);
+    var charColliders = game.physics.arcade.collide(player1Group, player2Group);
 
     // Control movement and animations for player 1
     player1Group.forEach(function(player) {controlPlayer(player, player1Group);}, this);
 
 
     // Control movement and animations for player 2
-    //player2Group.forEach(function(player) {controlPlayer(player, 'player2');}, this);
+    player2Group.forEach(function(player) {controlPlayer(player, player2Group);}, this);
 }
