@@ -612,6 +612,16 @@ function worldWrapDieLoser (player) {
 
 function resumeMusic() {
     music.mute = false;
+    music.resumeAll();
+}
+
+function pauseMusic() {
+    music.mute = false;
+    music.pause();
+}
+
+function startMusic() {
+    music.mute = false;
     music.play();
 }
 
@@ -686,8 +696,9 @@ function create() {
     console.log(player2Group);
     console.log(groundGroup);
     //console.log(test(1,10));
+    this.game.onPause.add(pauseMusic, this);
     this.game.onResume.add(resumeMusic, this);
-    resumeMusic();
+    startMusic();
 }
 
 function update() {
