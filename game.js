@@ -38,6 +38,14 @@ var rightPlayer2Button;
 var attackPlayer2Button;
 var switchPlayer2Button;
 
+// Music Player1Controls
+var musicMuteButton;
+var musicPlus1Button;
+var musicPlus2Button;
+var musicMinus1Button;
+var musicMinus2Button;
+
+
 // Default player stats
 var playerDirection = 'left';
 var playerJumpSensitivity = -5; // Negative number, default is about -2.8 falling always
@@ -49,6 +57,9 @@ var playerJumping = false;
 var groundGroup;
 var worldBoundsGroup;
 var platformGroup;
+
+// music
+var music;
 
 var range = Phaser.ArrayUtils.numberArray;
 //var numbers = new Phaser.ArrayUtils();
@@ -70,6 +81,18 @@ function player1Controls() {
     rightPlayer1Button = game.input.keyboard.addKey(Phaser.Keyboard.D);
     attackPlayer1Button = game.input.keyboard.addKey(Phaser.Keyboard.F);
     switchPlayer1Button = game.input.keyboard.addKey(Phaser.Keyboard.E);
+    musicMuteButton = game.input.keyboard.addKey(Phaser.Keyboard.P);
+    musicPlus1Button = game.input.keyboard.addKey(Phaser.Keyboard.EQUALS);
+    musicPlus2Button = game.input.keyboard.addKey(Phaser.Keyboard.PLUS);
+    musicMinus1Button = game.input.keyboard.addKey(Phaser.Keyboard.MINUS);
+    musicMinus2Button = game.input.keyboard.addKey(Phaser.Keyboard.UNDERSCORE);
+
+    musicMuteButton.onDown.add(muteMusicVolume, this);
+    musicPlus1Button.onDown.add(increaseMusicVolume, this);
+    musicPlus2Button.onDown.add(increaseMusicVolume, this);
+    musicMinus1Button.onDown.add(decreaseMusicVolume, this);
+    musicMinus2Button.onDown.add(decreaseMusicVolume, this);
+
     switchPlayer1Button.onDown.add(switchAllLevel, this);
 
     // Xbox controller controls
@@ -113,8 +136,40 @@ function loadSpriteSheets() {
 
 }
 
-function loadAnimations() {
-    // Create the animation frames for each character
+function loadMusic () {
+    game.load.audio('bgmusic', ['assets/audio/bgmusic.mp3']);
+}
+
+
+function muteMusicVolume() {
+    console.log('music mute');
+    if (music.mute == true) {
+        music.mute = false;
+    } else {
+        music.mute = true;
+    }
+}
+
+function increaseMusicVolume() {
+    if (music.mute == true) {
+        music.mute = false
+    }
+    music.volume += 1;
+    console.log('music plus', music.volume);
+
+}
+
+
+function decreaseMusicVolume() {
+    if (music.volume > 0 && music.mute == true) {
+        music.mute = false;
+    }
+    if (music.volume > 0){
+        music.volume -= 1;
+    } else {
+        music.mute = true;
+    }
+    console.log('music minus', music.volume);
 
 }
 
@@ -497,7 +552,7 @@ function preload() {
     // Preload loadImages
     loadImages();
     loadSpriteSheets();
-
+    loadMusic();
 
 }
 
@@ -518,6 +573,12 @@ function create() {
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     game.stage.smoothed = false;
     game.input.activePointer.leftButton.onDown.add(toggleFullscreen, this);
+
+    // bgMusic
+    music = game.add.audio('bgmusic');
+    music.volume = 5;
+    music.mute = false;
+    music.play();
 
     // Setup controls
     player1Controls();
@@ -568,6 +629,7 @@ function update() {
 
     // Control movement and animations for player 1
     player1Group.forEach(function(player) {controlPlayer(player, player1Group);}, this);
+
 
     // Control movement and animations for player 2
     //player2Group.forEach(function(player) {controlPlayer(player, 'player2');}, this);
