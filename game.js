@@ -28,6 +28,7 @@ var downPlayer1Button;
 var leftPlayer1Button;
 var rightPlayer1Button;
 var attackPlayer1Button;
+var switchPlayer1Button;
 
 // Player2Controls objects
 var upPlayer2Button;
@@ -35,6 +36,7 @@ var downPlayer2Button;
 var leftPlayer2Button;
 var rightPlayer2Button;
 var attackPlayer2Button;
+var switchPlayer2Button;
 
 // Default player stats
 var playerDirection = 'left';
@@ -67,6 +69,8 @@ function player1Controls() {
     leftPlayer1Button = game.input.keyboard.addKey(Phaser.Keyboard.A);
     rightPlayer1Button = game.input.keyboard.addKey(Phaser.Keyboard.D);
     attackPlayer1Button = game.input.keyboard.addKey(Phaser.Keyboard.F);
+    switchPlayer1Button = game.input.keyboard.addKey(Phaser.Keyboard.E);
+    switchPlayer1Button.onDown.add(switchAllLevel, this);
 
     // Xbox controller controls
 
@@ -80,6 +84,7 @@ function player2Controls() {
     leftPlayer2Button = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
     rightPlayer2Button = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
     attackPlayer2Button = game.input.keyboard.addKey(Phaser.Keyboard.L);
+    //switchPlayer2Button = game.input.keyboard.addKey(Phaser.Keyboard.K);
 
     // Xbox controller controls
 
@@ -128,7 +133,12 @@ function createMap1(groundGroup, worldWrapGroup, platformGroup) {
         var sky = game.add.sprite(0 + (64*i), 192, 'sky4');
     }
     var mountain = game.add.sprite(0, -48, 'mountain');
-    var cloud = game.add.sprite(game.world.width - 128, -32, 'cloud');
+    var mountain2 = game.add.sprite(game.world.width + 64, -48, 'mountain');
+    mountain2.scale.x *=-1;
+    var cloud = game.add.sprite(game.world.width - 100, -32, 'cloud');
+    var cloud2 = game.add.sprite(220, -10 , 'cloud');
+    var cloud22 = game.add.sprite(-32, -10 , 'cloud');
+    cloud2.scale.x *= -1;
 
 
     var platform = platformGroup.create(game.world.width/2 - 64, -40, 'platform');
@@ -177,6 +187,7 @@ function createBattery(playerGroup, x = 0, y = 0) {
 
     // Custom attributes
     player.a = 'meow';
+    player.playerLevel = 'level1';
     player.group = playerGroup;
     player.playerDirection = playerDirection;
     player.playerJumpSensitivity = playerJumpSensitivity;
@@ -256,28 +267,89 @@ function createMech(playerGroup, x = 0, y = 0) {
     //player.body.checkCollision.down = true;
 
 
-    //  Our two animations, walking left and right.
-    player.animations.add('idle_left', range(0,7), 10, true);
-    player.animations.add('idle_right', range(19,26), 10, true);
-    player.animations.add('walk_left', range(38,56), 20, true);
-    player.animations.add('walk_right', range(57,75), 20, true);
-    player.animations.add('attack_left', range(76,87), 10, false);
-    player.animations.add('attack_right', range(95,106), 10, false);
-    player.animations.add('jump_left', [114], 10, false);
-    player.animations.add('jump_right', [133], 10, false);
-    player.animations.add('fall_left', [152], 10, false);
-    player.animations.add('fall_right', [171], 10, false);
-    //player.animations.add('weld_left', [32, 33, 34, 35, 36, 37, 38, 39, 40], 10, true);
-    //player.animations.add('weld_right', [48, 49, 50, 51, 52, 53, 54, 55, 56], 10, true);
+    //  Stage 1 animations
+    player.playerLevel = 'level1';
+    player.animations.add(player.playerLevel + '_idle_left', range(0,7), 10, true);
+    player.animations.add(player.playerLevel + '_idle_right', range(19,26), 10, true);
+    player.animations.add(player.playerLevel + '_walk_left', range(38,56), 20, true);
+    player.animations.add(player.playerLevel + '_walk_right', range(57,75), 20, true);
+    player.animations.add(player.playerLevel + '_attack_left', range(76,87), 10, false);
+    player.animations.add(player.playerLevel + '_attack_right', range(95,106), 10, false);
+    player.animations.add(player.playerLevel + '_jump_left', [114], 10, false);
+    player.animations.add(player.playerLevel + '_jump_right', [133], 10, false);
+    player.animations.add(player.playerLevel + '_fall_left', [152], 10, false);
+    player.animations.add(player.playerLevel + '_fall_right', [171], 10, false);
+
+
+    // Stage 2 animation
+    player.playerLevel = 'level2';
+    player.animations.add(player.playerLevel + '_idle_left', range(190,197), 10, true);
+    player.animations.add(player.playerLevel + '_idle_right', range(209,216), 10, true);
+    player.animations.add(player.playerLevel + '_walk_left', range(228,233), 10, true);
+    player.animations.add(player.playerLevel + '_walk_right', range(247,252), 10, true);
+    player.animations.add(player.playerLevel + '_attack_left', range(266,271), 10, false);
+    player.animations.add(player.playerLevel + '_attack_right', range(285,290), 10, false);
+    player.animations.add(player.playerLevel + '_jump_left', [304], 10, false);
+    player.animations.add(player.playerLevel + '_jump_right', [323], 10, false);
+    player.animations.add(player.playerLevel + '_fall_left', [342], 10, false);
+    player.animations.add(player.playerLevel + '_fall_right', [361], 10, false);
+
+    // Stage 3 animation
+    player.playerLevel = 'level3';
+    player.animations.add(player.playerLevel + '_idle_left', range(380,387), 10, true);
+    player.animations.add(player.playerLevel + '_idle_right', range(399,406), 10, true);
+    player.animations.add(player.playerLevel + '_walk_left', range(418,423), 10, true);
+    player.animations.add(player.playerLevel + '_walk_right', range(437,442), 10, true);
+    player.animations.add(player.playerLevel + '_attack_left', range(456,461), 10, false);
+    player.animations.add(player.playerLevel + '_attack_right', range(475,480), 10, false);
+    player.animations.add(player.playerLevel + '_jump_left', [494], 10, false);
+    player.animations.add(player.playerLevel + '_jump_right', [513], 10, false);
+    player.animations.add(player.playerLevel + '_fall_left', [532], 10, false);
+    player.animations.add(player.playerLevel + '_fall_right', [551], 10, false);
+
+    switchPlayerLevel(player, level='level1');
 
     // Add to group player1 or player2
     playerGroup.add(player);
 }
 
-function createCrazyBilly() {
-    // Design each character with custom stuff
+function switchAllLevel() {
+    player1Group.forEach(function(player) {switchPlayerLevel(player);}, this);
+    //player1Group.forEach(function(player) {switchPlayerLevel(player);}, this);
+}
+
+function switchPlayerLevel(player, level = null) {
+    if (level) {
+        player.playerLevel = level;
+    } else if (player.playerLevel == 'level1') {
+        player.playerLevel = 'level2';
+    } else if (player.playerLevel == 'level2') {
+        player.playerLevel = 'level3';
+    } else if (player.playerLevel == 'level3') {
+        player.playerLevel = 'level1';
+    }
+    if (player.playerLevel == 'level1') {
+        player.body.bounce.y = 0;
+        player.body.gravity.y = 1000;
+        player.body.setSize(64, 64, 32, 64);
+        player.playerMoveSpeed = 50;
+        player.playerJumpSpeed = -350;
+    } else if (player.playerLevel == 'level2') {
+        player.body.bounce.y = 0.2;
+        player.body.gravity.y = 1000;
+        player.body.setSize(64, 64, 32, 64);
+        player.playerMoveSpeed = 100;
+        player.playerJumpSpeed = -450;
+    } else if (player.playerLevel == 'level3') {
+        player.body.bounce.y = 0.3;
+        player.body.gravity.y = 1000;
+        player.body.setSize(64, 64, 32, 64);
+        player.playerMoveSpeed = 150;
+        player.playerJumpSpeed = -550;
+    }
 
 }
+
 
 function controlPlayer(player, group) {
     //console.log(player.body.touching)
@@ -288,22 +360,34 @@ function controlPlayer(player, group) {
         var leftButton = leftPlayer1Button;
         var rightButton = rightPlayer1Button;
         var attackButton = attackPlayer1Button;
+        //var switchButton = switchPlayer1Button;
     } else if (group == player2Group) {
         var upButton = upPlayer2Button;
         var downButton = downPlayer2Button;
         var leftButton = leftPlayer2Button;
         var rightButton = rightPlayer2Button;
         var attackButton = attackPlayer2Button;
+        //var switchButton = switchPlayer2Button;
     }
-
+/*
+    if (switchButton.onPress) {
+        if (player.playerLevel == 'level1') {
+            switchPlayerLevel(player, 'level2')
+        } else if (player.playerLevel == 'level2') {
+            switchPlayerLevel(player, 'level3')
+        } else if (player.playerLevel == 'level3') {
+            switchPlayerLevel(player, 'level1')
+        }
+    }
+*/
     //  Reset the players velocity (movement)
     player.body.velocity.x = 0;
 
     if (attackButton.isDown) {
         if (player.playerDirection == 'left') {
-            player.animations.play('attack_left');
+            player.animations.play(player.playerLevel + '_attack_left');
         } else if (player.playerDirection == 'right') {
-            player.animations.play('attack_right');
+            player.animations.play(player.playerLevel + '_attack_right');
         }
 
     } else if (leftButton.isDown) {
@@ -312,12 +396,12 @@ function controlPlayer(player, group) {
        player.playerDirection = 'left';
        if (player.body.velocity.y < player.playerJumpSensitivity || !(player.body.touching.down || player.body.blocked.down)) {
            if (player.body.velocity.y < player.playerJumpSensitivity) {
-               player.animations.play('jump_left');
+               player.animations.play(player.playerLevel + '_jump_left');
            } else {
-               player.animations.play('fall_left');
+               player.animations.play(player.playerLevel + '_fall_left');
            }
        } else {
-           player.animations.play('walk_left');
+           player.animations.play(player.playerLevel + '_walk_left');
        }
     } else if (rightButton.isDown) {
        //  Move to the right
@@ -325,30 +409,30 @@ function controlPlayer(player, group) {
        player.playerDirection = 'right';
        if (player.body.velocity.y < player.playerJumpSensitivity || !(player.body.touching.down || player.body.blocked.down)) {
            if (player.body.velocity.y < player.playerJumpSensitivity) {
-               player.animations.play('jump_right');
+               player.animations.play(player.playerLevel + '_jump_right');
            } else {
-               player.animations.play('fall_right');
+               player.animations.play(player.playerLevel + '_fall_right');
            }
 
        } else {
-           player.animations.play('walk_right');
+           player.animations.play(player.playerLevel + '_walk_right');
        }
     } else {
         if (player.playerDirection == 'left') {
            if (player.body.velocity.y < player.playerJumpSensitivity) {
-               player.animations.play('jump_left');
+               player.animations.play(player.playerLevel + '_jump_left');
            } else if (!(player.body.touching.down || player.body.blocked.down)) {
-               player.animations.play('fall_left');
+               player.animations.play(player.playerLevel + '_fall_left');
            } else {
-               player.animations.play('idle_left');
+               player.animations.play(player.playerLevel + '_idle_left');
            }
         } else if (player.playerDirection == 'right') {
            if (player.body.velocity.y < player.playerJumpSensitivity) {
-               player.animations.play('jump_right');
+               player.animations.play(player.playerLevel + '_jump_right');
            } else if (!(player.body.touching.down || player.body.blocked.down)) {
-               player.animations.play('fall_right');
+               player.animations.play(player.playerLevel + '_fall_right');
            } else {
-               player.animations.play('idle_right');
+               player.animations.play(player.playerLevel + '_idle_right');
            }
         }
     }
