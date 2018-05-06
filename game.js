@@ -7,7 +7,8 @@ var config = {
     state: {
         preload: preload,
         create: create,
-        update: update
+        update: update,
+        render: render
     }
 }
 var game = new Phaser.Game(config);
@@ -61,6 +62,10 @@ var platformGroup;
 // music
 var music;
 
+// Hitbox
+var player1AttackGroup;
+var player2AttackGroup;
+
 var range = Phaser.ArrayUtils.numberArray;
 //var numbers = new Phaser.ArrayUtils();
 
@@ -94,7 +99,7 @@ function player1Controls() {
     musicMinus2Button.onDown.add(decreaseMusicVolume, this);
 
     switchPlayer1Button.onDown.add(switchAllLevel, this);
-
+game.add.group();
     // Xbox controller controls
 
 }
@@ -126,6 +131,10 @@ function loadImages() {
     game.load.image('platform', 'assets/sprites/maps/stage.png');
     // Load images ground
     game.load.image('ground', 'assets/sprites/maps/ground.png');
+    // Attack boxes
+    game.load.image('blank', 'assets/sprites/characters/blank.png');
+    game.load.image('green', 'assets/sprites/characters/green.png');
+
 }
 
 // Load spritesheets
@@ -268,16 +277,21 @@ function createKnight(playerGroup, x = 0, y = 0, level = 'level1') {
     player.group = playerGroup;
     if (playerGroup === player1Group) {
         player.playerDirection = 'right';
+        player.attackGroup = player1AttackGroup;
+        player.attackTimerFunction = stopAttackPlayer1;
     } else if (playerGroup === player2Group) {
         player.playerDirection = 'left';
+        player.attackGroup = player2AttackGroup;
+        player.attackTimerFunction = stopAttackPlayer2;
     }
     //player.playerDirection = playerDirection;
     player.playerJumpSensitivity = playerJumpSensitivity;
     player.playerMoveSpeed = playerMoveSpeed;
     player.playerJumpSpeed = playerJumpSpeed;
     player.playerJumping = playerJumping;
-
     player.brokenCollide = false;
+    player.isAttacking = false;
+
 
     // World bounds
     player.checkWorldBounds = true;
@@ -359,15 +373,19 @@ function createMech(playerGroup, x = 0, y = 0, level = 'level1') {
     player.group = playerGroup;
     if (playerGroup === player1Group) {
         player.playerDirection = 'right';
+        player.attackGroup = player1AttackGroup;
+        player.attackTimerFunction = stopAttackPlayer1;
     } else if (playerGroup === player2Group) {
         player.playerDirection = 'left';
+        player.attackGroup = player2AttackGroup;
+        player.attackTimerFunction = stopAttackPlayer2;
     }
     player.playerJumpSensitivity = playerJumpSensitivity;
     player.playerMoveSpeed = playerMoveSpeed;
     player.playerJumpSpeed = playerJumpSpeed;
     player.playerJumping = playerJumping;
-
     player.brokenCollide = false;
+    player.isAttacking = false;
 
     // World bounds
     player.checkWorldBounds = true;
@@ -452,13 +470,13 @@ function switchPlayerLevel(player, level = null) {
     } else if (player.playerLevel == 'level2') {
         player.body.bounce.y = 0.1;
         player.body.gravity.y = 600;
-        player.body.setSize(32, 64, 48, 64);
+        player.body.setSize(32, 47, 48, 83);
         player.playerMoveSpeed = 100;
         player.playerJumpSpeed = -375;
     } else if (player.playerLevel == 'level3') {
         player.body.bounce.y = 0.2;
         player.body.gravity.y = 600;
-        player.body.setSize(32, 64, 48, 64);
+        player.body.setSize(32, 47, 48, 83);
         player.playerMoveSpeed = 150;
         player.playerJumpSpeed = -400;
     }
@@ -504,8 +522,14 @@ function controlPlayer(player, group) {
     }
     //  Reset the players velocity (movement)
     player.body.velocity.x = 0;
-
-    if (attackButton.isDown) {
+    if (attackButton.isDown || player.isAttacking) {
+        if (!player.isAttacking) {
+            player.isAttacking = true;
+            player.attackTimer2 = game.time.create(true);
+            player.attackTimer2.loop(300, attackPlayer, this, player);
+            player.attackTimer2.start();
+            //attackPlayer(player);
+        }
         if (player.playerDirection == 'left') {
             player.animations.play(player.playerLevel + '_attack_left');
         } else if (player.playerDirection == 'right') {
@@ -645,6 +669,61 @@ function preload() {
 
 }
 
+function attackPlayer(player) {
+    console.log('attacking');
+
+    player.attackTimer2.stop();
+
+    player.attackBox = game.add.sprite(player.body.x + player.body.width/2,  player.body.y + player.body.height/2, 'green');
+    game.physics.arcade.enable(player.attackBox);
+    player.attackBox.anchor.setTo(0.5, 0.5);
+    if (player.playerDirection == 'left') {
+        player.attackBox.x -= 64;
+    } else if (player.playerDirection == 'right') {
+        player.attackBox.x += 64;
+    }
+    player.attackTimer = game.time.create(true);
+    player.attackTimer.loop(700, player.attackTimerFunction, this);
+    player.attackTimer.start();
+
+    player.attackBox.body.onOverlap = new Phaser.Signal();
+    player.attackBox.body.onOverlap.add(dealDamage);
+    player.attackGroup.add(player.attackBox);
+    game.world.bringToTop(player1AttackGroup);
+    game.world.bringToTop(player2AttackGroup);
+
+
+}
+
+function stopAttackPlayer1() {
+    console.log('timer ended player 1');
+    // Control movement and animations for player 1
+    player1Group.forEach(function(player) {
+        player.isAttacking = false;
+        player.attackTimer.stop()
+        if (player.attackBox) {
+            player.attackBox.destroy();
+        }
+    }, this);
+
+}
+
+function stopAttackPlayer2() {
+    console.log('timer ended player 2');
+    player2Group.forEach(function(player) {
+        player.isAttacking = false;
+        player.attackTimer.stop()
+        if (player.attackBox) {
+            player.attackBox.destroy();
+        }
+    }, this);
+
+}
+
+function dealDamage(bounds, player) {
+    console.log('dealing dmg to', player.model);
+}
+
 function create() {
     // Start the simple physics
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -691,6 +770,10 @@ function create() {
     platformGroup = game.add.group();
     platformGroup.enableBody = true;
 
+    // Attack groups
+    player1AttackGroup  = game.add.group();
+    player2AttackGroup  = game.add.group();
+
     // Create map1
     createMap1(groundGroup, worldWrapGroup, platformGroup);
 
@@ -703,6 +786,7 @@ function create() {
     game.world.bringToTop(player1Group);
     game.world.bringToTop(player2Group);
     game.world.bringToTop(platformGroup);
+
 
     console.log(player1Group);
     console.log(player2Group);
@@ -720,6 +804,8 @@ function update() {
     var worldWrapCollision = game.physics.arcade.overlap(player1Group, worldWrapGroup);
     var worldWrapCollision = game.physics.arcade.overlap(player2Group, worldWrapGroup);
     var charColliders = game.physics.arcade.collide(player1Group, player2Group);
+    var attackColliders = game.physics.arcade.overlap(player1Group, player2AttackGroup);
+    var attackColliders = game.physics.arcade.overlap(player2Group, player1AttackGroup);
 
     // Control movement and animations for player 1
     player1Group.forEach(function(player) {controlPlayer(player, player1Group);}, this);
@@ -727,4 +813,9 @@ function update() {
 
     // Control movement and animations for player 2
     player2Group.forEach(function(player) {controlPlayer(player, player2Group);}, this);
+}
+
+function render () {
+    //game.debug.geom(rect,'#0fffff');
+
 }
