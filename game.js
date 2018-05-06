@@ -98,7 +98,7 @@ function player1Controls() {
     musicMinus1Button.onDown.add(decreaseMusicVolume, this);
     musicMinus2Button.onDown.add(decreaseMusicVolume, this);
 
-    switchPlayer1Button.onDown.add(switchAllLevel, this);
+    //switchPlayer1Button.onDown.add(switchAllLevel, this);
 game.add.group();
     // Xbox controller controls
 
@@ -350,6 +350,8 @@ function createKnight(playerGroup, x = 0, y = 0, level = 'level1') {
 
     // Add to group player1 or player2
     playerGroup.add(player);
+    var groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
+    var groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
 }
 
 function createMech(playerGroup, x = 0, y = 0, level = 'level1') {
@@ -444,6 +446,8 @@ function createMech(playerGroup, x = 0, y = 0, level = 'level1') {
 
     // Add to group player1 or player2
     playerGroup.add(player);
+    var groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
+    var groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
 }
 
 function switchAllLevel() {
@@ -460,6 +464,9 @@ function switchPlayerLevel(player, level = null) {
         player.playerLevel = 'level3';
     } else if (player.playerLevel == 'level3') {
         player.playerLevel = 'level1';
+        youLose(player);
+        console.log('YOU LOSE', player.model);
+        return;
     }
     if (player.playerLevel == 'level1') {
         player.body.bounce.y = 0;
@@ -625,9 +632,9 @@ function worldWrap(bounds, player) {
         }
 
         if (player.model == 'mech') {
-            createMech(player.group, x, y - 64, level=player.playerLevel);
+            createMech(player.group, x, y - 64 - 20, level=player.playerLevel);
         } else {
-            createKnight(player.group, x, y - 64, level=player.playerLevel);
+            createKnight(player.group, x, y - 64 - 20, level=player.playerLevel);
         }
 
         game.world.bringToTop(player.group);
@@ -733,6 +740,10 @@ function dealDamage(bounds, player) {
     switchPlayerLevel(player);
 }
 
+function youLose(player) {
+    player.destroy();
+}
+
 function create() {
     // Start the simple physics
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -817,11 +828,16 @@ function update() {
     var attackColliders = game.physics.arcade.overlap(player2Group, player1AttackGroup);
 
     // Control movement and animations for player 1
-    player1Group.forEach(function(player) {controlPlayer(player, player1Group);}, this);
+    if (player1Group.length > 0) {
+        player1Group.forEach(function(player) {controlPlayer(player, player1Group);}, this);
+    }
 
 
     // Control movement and animations for player 2
-    player2Group.forEach(function(player) {controlPlayer(player, player2Group);}, this);
+    if (player2Group.length > 0) {
+        player2Group.forEach(function(player) {controlPlayer(player, player2Group);}, this);
+    }
+
 }
 
 function render () {
