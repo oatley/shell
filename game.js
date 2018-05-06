@@ -145,14 +145,20 @@ function createMap1(groundGroup, worldWrapGroup, platformGroup) {
     platform.body.immovable = true;
     platform.body.setSize(100, 4, 14, 110);
     platform.body.checkCollision.down = false;
+    platform.body.checkCollision.left = false;
+    platform.body.checkCollision.right = false;
     var platform2 = platformGroup.create(48, 24, 'platform');
     platform2.body.immovable = true;
     platform2.body.setSize(100, 4, 14, 110);
     platform2.body.checkCollision.down = false;
+    platform2.body.checkCollision.left = false;
+    platform2.body.checkCollision.right = false;
     var platform3 = platformGroup.create(game.world.width - 128 - 48, 24, 'platform');
     platform3.body.immovable = true;
     platform3.body.setSize(100, 4, 14, 110);
     platform3.body.checkCollision.down = false;
+    platform3.body.checkCollision.left = false;
+    platform3.body.checkCollision.right = false;
 
     for (var i = 0; i < 10; i++) {
         var ground = groundGroup.create(-64 + (64*i), game.world.height - 64, 'ground');
@@ -356,6 +362,9 @@ function switchPlayerLevel(player, level = null) {
 
 
 function controlPlayer(player, group) {
+
+
+
     //console.log(player.body.touching)
     // Function accept the character (knight, mech, etc) and "player1" or "player2"
     if (group === player1Group) {
@@ -384,6 +393,10 @@ function controlPlayer(player, group) {
         }
     }
 */
+// PLatform collisions are based on player only
+    if (!downButton.isDown) {
+        var platformCollision = game.physics.arcade.collide(player, platformGroup);
+    }
     //  Reset the players velocity (movement)
     player.body.velocity.x = 0;
 
@@ -551,7 +564,7 @@ function update() {
     var groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
     var groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
     var worldWrapCollision = game.physics.arcade.overlap(player1Group, worldWrapGroup);
-    var platformCollision = game.physics.arcade.collide(player1Group, platformGroup);
+    //var platformCollision = game.physics.arcade.collide(player1Group, platformGroup);
 
     // Control movement and animations for player 1
     player1Group.forEach(function(player) {controlPlayer(player, player1Group);}, this);
