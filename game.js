@@ -246,7 +246,8 @@ function createMap1(groundGroup, worldWrapGroup, platformGroup) {
 
 }
 
-function createBattery(playerGroup, x = 0, y = 0) {
+function createKnight() {
+    // Design each character with custom stuff
     // Positions
     if (playerGroup === player1Group && (x == 0 && y == 0) ) {
         var x = Number(game.world.width/2 - 200) ;
@@ -257,12 +258,12 @@ function createBattery(playerGroup, x = 0, y = 0) {
     }
 
     // Design each character with custom stuff
-    var player = game.add.sprite(x, y, 'battery');
+    var player = game.add.sprite(x, y, 'mech');
     game.physics.arcade.enable(player);
 
     // Custom attributes
     player.a = 'meow';
-    player.playerLevel = 'level1';
+    player.model = 'knight';
     player.group = playerGroup;
     player.playerDirection = playerDirection;
     player.playerJumpSensitivity = playerJumpSensitivity;
@@ -277,33 +278,58 @@ function createBattery(playerGroup, x = 0, y = 0) {
     player.events.onOutOfBounds.add(worldWrapDieLoser, this);
 
     //  Player physics properties. Give the little guy a slight bounce.
-    player.body.bounce.y = 0;
+    player.body.bounce.y = 0.2;
     player.body.gravity.y = 1000;
-    player.body.collideWorldBounds = false;
-    player.body.setSize(32, 60, 16, 0);
-    //player.body.checkCollision.up = true;
+    //player.body.collideWorldBounds.up = true;
+    player.body.setSize(64, 64, 32, 64);
+    //player.body.checkCollision.up = false;
     //player.body.checkCollision.down = true;
 
 
-    //  Our two animations, walking left and right.
-    player.animations.add('idle_left', range(0,6), 10, true);
-    player.animations.add('idle_right', range(7,13), 10, true);
-    player.animations.add('fall_left', [14], 10, false);
-    player.animations.add('fall_right', [15], 10, false);
-    player.animations.add('walk_left', range(16,21), 10, true);
-    player.animations.add('walk_right', range(22,27), 10, true);
-    player.animations.add('jump_left', [28], 10, false);
-    player.animations.add('jump_right', [29], 10, false);
-    player.animations.add('weld_left', [32, 33, 34, 35, 36, 37, 38, 39, 40], 10, true);
-    player.animations.add('weld_right', [48, 49, 50, 51, 52, 53, 54, 55, 56], 10, true);
+    //  Stage 1 animations
+    player.playerLevel = 'level1';
+    player.animations.add(player.playerLevel + '_idle_left', range(0,5), 10, true);
+    player.animations.add(player.playerLevel + '_idle_right', range(19,24), 10, true);
+    player.animations.add(player.playerLevel + '_walk_left', range(38,49), 20, true);
+    player.animations.add(player.playerLevel + '_walk_right', range(57,68), 20, true);
+    player.animations.add(player.playerLevel + '_attack_left', range(76,87), 10, false);
+    player.animations.add(player.playerLevel + '_attack_right', range(95,106), 10, false);
+    player.animations.add(player.playerLevel + '_jump_left', [114], 10, false);
+    player.animations.add(player.playerLevel + '_jump_right', [133], 10, false);
+    player.animations.add(player.playerLevel + '_fall_left', [152], 10, false);
+    player.animations.add(player.playerLevel + '_fall_right', [171], 10, false);
+
+
+    // Stage 2 animation
+    player.playerLevel = 'level2';
+    player.animations.add(player.playerLevel + '_idle_left', range(190,197), 10, true);
+    player.animations.add(player.playerLevel + '_idle_right', range(209,216), 10, true);
+    player.animations.add(player.playerLevel + '_walk_left', range(228,237), 10, true);
+    player.animations.add(player.playerLevel + '_walk_right', range(247,256), 10, true);
+    player.animations.add(player.playerLevel + '_attack_left', range(266,273), 10, false);
+    player.animations.add(player.playerLevel + '_attack_right', range(285,292), 10, false);
+    player.animations.add(player.playerLevel + '_jump_left', [304], 10, false);
+    player.animations.add(player.playerLevel + '_jump_right', [323], 10, false);
+    player.animations.add(player.playerLevel + '_fall_left', [342], 10, false);
+    player.animations.add(player.playerLevel + '_fall_right', [361], 10, false);
+
+    // Stage 3 animation
+    player.playerLevel = 'level3';
+    player.animations.add(player.playerLevel + '_idle_left', range(380,386), 10, true);
+    player.animations.add(player.playerLevel + '_idle_right', range(399,405), 10, true);
+    player.animations.add(player.playerLevel + '_walk_left', range(418,423), 10, true);
+    player.animations.add(player.playerLevel + '_walk_right', range(437,442), 10, true);
+    player.animations.add(player.playerLevel + '_attack_left', range(456,461), 10, false);
+    player.animations.add(player.playerLevel + '_attack_right', range(475,480), 10, false);
+    player.animations.add(player.playerLevel + '_jump_left', [494], 10, false);
+    player.animations.add(player.playerLevel + '_jump_right', [513], 10, false);
+    player.animations.add(player.playerLevel + '_fall_left', [532], 10, false);
+    player.animations.add(player.playerLevel + '_fall_right', [551], 10, false);
+
+    switchPlayerLevel(player, level=level);
 
     // Add to group player1 or player2
     playerGroup.add(player);
-}
-
-function createKnight() {
-    // Design each character with custom stuff
-
 }
 
 function createMech(playerGroup, x = 0, y = 0, level = 'level1') {
@@ -526,7 +552,7 @@ function controlPlayer(player, group) {
     }
 
     //  Allow the player to jump if they are touching the ground.
-    console.log(player.isGrounded);
+    //console.log(player.isGrounded);
     if (!upButton.isDown && player.playerJumping && player.body.velocity.y < 0 && player.isGrounded) {
         player.body.velocity.y = player.body.velocity.y * 0.5;
         player.playerJumping = false;
@@ -567,7 +593,7 @@ function worldWrap(bounds, player) {
         if (player.model == 'mech') {
             createMech(player.group, x, y - 64, level=player.playerLevel);
         } else {
-            createBattery(player.group, x, player.body.y);
+            createKnight(player.group, x, y - 64, level=player.playerLevel);
         }
 
         game.world.bringToTop(player.group);
@@ -583,6 +609,11 @@ function worldWrapDieLoser (player) {
     player.destroy();
 }
 
+
+function resumeMusic() {
+    music.mute = false;
+    music.play();
+}
 
 
 function preload() {
@@ -655,6 +686,8 @@ function create() {
     console.log(player2Group);
     console.log(groundGroup);
     //console.log(test(1,10));
+    this.game.onResume.add(resumeMusic, this);
+
 }
 
 function update() {
