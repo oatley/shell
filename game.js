@@ -612,7 +612,8 @@ function worldWrapDieLoser (player) {
 
 function resumeMusic() {
     music.mute = false;
-    music.resumeAll();
+    //music.resumeAll();
+    music.resume();
 }
 
 function pauseMusic() {
