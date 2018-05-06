@@ -687,7 +687,7 @@ function create() {
     console.log(groundGroup);
     //console.log(test(1,10));
     this.game.onResume.add(resumeMusic, this);
-
+    resumeMusic();
 }
 
 function update() {
