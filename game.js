@@ -19,6 +19,8 @@ var player2;
 
 var gameOver;
 var youwinscreen;
+var titlescreen;
+var titlescreenbool = true;
 
 // Player 1 group
 var player1Group;
@@ -142,6 +144,7 @@ function loadImages() {
 
     // Win screen
     game.load.image('youwin', 'assets/sprites/ui/ui_winscreen.png');
+    game.load.image('title', 'assets/sprites/ui/ui_titleScreen.png');
 }
 
 // Load spritesheets
@@ -839,7 +842,9 @@ function create() {
     // Create map1
     createMap1(groundGroup, worldWrapGroup, platformGroup);
 
-    startGame();
+    //startGame();
+    titlescreen = game.add.sprite(game.world.width/2, game.world.height/2, 'title');
+    titlescreen.anchor.setTo(0.5, 0.5);
 
     console.log(player1Group);
     console.log(player2Group);
@@ -872,6 +877,10 @@ function update() {
 
     if (gameOver && resetGameButton.isDown) {
         console.log('resetting the game');
+        startGame();
+    } else if (titlescreenbool && resetGameButton.isDown) {
+        titlescreenbool = false;
+        titlescreen.destroy();
         startGame();
     }
 
