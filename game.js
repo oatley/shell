@@ -144,18 +144,22 @@ function createMap1(groundGroup, worldWrapGroup, platformGroup) {
     var platform = platformGroup.create(game.world.width/2 - 64, -40, 'platform');
     platform.body.immovable = true;
     platform.body.setSize(100, 4, 14, 110);
+    platform.body.checkCollision.down = false;
     var platform2 = platformGroup.create(48, 24, 'platform');
     platform2.body.immovable = true;
     platform2.body.setSize(100, 4, 14, 110);
+    platform2.body.checkCollision.down = false;
     var platform3 = platformGroup.create(game.world.width - 128 - 48, 24, 'platform');
     platform3.body.immovable = true;
     platform3.body.setSize(100, 4, 14, 110);
+    platform3.body.checkCollision.down = false;
 
     for (var i = 0; i < 10; i++) {
         var ground = groundGroup.create(-64 + (64*i), game.world.height - 64, 'ground');
         ground.body.immovable = true;
         ground.body.setSize(64, 32, 0, 32);
         var roof = groundGroup.create(-64 + (64*i), 0 - 64, 'ground');
+        roof.body.setSize(64, 32, 0, 0);
         roof.body.immovable = true;
     }
     var worldWrapTile = worldWrapGroup.create(-64, game.world.height - 64, 'ground');
@@ -229,7 +233,7 @@ function createKnight() {
 
 }
 
-function createMech(playerGroup, x = 0, y = 0) {
+function createMech(playerGroup, x = 0, y = 0, level = 'level1') {
     // Design each character with custom stuff
     // Positions
     if (playerGroup === player1Group && (x == 0 && y == 0) ) {
@@ -261,9 +265,9 @@ function createMech(playerGroup, x = 0, y = 0) {
     //  Player physics properties. Give the little guy a slight bounce.
     player.body.bounce.y = 0.2;
     player.body.gravity.y = 1000;
-    player.body.collideWorldBounds = false;
+    //player.body.collideWorldBounds.up = true;
     player.body.setSize(64, 64, 32, 64);
-    //player.body.checkCollision.up = true;
+    //player.body.checkCollision.up = false;
     //player.body.checkCollision.down = true;
 
 
@@ -307,7 +311,7 @@ function createMech(playerGroup, x = 0, y = 0) {
     player.animations.add(player.playerLevel + '_fall_left', [532], 10, false);
     player.animations.add(player.playerLevel + '_fall_right', [551], 10, false);
 
-    switchPlayerLevel(player, level='level1');
+    switchPlayerLevel(player, level=level);
 
     // Add to group player1 or player2
     playerGroup.add(player);
@@ -333,19 +337,19 @@ function switchPlayerLevel(player, level = null) {
         player.body.gravity.y = 1000;
         player.body.setSize(64, 64, 32, 64);
         player.playerMoveSpeed = 50;
-        player.playerJumpSpeed = -350;
+        player.playerJumpSpeed = -250;
     } else if (player.playerLevel == 'level2') {
-        player.body.bounce.y = 0.2;
-        player.body.gravity.y = 1000;
-        player.body.setSize(64, 64, 32, 64);
+        player.body.bounce.y = 0.1;
+        player.body.gravity.y = 600;
+        player.body.setSize(32, 64, 48, 64);
         player.playerMoveSpeed = 100;
-        player.playerJumpSpeed = -450;
+        player.playerJumpSpeed = -375;
     } else if (player.playerLevel == 'level3') {
-        player.body.bounce.y = 0.3;
-        player.body.gravity.y = 1000;
-        player.body.setSize(64, 64, 32, 64);
+        player.body.bounce.y = 0.2;
+        player.body.gravity.y = 600;
+        player.body.setSize(32, 64, 48, 64);
         player.playerMoveSpeed = 150;
-        player.playerJumpSpeed = -550;
+        player.playerJumpSpeed = -400;
     }
 
 }
@@ -460,7 +464,7 @@ function worldWrap(bounds, player) {
         }
 
         if (player.model == 'mech') {
-            createMech(player.group, x, y - 64);
+            createMech(player.group, x, y - 64, level=player.playerLevel);
         } else {
             createBattery(player.group, x, player.body.y);
         }
