@@ -683,7 +683,14 @@ function attackPlayer(player) {
         player.attackBox.x += 64;
     }
     player.attackTimer = game.time.create(true);
-    player.attackTimer.loop(700, player.attackTimerFunction, this);
+    if (player.playerLevel == 'level1') {
+        player.attackTimer.loop(600, player.attackTimerFunction, this);
+    } else if (player.playerLevel == 'level2') {
+        player.attackTimer.loop(500, player.attackTimerFunction, this);
+    } else if (player.playerLevel == 'level3') {
+        player.attackTimer.loop(250, player.attackTimerFunction, this);
+    }
+
     player.attackTimer.start();
 
     player.attackBox.body.onOverlap = new Phaser.Signal();
@@ -722,6 +729,8 @@ function stopAttackPlayer2() {
 
 function dealDamage(bounds, player) {
     console.log('dealing dmg to', player.model);
+    bounds.destroy();
+    switchPlayerLevel(player);
 }
 
 function create() {
