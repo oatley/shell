@@ -21,6 +21,8 @@ var gameOver;
 var youwinscreen;
 var titlescreen;
 var titlescreenbool = true;
+var sci;
+var jan;
 
 // Player 1 group
 var player1Group;
@@ -140,11 +142,13 @@ function loadImages() {
     game.load.image('ground', 'assets/sprites/maps/ground.png');
     // Attack boxes
     game.load.image('blank', 'assets/sprites/characters/blank.png');
-    game.load.image('green', 'assets/sprites/characters/green.png');
+    game.load.image('green', 'assets/sprites/characters/blank.png');
 
     // Win screen
     game.load.image('youwin', 'assets/sprites/ui/ui_winscreen.png');
     game.load.image('title', 'assets/sprites/ui/ui_titleScreen.png');
+    game.load.image('sci', 'assets/sprites/ui/ui_portrait_sci03.png');
+    game.load.image('jan', 'assets/sprites/ui/ui_portrait_jan03.png');
 }
 
 // Load spritesheets
@@ -783,10 +787,14 @@ function startGame() {
     createMech(player1Group);
     createKnight(player2Group);
 
+
     game.world.bringToTop(groundGroup);
     game.world.bringToTop(player1Group);
     game.world.bringToTop(player2Group);
     game.world.bringToTop(platformGroup);
+
+    sci = game.add.image(0, game.world.height - 64, 'sci');
+    jan = game.add.image(game.world.width - 64, game.world.height - 64, 'jan');
 }
 
 function create() {
