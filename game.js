@@ -295,8 +295,8 @@ function createMech(playerGroup, x = 0, y = 0, level = 'level1') {
     player.playerLevel = 'level2';
     player.animations.add(player.playerLevel + '_idle_left', range(190,197), 10, true);
     player.animations.add(player.playerLevel + '_idle_right', range(209,216), 10, true);
-    player.animations.add(player.playerLevel + '_walk_left', range(228,233), 10, true);
-    player.animations.add(player.playerLevel + '_walk_right', range(247,252), 10, true);
+    player.animations.add(player.playerLevel + '_walk_left', range(228,237), 10, true);
+    player.animations.add(player.playerLevel + '_walk_right', range(247,256), 10, true);
     player.animations.add(player.playerLevel + '_attack_left', range(266,271), 10, false);
     player.animations.add(player.playerLevel + '_attack_right', range(285,290), 10, false);
     player.animations.add(player.playerLevel + '_jump_left', [304], 10, false);
