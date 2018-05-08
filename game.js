@@ -105,8 +105,8 @@ function cleanUp() {
     clean.cleanGround(groundGroup);
     clean.cleanPlatforms(platformGroup);
     clean.cleanBackground(backgroundGroup);
-    sci.destroy();
-    jan.destroy();
+    if(sci)sci.destroy();
+    if(jan)jan.destroy();
 }
 
 function youLose(player) {
