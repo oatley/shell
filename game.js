@@ -7,8 +7,7 @@ let config = {
     state: {
         preload: preload,
         create: create,
-        update: update,
-        render: render
+        update: update
     }
 }
 let game = new Phaser.Game(config);
