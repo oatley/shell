@@ -115,8 +115,6 @@ let characters = {
     createKnight: function(playerGroup, x = 0, y = 0, stage = 'Stage1') {
 
         // Positions
-        let x = 0;
-        let y = 0;
         if (playerGroup === player1Group && (x == 0 && y == 0) ) {
             x = Number(game.world.width/2 - 200) ;
             y = Number(game.world.height - 200);
@@ -212,14 +210,12 @@ let characters = {
     createMech: function(playerGroup, x = 0, y = 0, stage = 'Stage1') {
 
         // Positions
-        let x = 0;
-        let y = 0;
         if (playerGroup === player1Group && (x == 0 && y == 0) ) {
-            x = Number(game.world.width/2 - 200) ;
-            y = Number(game.world.height - 200)
+            x = Number(game.world.width/2 - 200);
+            y = Number(game.world.height - 200);
         } else if (playerGroup === player2Group && (x == 0 && y == 0)) {
-            x = Number(game.world.width/2 + 200) ;
-            y = Number(game.world.height - 200)
+            x = Number(game.world.width/2 + 200);
+            y = Number(game.world.height - 200);
         }
 
         // Design each character with custom stuff
