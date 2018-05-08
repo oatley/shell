@@ -99,231 +99,39 @@ function toggleFullscreen() {
 
 
 
-function createKnight(playerGroup, x = 0, y = 0, level = 'level1') {
-    // Design each character with custom stuff
-    // Positions
-    if (playerGroup === player1Group && (x == 0 && y == 0) ) {
-        var x = Number(game.world.width/2 - 200) ;
-        var y = Number(game.world.height - 200)
-    } else if (playerGroup === player2Group && (x == 0 && y == 0)) {
-        var x = Number(game.world.width/2 + 100) ;
-        var y = Number(game.world.height - 200)
-    }
-
-    // Design each character with custom stuff
-    var player = game.add.sprite(x, y, 'knight');
-    game.physics.arcade.enable(player);
-
-    // Custom attributes
-    player.a = 'meow';
-    player.model = 'knight';
-    player.group = playerGroup;
-    if (playerGroup === player1Group) {
-        player.playerDirection = 'right';
-        player.attackGroup = player1AttackGroup;
-        player.attackTimerFunction = stopAttackPlayer1;
-    } else if (playerGroup === player2Group) {
-        player.playerDirection = 'left';
-        player.attackGroup = player2AttackGroup;
-        player.attackTimerFunction = stopAttackPlayer2;
-    }
-    //player.playerDirection = playerDirection;
-    player.playerJumpSensitivity = playerJumpSensitivity;
-    player.playerMoveSpeed = playerMoveSpeed;
-    player.playerJumpSpeed = playerJumpSpeed;
-    player.playerJumping = playerJumping;
-    player.brokenCollide = false;
-    player.isAttacking = false;
 
 
-    // World bounds
-    player.checkWorldBounds = true;
-    player.events.onOutOfBounds.add(worldWrapDieLoser, this);
+//function switchAllStages() {
+//    player1Group.forEach(function(player) {switchPlayerStage(player);}, this);
+//    player2Group.forEach(function(player) {switchPlayerStage(player);}, this);
+//}
 
-    //  Player physics properties. Give the little guy a slight bounce.
-    player.body.bounce.y = 0.2;
-    player.body.gravity.y = 1000;
-    //player.body.collideWorldBounds.up = true;
-    player.body.setSize(64, 64, 32, 64);
-    //player.body.checkCollision.up = false;
-    //player.body.checkCollision.down = true;
-
-
-    //  Stage 1 animations
-    player.playerLevel = 'level1';
-    player.animations.add(player.playerLevel + '_idle_left', range(0,5), 10, true);
-    player.animations.add(player.playerLevel + '_idle_right', range(19,24), 10, true);
-    player.animations.add(player.playerLevel + '_walk_left', range(38,49), 20, true);
-    player.animations.add(player.playerLevel + '_walk_right', range(57,68), 20, true);
-    player.animations.add(player.playerLevel + '_attack_left', range(76,87), 10, false);
-    player.animations.add(player.playerLevel + '_attack_right', range(95,106), 10, false);
-    player.animations.add(player.playerLevel + '_jump_left', [114], 10, false);
-    player.animations.add(player.playerLevel + '_jump_right', [133], 10, false);
-    player.animations.add(player.playerLevel + '_fall_left', [152], 10, false);
-    player.animations.add(player.playerLevel + '_fall_right', [171], 10, false);
-
-
-    // Stage 2 animation
-    player.playerLevel = 'level2';
-    player.animations.add(player.playerLevel + '_idle_left', range(190,197), 10, true);
-    player.animations.add(player.playerLevel + '_idle_right', range(209,216), 10, true);
-    player.animations.add(player.playerLevel + '_walk_left', range(228,237), 10, true);
-    player.animations.add(player.playerLevel + '_walk_right', range(247,256), 10, true);
-    player.animations.add(player.playerLevel + '_attack_left', range(266,273), 10, false);
-    player.animations.add(player.playerLevel + '_attack_right', range(285,292), 10, false);
-    player.animations.add(player.playerLevel + '_jump_left', [304], 10, false);
-    player.animations.add(player.playerLevel + '_jump_right', [323], 10, false);
-    player.animations.add(player.playerLevel + '_fall_left', [342], 10, false);
-    player.animations.add(player.playerLevel + '_fall_right', [361], 10, false);
-
-    // Stage 3 animation
-    player.playerLevel = 'level3';
-    player.animations.add(player.playerLevel + '_idle_left', range(380,386), 10, true);
-    player.animations.add(player.playerLevel + '_idle_right', range(399,405), 10, true);
-    player.animations.add(player.playerLevel + '_walk_left', range(418,423), 10, true);
-    player.animations.add(player.playerLevel + '_walk_right', range(437,442), 10, true);
-    player.animations.add(player.playerLevel + '_attack_left', range(456,461), 10, false);
-    player.animations.add(player.playerLevel + '_attack_right', range(475,480), 10, false);
-    player.animations.add(player.playerLevel + '_jump_left', [494], 10, false);
-    player.animations.add(player.playerLevel + '_jump_right', [513], 10, false);
-    player.animations.add(player.playerLevel + '_fall_left', [532], 10, false);
-    player.animations.add(player.playerLevel + '_fall_right', [551], 10, false);
-
-    switchPlayerLevel(player, level=level);
-
-    // Add to group player1 or player2
-    playerGroup.add(player);
-    var groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
-    var groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
-}
-
-function createMech(playerGroup, x = 0, y = 0, level = 'level1') {
-    // Design each character with custom stuff
-    // Positions
-    if (playerGroup === player1Group && (x == 0 && y == 0) ) {
-        var x = Number(game.world.width/2 - 200) ;
-        var y = Number(game.world.height - 200)
-    } else if (playerGroup === player2Group && (x == 0 && y == 0)) {
-        var x = Number(game.world.width/2 + 200) ;
-        var y = Number(game.world.height - 200)
-    }
-
-    // Design each character with custom stuff
-    var player = game.add.sprite(x, y, 'mech');
-    game.physics.arcade.enable(player);
-
-    // Custom attributes
-    player.a = 'meow';
-    player.model = 'mech';
-    player.group = playerGroup;
-    if (playerGroup === player1Group) {
-        player.playerDirection = 'right';
-        player.attackGroup = player1AttackGroup;
-        player.attackTimerFunction = stopAttackPlayer1;
-    } else if (playerGroup === player2Group) {
-        player.playerDirection = 'left';
-        player.attackGroup = player2AttackGroup;
-        player.attackTimerFunction = stopAttackPlayer2;
-    }
-    player.playerJumpSensitivity = playerJumpSensitivity;
-    player.playerMoveSpeed = playerMoveSpeed;
-    player.playerJumpSpeed = playerJumpSpeed;
-    player.playerJumping = playerJumping;
-    player.brokenCollide = false;
-    player.isAttacking = false;
-
-    // World bounds
-    player.checkWorldBounds = true;
-    player.events.onOutOfBounds.add(worldWrapDieLoser, this);
-
-    //  Player physics properties. Give the little guy a slight bounce.
-    player.body.bounce.y = 0.2;
-    player.body.gravity.y = 1000;
-    //player.body.collideWorldBounds.up = true;
-    player.body.setSize(64, 64, 32, 64);
-    //player.body.checkCollision.up = false;
-    //player.body.checkCollision.down = true;
-
-
-    //  Stage 1 animations
-    player.playerLevel = 'level1';
-    player.animations.add(player.playerLevel + '_idle_left', range(0,7), 10, true);
-    player.animations.add(player.playerLevel + '_idle_right', range(19,26), 10, true);
-    player.animations.add(player.playerLevel + '_walk_left', range(38,56), 20, true);
-    player.animations.add(player.playerLevel + '_walk_right', range(57,75), 20, true);
-    player.animations.add(player.playerLevel + '_attack_left', range(76,87), 10, false);
-    player.animations.add(player.playerLevel + '_attack_right', range(95,106), 10, false);
-    player.animations.add(player.playerLevel + '_jump_left', [114], 10, false);
-    player.animations.add(player.playerLevel + '_jump_right', [133], 10, false);
-    player.animations.add(player.playerLevel + '_fall_left', [152], 10, false);
-    player.animations.add(player.playerLevel + '_fall_right', [171], 10, false);
-
-
-    // Stage 2 animation
-    player.playerLevel = 'level2';
-    player.animations.add(player.playerLevel + '_idle_left', range(190,197), 10, true);
-    player.animations.add(player.playerLevel + '_idle_right', range(209,216), 10, true);
-    player.animations.add(player.playerLevel + '_walk_left', range(228,237), 10, true);
-    player.animations.add(player.playerLevel + '_walk_right', range(247,256), 10, true);
-    player.animations.add(player.playerLevel + '_attack_left', range(266,273), 10, false);
-    player.animations.add(player.playerLevel + '_attack_right', range(285,292), 10, false);
-    player.animations.add(player.playerLevel + '_jump_left', [304], 10, false);
-    player.animations.add(player.playerLevel + '_jump_right', [323], 10, false);
-    player.animations.add(player.playerLevel + '_fall_left', [342], 10, false);
-    player.animations.add(player.playerLevel + '_fall_right', [361], 10, false);
-
-    // Stage 3 animation
-    player.playerLevel = 'level3';
-    player.animations.add(player.playerLevel + '_idle_left', range(380,387), 10, true);
-    player.animations.add(player.playerLevel + '_idle_right', range(399,406), 10, true);
-    player.animations.add(player.playerLevel + '_walk_left', range(418,423), 10, true);
-    player.animations.add(player.playerLevel + '_walk_right', range(437,442), 10, true);
-    player.animations.add(player.playerLevel + '_attack_left', range(456,461), 10, false);
-    player.animations.add(player.playerLevel + '_attack_right', range(475,480), 10, false);
-    player.animations.add(player.playerLevel + '_jump_left', [494], 10, false);
-    player.animations.add(player.playerLevel + '_jump_right', [513], 10, false);
-    player.animations.add(player.playerLevel + '_fall_left', [532], 10, false);
-    player.animations.add(player.playerLevel + '_fall_right', [551], 10, false);
-
-    switchPlayerLevel(player, level=level);
-
-    // Add to group player1 or player2
-    playerGroup.add(player);
-    var groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
-    var groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
-}
-
-function switchAllLevel() {
-    player1Group.forEach(function(player) {switchPlayerLevel(player);}, this);
-    player2Group.forEach(function(player) {switchPlayerLevel(player);}, this);
-}
-
-function switchPlayerLevel(player, level = null) {
-    if (level) {
-        player.playerLevel = level;
-    } else if (player.playerLevel == 'level1') {
-        player.playerLevel = 'level2';
-    } else if (player.playerLevel == 'level2') {
-        player.playerLevel = 'level3';
-    } else if (player.playerLevel == 'level3') {
-        player.playerLevel = 'level1';
+function switchPlayerStage(player, stage = null) {
+    if (stage) {
+        player.playerStage = stage;
+    } else if (player.playerStage == 'Stage1') {
+        player.playerStage = 'Stage2';
+    } else if (player.playerStage == 'Stage2') {
+        player.playerStage = 'Stage3';
+    } else if (player.playerStage == 'Stage3') {
+        player.playerStage = 'Stage1';
         youLose(player);
         console.log('YOU LOSE', player.model);
         return;
     }
-    if (player.playerLevel == 'level1') {
+    if (player.playerStage == 'Stage1') {
         player.body.bounce.y = 0;
         player.body.gravity.y = 1000;
         player.body.setSize(64, 64, 32, 64);
         player.playerMoveSpeed = 50;
         player.playerJumpSpeed = -250;
-    } else if (player.playerLevel == 'level2') {
+    } else if (player.playerStage == 'Stage2') {
         player.body.bounce.y = 0.1;
         player.body.gravity.y = 600;
         player.body.setSize(32, 47, 48, 83);
         player.playerMoveSpeed = 100;
         player.playerJumpSpeed = -375;
-    } else if (player.playerLevel == 'level3') {
+    } else if (player.playerStage == 'Stage3') {
         player.body.bounce.y = 0.2;
         player.body.gravity.y = 600;
         player.body.setSize(32, 47, 48, 83);
@@ -357,12 +165,12 @@ function controlPlayer(player, group) {
     }
 /*
     if (switchButton.onPress) {
-        if (player.playerLevel == 'level1') {
-            switchPlayerLevel(player, 'level2')
-        } else if (player.playerLevel == 'level2') {
-            switchPlayerLevel(player, 'level3')
-        } else if (player.playerLevel == 'level3') {
-            switchPlayerLevel(player, 'level1')
+        if (player.playerStage == 'Stage1') {
+            switchPlayerStage(player, 'Stage2')
+        } else if (player.playerStage == 'Stage2') {
+            switchPlayerStage(player, 'Stage3')
+        } else if (player.playerStage == 'Stage3') {
+            switchPlayerStage(player, 'Stage1')
         }
     }
 */
@@ -383,9 +191,9 @@ function controlPlayer(player, group) {
             //attackPlayer(player);
         }
         if (player.playerDirection == 'left') {
-            player.animations.play(player.playerLevel + '_attack_left');
+            player.animations.play(player.playerStage + '_attack_left');
         } else if (player.playerDirection == 'right') {
-            player.animations.play(player.playerLevel + '_attack_right');
+            player.animations.play(player.playerStage + '_attack_right');
         }
 
     } else if (leftButton.isDown) {
@@ -394,12 +202,12 @@ function controlPlayer(player, group) {
        player.playerDirection = 'left';
        if (player.body.velocity.y < player.playerJumpSensitivity || !(player.body.touching.down || player.body.blocked.down)) {
            if (player.body.velocity.y < player.playerJumpSensitivity) {
-               player.animations.play(player.playerLevel + '_jump_left');
+               player.animations.play(player.playerStage + '_jump_left');
            } else {
-               player.animations.play(player.playerLevel + '_fall_left');
+               player.animations.play(player.playerStage + '_fall_left');
            }
        } else {
-           player.animations.play(player.playerLevel + '_walk_left');
+           player.animations.play(player.playerStage + '_walk_left');
        }
     } else if (rightButton.isDown) {
        //  Move to the right
@@ -407,30 +215,30 @@ function controlPlayer(player, group) {
        player.playerDirection = 'right';
        if (player.body.velocity.y < player.playerJumpSensitivity || !(player.body.touching.down || player.body.blocked.down)) {
            if (player.body.velocity.y < player.playerJumpSensitivity) {
-               player.animations.play(player.playerLevel + '_jump_right');
+               player.animations.play(player.playerStage + '_jump_right');
            } else {
-               player.animations.play(player.playerLevel + '_fall_right');
+               player.animations.play(player.playerStage + '_fall_right');
            }
 
        } else {
-           player.animations.play(player.playerLevel + '_walk_right');
+           player.animations.play(player.playerStage + '_walk_right');
        }
     } else {
         if (player.playerDirection == 'left') {
            if (player.body.velocity.y < player.playerJumpSensitivity) {
-               player.animations.play(player.playerLevel + '_jump_left');
+               player.animations.play(player.playerStage + '_jump_left');
            } else if (!(player.body.touching.down || player.body.blocked.down)) {
-               player.animations.play(player.playerLevel + '_fall_left');
+               player.animations.play(player.playerStage + '_fall_left');
            } else {
-               player.animations.play(player.playerLevel + '_idle_left');
+               player.animations.play(player.playerStage + '_idle_left');
            }
         } else if (player.playerDirection == 'right') {
            if (player.body.velocity.y < player.playerJumpSensitivity) {
-               player.animations.play(player.playerLevel + '_jump_right');
+               player.animations.play(player.playerStage + '_jump_right');
            } else if (!(player.body.touching.down || player.body.blocked.down)) {
-               player.animations.play(player.playerLevel + '_fall_right');
+               player.animations.play(player.playerStage + '_fall_right');
            } else {
-               player.animations.play(player.playerLevel + '_idle_right');
+               player.animations.play(player.playerStage + '_idle_right');
            }
         }
 
@@ -458,28 +266,28 @@ function worldWrap(bounds, player) {
         // 0 is the bounds for left side
         var y = player.body.y;
         if (player.body.x < 0) {
-            if (player.playerLevel == 'level1') {
+            if (player.playerStage == 'Stage1') {
                 var x = game.world.width -32;
-            } else if (player.playerLevel == 'level2') {
+            } else if (player.playerStage == 'Stage2') {
                 var x = game.world.width -48;
-            } else if (player.playerLevel == 'level3') {
+            } else if (player.playerStage == 'Stage3') {
                 var x = game.world.width -48;
             }
 
         } else if (player.body.x > (game.world.width - 128)) {
-            if (player.playerLevel == 'level1') {
+            if (player.playerStage == 'Stage1') {
                 var x = -96;
-            } else if (player.playerLevel == 'level2') {
+            } else if (player.playerStage == 'Stage2') {
                 var x = -80;
-            } else if (player.playerLevel == 'level3') {
+            } else if (player.playerStage == 'Stage3') {
                 var x = -80;
             }
         }
 
         if (player.model == 'mech') {
-            createMech(player.group, x, y - 64 - 20, level=player.playerLevel);
+            characters.createMech(player.group, x, y - 64 - 20, stage=player.playerStage);
         } else {
-            createKnight(player.group, x, y - 64 - 20, level=player.playerLevel);
+            characters.createKnight(player.group, x, y - 64 - 20, stage=player.playerStage);
         }
 
         game.world.bringToTop(player.group);
@@ -521,11 +329,11 @@ function attackPlayer(player) {
         player.attackBox.x += 64;
     }
     player.attackTimer = game.time.create(true);
-    if (player.playerLevel == 'level1') {
+    if (player.playerStage == 'Stage1') {
         player.attackTimer.loop(600, player.attackTimerFunction, this);
-    } else if (player.playerLevel == 'level2') {
+    } else if (player.playerStage == 'Stage2') {
         player.attackTimer.loop(500, player.attackTimerFunction, this);
-    } else if (player.playerLevel == 'level3') {
+    } else if (player.playerStage == 'Stage3') {
         player.attackTimer.loop(250, player.attackTimerFunction, this);
     }
 
@@ -568,7 +376,7 @@ function stopAttackPlayer2() {
 function dealDamage(bounds, player) {
     console.log('dealing dmg to', player.model);
     bounds.destroy();
-    switchPlayerLevel(player);
+    switchPlayerStage(player);
 }
 
 function youLose(player) {
@@ -597,8 +405,8 @@ function startGame() {
     gameOver = false;
     // Create characters
     //createBattery(player1Group);
-    createMech(player1Group);
-    createKnight(player2Group);
+    characters.createMech(player1Group);
+    characters.createKnight(player2Group);
 
 
     game.world.bringToTop(groundGroup);
