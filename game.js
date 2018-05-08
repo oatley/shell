@@ -80,7 +80,7 @@ var playerJumping = false;
 var groundGroup;
 var worldBoundsGroup;
 var platformGroup;
-var skyGroup;
+var backgroundGroup;
 
 // music
 var music;
@@ -157,12 +157,12 @@ function cleanGround() {
     }
 }
 
-function cleanSky() {
-    if (skyGroup.length > 0) {
-        while(skyGroup.length > 0) { // Because it refuses to run the function on all items in the group
-            console.log('ground', skyGroup.length);
-            skyGroup.forEach(function(ground) {
-                ground.destroy();
+function cleanBackground() {
+    if (backgroupGroup.length > 0) {
+        while(backgroundGroup.length > 0) { // Because it refuses to run the function on all items in the group
+            console.log('cleanBackground', cleanBackground.length);
+            backgroundGroup.forEach(function(background) {
+                background.destroy();
             }, this);
         }
     }
@@ -172,6 +172,7 @@ function cleanUp() {
     cleanPlayers();
     cleanGround();
     cleanPlatforms();
+    cleanBackground();
 }
 
 
@@ -190,7 +191,7 @@ function startGame() {
     gameOver = false;
 
     // Create map1
-    levels.createMap1();
+    levels.createMap1(groundGroup, worldWrapGroup, platformGroup, backgroundGroup);
     cleanUp();
     // Create characters
     //createBattery(player1Group);

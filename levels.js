@@ -1,26 +1,25 @@
 var levels = {
     // Create a second and 3rd map off screen so the doubles never get out of sync
-    createMap1: function() {
+    createMap1: function(groundGroup, worldWrapGroup, platformGroup, backgroundGroup) {
         for (var i = 0; i < 8; i++) {
-            var sky = skyGroup.create(0 + (64*i), 0, 'sky1');
+            var sky = backgroundGroup.create(0 + (64*i), 0, 'sky1');
         }
         for (var i = 0; i < 8; i++) {
-            var sky = skyGroup.create(0 + (64*i), 64, 'sky2');
+            var sky = backgroundGroup.create(0 + (64*i), 64, 'sky2');
         }
         for (var i = 0; i < 8; i++) {
-            var sky = skyGroup.create(0 + (64*i), 128, 'sky3');
+            var sky = backgroundGroup.create(0 + (64*i), 128, 'sky3');
         }
         for (var i = 0; i < 8; i++) {
-            var sky = skyGroup.create(0 + (64*i), 192, 'sky4');
+            var sky = backgroundGroup.create(0 + (64*i), 192, 'sky4');
         }
-        var mountain = game.add.sprite(0, -48, 'mountain');
-        var mountain2 = game.add.sprite(game.world.width + 64, -48, 'mountain');
+        var mountain = backgroundGroup.create(0, -48, 'mountain');
+        var mountain2 = backgroundGroup.create(game.world.width + 64, -48, 'mountain');
         mountain2.scale.x *=-1;
-        var cloud = game.add.sprite(game.world.width - 100, -32, 'cloud');
-        var cloud2 = game.add.sprite(220, -10 , 'cloud');
-        var cloud22 = game.add.sprite(-32, -10 , 'cloud');
+        var cloud = backgroundGroup.create(game.world.width - 100, -32, 'cloud');
+        var cloud2 = backgroundGroup.create(220, -10 , 'cloud');
+        var cloud22 = backgroundGroup.create(-32, -10 , 'cloud');
         cloud2.scale.x *= -1;
-
 
         var platform = platformGroup.create(game.world.width/2 - 64, -40, 'platform');
         platform.body.immovable = true;
