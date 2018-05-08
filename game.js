@@ -13,25 +13,13 @@ var config = {
 }
 var game = new Phaser.Game(config);
 
-/* Don't need game state?
-console.log('load.js');
-game.state.add('load', load); // load contains everything for preload
-console.log('audio.js');
-game.state.add('audio', audio); // functions for controlling the audio
-console.log('controller.js');
-game.state.add('controller', controller); // controller contains setup for keyboard and controller support
-console.log('levels.js');
-game.state.add('levels', levels);
-console.log('character.js');
-game.state.add('characters', characters);
-*/
+// State control
+var isTitleScreen = false;
+var isGameOver = false;
 
 
 
-// Player objects
-var player1;
-var player2;
-
+// JUNK CLEANUP
 var gameOver;
 var youwinscreen;
 var titlescreen;
@@ -45,11 +33,6 @@ var player1Group;
 
 // Player 2 group
 var player2Group;
-
-
-
-
-
 
 // maps
 var groundGroup;
@@ -181,30 +164,20 @@ function update() {
     }
 
     // Colliders
-    var groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
-    var groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
-    var worldWrapCollision = game.physics.arcade.overlap(player1Group, worldWrapGroup);
-    var worldWrapCollision = game.physics.arcade.overlap(player2Group, worldWrapGroup);
-    var charColliders = game.physics.arcade.collide(player1Group, player2Group);
-    var attackColliders = game.physics.arcade.overlap(player1Group, player2AttackGroup);
-    var attackColliders = game.physics.arcade.overlap(player2Group, player1AttackGroup);
 
-    // Control movement and animations for player 1
-    if (player1Group.length > 0) {
-        player1Group.forEach(function(player) {controller.controlPlayer(player, player1Group);}, this);
-    }
 
-    // Control movement and animations for player 2
-    if (player2Group.length > 0) {
-        player2Group.forEach(function(player) {controller.controlPlayer(player, player2Group);}, this);
-    }
+    collisions.collide();
+    collisions.overlap();
+
+
+    controller.controlAllPlayers(player1Group, player2Group);
 
     if (gameOver && resetGameButton.isDown) {
         console.log('resetting the game');
         cleanUp();
         startGame();
-    } else if (titlescreenbool && resetGameButton.isDown) {
-        titlescreenbool = false;
+    } else if (isTitleScreen && resetGameButton.isDown) {
+        isTitleScreen = false;
         //titlescreen.destroy();
         startGame();
     }

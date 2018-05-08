@@ -67,6 +67,17 @@ var controller = {
         musicMinus1Button.onDown.add(audio.decreaseMusicVolume, this);
         musicMinus2Button.onDown.add(audio.decreaseMusicVolume, this);
     },
+    controlAllPlayers: function (player1Group, player2Group) {
+        // Control movement and animations for player 1
+        if (player1Group.length > 0) {
+            player1Group.forEach(function(player) {controller.controlPlayer(player, player1Group);}, this);
+        }
+
+        // Control movement and animations for player 2
+        if (player2Group.length > 0) {
+            player2Group.forEach(function(player) {controller.controlPlayer(player, player2Group);}, this);
+        }
+    },
     controlPlayer: function(player, group) {
         // Function accept the character (knight, mech, etc) and "player1" or "player2"
         if (group === player1Group) {
