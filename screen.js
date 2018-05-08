@@ -1,4 +1,19 @@
 var screen = {
+    displayConfiguration: function() {
+        // Background colour
+        game.stage.backgroundColor = '#6bc4ff';
+
+        // Configure fullscreen mode and scale
+        game.scale.minWidth = 480;
+        game.scale.minHeight = 270;
+        game.scale.maxWidth = 1920;
+        game.scale.maxHeight = 1080;
+        game.scale.pageAlignHorizontally = true;
+        game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.stage.smoothed = false;
+        game.input.activePointer.leftButton.onDown.add(screen.toggleFullscreen, this);
+    },
     toggleFullscreen: function() {
         if (game.scale.isFullScreen) {
             game.scale.stopFullScreen();
