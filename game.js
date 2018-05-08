@@ -387,12 +387,12 @@ function update() {
 
     // Control movement and animations for player 1
     if (player1Group.length > 0) {
-        player1Group.forEach(function(player) {controlPlayer(player, player1Group);}, this);
+        player1Group.forEach(function(player) {controller.controlPlayer(player, player1Group);}, this);
     }
 
     // Control movement and animations for player 2
     if (player2Group.length > 0) {
-        player2Group.forEach(function(player) {controlPlayer(player, player2Group);}, this);
+        player2Group.forEach(function(player) {controller.controlPlayer(player, player2Group);}, this);
     }
 
     if (gameOver && resetGameButton.isDown) {
