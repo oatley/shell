@@ -1,23 +1,27 @@
 var clean = {
     // Delete all players from game
     cleanPlayers: function(player1Group, player2Group) {
-        if (player1Group.length > 0) {
-            player1Group.forEach(function(player) {
-                if (!player) return;
-                if (player.attackTimer) player.attackTimer.stop();
-                if (player.attackTimer2) player.attackTimer2.stop();
-                if (player.attackBox) player.attackBox.destroy();
-                player.destroy();
-            }, this);
+        while(player1Group.length > 0) { // Because it refuses to run the function on all items in the group
+            if (player1Group.length > 0) {
+                player1Group.forEach(function(player) {
+                    if (!player) return;
+                    if (player.attackTimer) player.attackTimer.stop();
+                    if (player.attackTimer2) player.attackTimer2.stop();
+                    if (player.attackBox) player.attackBox.destroy();
+                    player.destroy();
+                }, this);
+            }
         }
-        if (player2Group.length > 0) {
-            player2Group.forEach(function(player) {
-                if (!player) return;
-                if (player.attackTimer) player.attackTimer.stop();
-                if (player.attackTimer2) player.attackTimer2.stop();
-                if (player.attackBox) player.attackBox.destroy();
-                player.destroy();
-            }, this);
+        while(player2Group.length > 0) { // Because it refuses to run the function on all items in the group
+            if (player2Group.length > 0) {
+                player2Group.forEach(function(player) {
+                    if (!player) return;
+                    if (player.attackTimer) player.attackTimer.stop();
+                    if (player.attackTimer2) player.attackTimer2.stop();
+                    if (player.attackBox) player.attackBox.destroy();
+                    player.destroy();
+                }, this);
+            }
         }
     },
     // Delete all platforms from game
