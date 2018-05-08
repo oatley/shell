@@ -135,7 +135,7 @@ function cleanPlayers() {
 
 }
 
-function cleanPlatform(platform) {
+function cleanPlatforms(platform) {
     if (platformGroup.length > 0) {
         while(platformGroup.length > 0) { // Because it refuses to run the function on all items in the group
             console.log(platformGroup.length);
