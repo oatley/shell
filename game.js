@@ -14,7 +14,7 @@ let config = {
 }
 let game = new Phaser.Game(config);
 
-
+let playerController = new playerController();
 
 
 // Player objects

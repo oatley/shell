@@ -1,4 +1,4 @@
-let playerController = {
+
     // Set player 1 controls
     function player1Controls() {
         // Keyboard controls
@@ -41,6 +41,3 @@ let playerController = {
         // Xbox controller controls
 
     }
-}
-
-module.exports = playerController;
