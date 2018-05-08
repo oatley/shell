@@ -146,11 +146,15 @@ function youLose(player) {
 }
 
 function startGame() {
-
+    cleanUp();
     if (youwinscreen) {
         youwinscreen.destroy();
     }
     gameOver = false;
+
+    // Create map1
+    levels.createMap1(groundGroup, worldWrapGroup, platformGroup);
+
     // Create characters
     //createBattery(player1Group);
     characters.createMech(player1Group);
@@ -217,8 +221,7 @@ function create() {
     player1AttackGroup  = game.add.group();
     player2AttackGroup  = game.add.group();
 
-    // Create map1
-    levels.createMap1(groundGroup, worldWrapGroup, platformGroup);
+
 
     //startGame();
     titlescreen = game.add.sprite(game.world.width/2, game.world.height/2, 'title');
@@ -228,6 +231,7 @@ function create() {
     this.game.onPause.add(audio.pauseMusic, this);
     this.game.onResume.add(audio.resumeMusic, this);
     audio.startMusic();
+    //startGame();
 }
 
 function update() {
