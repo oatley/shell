@@ -1,6 +1,3 @@
-//
-let playerController = require('player.controller');
-
 // Start phaser game
 let config = {
     width: 480,
