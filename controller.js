@@ -1,7 +1,7 @@
 
 var = controller {
     // Set player 1 controls
-    player1Controls function() {
+    player1Controls: function() {
         // Keyboard controls
         upPlayer1Button = game.input.keyboard.addKey(Phaser.Keyboard.W);
         downPlayer1Button = game.input.keyboard.addKey(Phaser.Keyboard.S);
@@ -24,7 +24,7 @@ var = controller {
         musicMinus2Button.onDown.add(decreaseMusicVolume, this);
 
         //switchPlayer1Button.onDown.add(switchAllLevel, this);
-    game.add.group();
+        game.add.group();
         // Xbox controller controls
 
     },
