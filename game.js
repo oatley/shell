@@ -168,7 +168,7 @@ function create() {
 
 
 
-    screens.displayTitleScreen(displayScreensGroup);
+    screen.displayTitleScreen(displayScreensGroup);
 
 
     // Start background music and on resume and pause callbacks
