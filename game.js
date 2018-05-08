@@ -153,8 +153,8 @@ function startGame() {
     gameOver = false;
 
     // Create map1
-    //levels.createMap1(groundGroup, worldWrapGroup, platformGroup);
-
+    levels.createMap1(groundGroup, worldWrapGroup, platformGroup);
+    cleanUp();
     // Create characters
     //createBattery(player1Group);
     characters.createMech(player1Group);
