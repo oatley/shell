@@ -1,5 +1,5 @@
 var characters = {
-    function switchPlayerStage(player, stage = null) {
+    switchPlayerStage: function(player, stage = null) {
         if (stage) {
             player.playerStage = stage;
         } else if (player.playerStage == 'Stage1') {
