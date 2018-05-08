@@ -74,7 +74,7 @@ var characters = {
         player.attackTimer.start();
 
         player.attackBox.body.onOverlap = new Phaser.Signal();
-        player.attackBox.body.onOverlap.add(this.dealDamage);
+        player.attackBox.body.onOverlap.add(characters.dealDamage);
         player.attackGroup.add(player.attackBox);
         game.world.bringToTop(player1AttackGroup);
         game.world.bringToTop(player2AttackGroup);
