@@ -72,8 +72,9 @@ var characters = {
     },
     // Callback timer to stop an attack for player1
     stopAttackPlayer1: function() {
-        console.log('timer ended player 1');
-        // Control movement and animations for player 1
+        if (player1Group.length < 1) {
+            return;
+        }
         player1Group.forEach(function(player) {
             player.isAttacking = false;
             player.attackTimer.stop()
@@ -84,7 +85,9 @@ var characters = {
     },
     // Callback timer to stop an attack for player2
     stopAttackPlayer2: function() {
-        console.log('timer ended player 2');
+        if (player2Group.length < 1) {
+            return;
+        }
         player2Group.forEach(function(player) {
             player.isAttacking = false;
             player.attackTimer.stop()
