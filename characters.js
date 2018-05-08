@@ -45,7 +45,10 @@ var characters = {
         // destroy hitbox created to detect a hit on player
         bounds.destroy();
         // Send player to next stage
-        characters.switchPlayerStage(player);
+        player.group.forEach(function(player) {
+            characters.switchPlayerStage(player);
+        }, this);
+
     },
     // Creates hitbox and forces animation to stay in attack
     attackPlayer: function(player) {
