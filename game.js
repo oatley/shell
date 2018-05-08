@@ -91,6 +91,8 @@ var player2AttackGroup;
 
 var range = Phaser.ArrayUtils.numberArray;
 
+var endGame = false;
+
 function preload() {
     // Preload images and audio
     load.loadImages();
@@ -202,6 +204,10 @@ function create() {
 }
 
 function update() {
+    if (endGame) {
+        youLose();
+    }
+
     // Colliders
     var groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
     var groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);

@@ -8,7 +8,8 @@ var characters = {
             player.playerStage = 'Stage3';
         } else if (player.playerStage == 'Stage3') {
             player.playerStage = 'Stage1';
-            youLose(player);
+            //youLose(player);
+            endGame = true;
             console.log('YOU LOSE', player.model);
             return;
         }

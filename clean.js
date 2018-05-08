@@ -3,6 +3,9 @@ var clean = {
     cleanPlayers: function(player1Group, player2Group) {
         if (player1Group.length > 0) {
             player1Group.forEach(function(player) {
+                if (!player) {
+                    return;
+                }
                 player.attackTimer.stop();
                 player.attackTimer2.stop();
                 player.attackBox.destroy();
@@ -11,6 +14,9 @@ var clean = {
         }
         if (player2Group.length > 0) {
             player2Group.forEach(function(player) {
+                if (!player) {
+                    return;
+                }
                 player.attackTimer.stop();
                 player.attackTimer2.stop();
                 player.attackBox.destroy();
