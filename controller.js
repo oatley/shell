@@ -34,10 +34,10 @@ var controller = {
         musicPlus2Button = game.input.keyboard.addKey(Phaser.Keyboard.PLUS);
         musicMinus1Button = game.input.keyboard.addKey(Phaser.Keyboard.MINUS);
         musicMinus2Button = game.input.keyboard.addKey(Phaser.Keyboard.UNDERSCORE);
-        musicMuteButton.onDown.add(muteMusicVolume, this);
-        musicPlus1Button.onDown.add(increaseMusicVolume, this);
-        musicPlus2Button.onDown.add(increaseMusicVolume, this);
-        musicMinus1Button.onDown.add(decreaseMusicVolume, this);
-        musicMinus2Button.onDown.add(decreaseMusicVolume, this);
+        musicMuteButton.onDown.add(audio.muteMusicVolume, this);
+        musicPlus1Button.onDown.add(audio.increaseMusicVolume, this);
+        musicPlus2Button.onDown.add(audio.increaseMusicVolume, this);
+        musicMinus1Button.onDown.add(audio.decreaseMusicVolume, this);
+        musicMinus2Button.onDown.add(audio.decreaseMusicVolume, this);
     }
 };
