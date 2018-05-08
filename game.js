@@ -114,6 +114,13 @@ function dealDamage(bounds, player) {
     characters.switchPlayerStage(player);
 }
 
+function cleanCharacter(player) {
+    player.attackTimer.stop();
+    player.attackTimer2.stop();
+    player.attackBox.destroy();
+    player.destroy();
+}
+
 function cleanUp() {
     if (player1Group.length > 0) {
         player1Group.forEach(function(player) {cleanCharacter(player);}, this);
@@ -124,12 +131,6 @@ function cleanUp() {
     }
 }
 
-function cleanCharacter(player) {
-    player.attackTimer.stop();
-    player.attackTimer2.stop();
-    player.attackBox.destroy();
-    player.destroy();
-}
 
 function youLose(player) {
     cleanCharacter(player);
