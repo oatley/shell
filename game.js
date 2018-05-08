@@ -14,7 +14,7 @@ var config = {
 var game = new Phaser.Game(config);
 
 // State control
-var isTitleScreen = false;
+var isTitleScreen = true;
 var isGameOver = false;
 
 
