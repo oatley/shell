@@ -135,6 +135,9 @@ function cleanUp() {
     if (platformGroup.length > 0) {
         console.log(platformGroup.length);
         platformGroup.forEach(function(platform) {console.log('deleting platform');cleanPlatform(platform);}, this);
+        platformGroup.forEach(function(platform) {console.log('deleting platform');cleanPlatform(platform);}, this);
+        platformGroup.forEach(function(platform) {console.log('deleting platform');cleanPlatform(platform);}, this);
+        platformGroup.forEach(function(platform) {console.log('deleting platform');cleanPlatform(platform);}, this);
     }
 }
 
