@@ -35,14 +35,18 @@ var characters = {
     },
     // Callback runs when player touches ground
     groundPlayer: function(bounds, player) {
+        if (!player) {
+            return;
+        }
         player.isGrounded = true;
     },
     // Creates hitbox and forces animation to stay in attack
     attackPlayer: function(player) {
-        console.log('attacking');
+        if (!player) {
+            return;
+        }
 
         player.attackTimer2.stop();
-
         player.attackBox = game.add.sprite(player.body.x + player.body.width/2,  player.body.y + player.body.height/2, 'green');
         game.physics.arcade.enable(player.attackBox);
         player.attackBox.anchor.setTo(0.5, 0.5);
