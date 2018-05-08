@@ -113,14 +113,16 @@ let characters = {
     },
     // Create knight character and animations
     createKnight: function(playerGroup, x = 0, y = 0, stage = 'Stage1') {
-        // Design each character with custom stuff
+
         // Positions
+        let x = 0;
+        let y = 0;
         if (playerGroup === player1Group && (x == 0 && y == 0) ) {
-            let x = Number(game.world.width/2 - 200) ;
-            let y = Number(game.world.height - 200)
+            x = Number(game.world.width/2 - 200) ;
+            y = Number(game.world.height - 200);
         } else if (playerGroup === player2Group && (x == 0 && y == 0)) {
-            let x = Number(game.world.width/2 + 100) ;
-            let y = Number(game.world.height - 200)
+            x = Number(game.world.width/2 + 100);
+            y = Number(game.world.height - 200);
         }
 
         // Design each character with custom stuff
@@ -208,14 +210,16 @@ let characters = {
     },
     // Create mech character and animations
     createMech: function(playerGroup, x = 0, y = 0, stage = 'Stage1') {
-        // Design each character with custom stuff
+
         // Positions
+        let x = 0;
+        let y = 0;
         if (playerGroup === player1Group && (x == 0 && y == 0) ) {
-            let x = Number(game.world.width/2 - 200) ;
-            let y = Number(game.world.height - 200)
+            x = Number(game.world.width/2 - 200) ;
+            y = Number(game.world.height - 200)
         } else if (playerGroup === player2Group && (x == 0 && y == 0)) {
-            let x = Number(game.world.width/2 + 200) ;
-            let y = Number(game.world.height - 200)
+            x = Number(game.world.width/2 + 200) ;
+            y = Number(game.world.height - 200)
         }
 
         // Design each character with custom stuff
