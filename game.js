@@ -49,12 +49,7 @@ var player2Group;
 
 
 
-// Default player stats
-var playerDirection = 'left';
-var playerJumpSensitivity = -5; // Negative number, default is about -2.8 falling always
-var playerMoveSpeed = 50; // 50
-var playerJumpSpeed = -650; // Negative number // -350
-var playerJumping = false;
+
 
 // maps
 var groundGroup;
@@ -74,14 +69,14 @@ var player2AttackGroup;
 
 var range = Phaser.ArrayUtils.numberArray;
 
-
+// Preload images, spritesheets, and audio
 function preload() {
-    // Preload images and audio
     load.loadImages();
     load.loadSpriteSheets();
     load.loadMusic();
 }
 
+// cleanUp clears all sprites from the screen and deletes the data associated with them
 function cleanUp() {
     clean.cleanPlayers(player1Group, player2Group);
     clean.cleanGround(groundGroup);

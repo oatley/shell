@@ -140,10 +140,10 @@ var characters = {
             player.attackGroup = player2AttackGroup;
             player.attackTimerFunction = characters.stopAttackPlayer2;
         }
-        player.playerJumpSensitivity = playerJumpSensitivity;
-        player.playerMoveSpeed = playerMoveSpeed;
-        player.playerJumpSpeed = playerJumpSpeed;
-        player.playerJumping = playerJumping;
+        player.playerJumpSensitivity = -5;
+        player.playerMoveSpeed = 50;
+        player.playerJumpSpeed = -650;
+        player.playerJumping = false;
         player.brokenCollide = false;
         player.isAttacking = false;
 
@@ -156,10 +156,7 @@ var characters = {
         //  Player physics properties. Give the little guy a slight bounce.
         player.body.bounce.y = 0.2;
         player.body.gravity.y = 1000;
-        //player.body.collideWorldBounds.up = true;
         player.body.setSize(64, 64, 32, 64);
-        //player.body.checkCollision.up = false;
-        //player.body.checkCollision.down = true;
 
 
         //  Stage 1 animations
@@ -238,11 +235,8 @@ var characters = {
             player.attackGroup = player2AttackGroup;
             player.attackTimerFunction = characters.stopAttackPlayer2;
         }
-        player.playerJumpSensitivity = playerJumpSensitivity;
-        player.playerMoveSpeed = playerMoveSpeed;
-        player.playerJumpSpeed = playerJumpSpeed;
-        player.playerJumping = playerJumping;
-        player.brokenCollide = false;
+        player.playerJumpSensitivity = -5;
+        player.playerJumping = false;
         player.isAttacking = false;
 
         // World bounds
@@ -254,11 +248,7 @@ var characters = {
         //  Player physics properties. Give the little guy a slight bounce.
         player.body.bounce.y = 0.2;
         player.body.gravity.y = 1000;
-        //player.body.collideWorldBounds.up = true;
         player.body.setSize(64, 64, 32, 64);
-        //player.body.checkCollision.up = false;
-        //player.body.checkCollision.down = true;
-
 
         //  Stage 1 animations
         player.playerStage = 'Stage1';

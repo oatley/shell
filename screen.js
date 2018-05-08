@@ -27,8 +27,6 @@ var screen = {
     },
     // Create a second version of the player wallwrapping
     worldWrap: function(bounds, player) {
-        //player.brokenCollide = true;
-        //console.log(player.brokenCollide);
         if (player.group.length == 1) {
             // game.world.width - 64 is the bounds for rigth side
             // 0 is the bounds for left side
