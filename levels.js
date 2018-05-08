@@ -52,7 +52,7 @@ var levels = {
             ground.body.immovable = true;
             ground.body.setSize(64, 32, 0, 32);
             ground.body.onCollide = new Phaser.Signal();
-            ground.body.onCollide.add(groundPlayer);
+            ground.body.onCollide.add(characters.groundPlayer);
             var roof = groundGroup.create(-64 + (64*i), 0 - 64, 'ground');
             roof.body.setSize(64, 32, 0, 0);
             roof.body.immovable = true;
@@ -61,13 +61,13 @@ var levels = {
         var worldWrapTile = worldWrapGroup.create(-64, 0, 'ground');
         worldWrapTile.body.immovable = true;
         worldWrapTile.body.onOverlap = new Phaser.Signal();
-        worldWrapTile.body.onOverlap.add(worldWrap);
+        worldWrapTile.body.onOverlap.add(screen.screenWrap);
         worldWrapTile.body.setSize(4, 1000, 60)
         //var worldWrapTile2 = worldWrapGroup.create(game.world.width, game.world.height -64, 'ground');
         var worldWrapTile2 = worldWrapGroup.create(game.world.width, 0, 'ground');
         worldWrapTile2.body.immovable = true;
         worldWrapTile2.body.onOverlap = new Phaser.Signal();
-        worldWrapTile2.body.onOverlap.add(worldWrap)
+        worldWrapTile2.body.onOverlap.add(screen.screenWrap)
         worldWrapTile2.body.setSize(4, 1000)
 
     }
