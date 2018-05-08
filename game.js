@@ -87,6 +87,7 @@ function cleanUp() {
     clean.cleanGround(groundGroup);
     clean.cleanPlatforms(platformGroup);
     clean.cleanBackground(backgroundGroup);
+    clean.cleanScreens(displayScreensGroup);
     if(sci)sci.destroy();
     if(jan)jan.destroy();
 }
@@ -209,7 +210,7 @@ function update() {
         startGame();
     } else if (titlescreenbool && resetGameButton.isDown) {
         titlescreenbool = false;
-        titlescreen.destroy();
+        //titlescreen.destroy();
         startGame();
     }
 

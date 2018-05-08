@@ -1,4 +1,11 @@
 var clean = {
+    // Delete all screens
+    cleanScreens: function(displayScreensGroup) {
+        while(displayScreensGroup.length > 0) { // Because it refuses to run the function on all items in the group
+            displayScreensGroup.forEach(function(displayedScreen) {
+                displayedScreen.destroy();
+            }, this);
+    },
     // Delete all players from game
     cleanPlayers: function(player1Group, player2Group) {
         while(player1Group.length > 0) { // Because it refuses to run the function on all items in the group
