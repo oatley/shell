@@ -5,6 +5,7 @@ var clean = {
             displayScreensGroup.forEach(function(displayedScreen) {
                 displayedScreen.destroy();
             }, this);
+        }
     },
     // Delete all players from game
     cleanPlayers: function(player1Group, player2Group) {
