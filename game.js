@@ -176,7 +176,7 @@ function cleanUp() {
 
 
 function youLose(player) {
-    cleanPlayers();
+    cleanPlayers(player1Group, player2Group);
     youwinscreen = game.add.sprite(game.world.width/2, game.world.height/2, 'youwin');
     youwinscreen.anchor.setTo(0.5, 0.5);
     gameOver = true;
