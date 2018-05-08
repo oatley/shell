@@ -1,4 +1,3 @@
-
 var controller = {
     // Set player 1 controls
     player1Controls: function() {

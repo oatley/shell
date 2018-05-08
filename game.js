@@ -620,7 +620,7 @@ function startMusic() {
 function preload() {
     // Preload loadImages
     game.state.add('load', load);
-    game.state.start('load');
+    load = game.state.start('load');
     load.loadImages();
     load.loadSpriteSheets();
     load.loadMusic();
