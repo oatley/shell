@@ -15,8 +15,8 @@ var game = new Phaser.Game(config);
 
 // Load code into game in order
 game.state.add('controller', controller);
-game.state.add('load', load);
-game.state.start('load');
+
+//game.state.start('load');
 
 // Run the code so you have access to the WTF DOES THIS EVEN DO? THAT THE ABOVE DOESN"T ALREADY DO?
 //game.state.start('controller');
@@ -619,6 +619,7 @@ function startMusic() {
 
 function preload() {
     // Preload loadImages
+    game.state.add('load', load);
     load.loadImages();
     load.loadSpriteSheets();
     load.loadMusic();
