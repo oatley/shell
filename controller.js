@@ -10,8 +10,6 @@ var controller = {
         switchPlayer1Button = game.input.keyboard.addKey(Phaser.Keyboard.E);
         resetGameButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
-
-        //game.add.group();
         // Xbox controller controls
 
     },
@@ -23,17 +21,19 @@ var controller = {
         leftPlayer2Button = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
         rightPlayer2Button = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
         attackPlayer2Button = game.input.keyboard.addKey(Phaser.Keyboard.L);
-        //switchPlayer2Button = game.input.keyboard.addKey(Phaser.Keyboard.K);
 
         // Xbox controller controls
 
     },
     musicControls: function() {
+        // Keyboard controls
         musicMuteButton = game.input.keyboard.addKey(Phaser.Keyboard.P);
         musicPlus1Button = game.input.keyboard.addKey(Phaser.Keyboard.EQUALS);
         musicPlus2Button = game.input.keyboard.addKey(Phaser.Keyboard.PLUS);
         musicMinus1Button = game.input.keyboard.addKey(Phaser.Keyboard.MINUS);
         musicMinus2Button = game.input.keyboard.addKey(Phaser.Keyboard.UNDERSCORE);
+
+        // Add callbacks to control the music volume
         musicMuteButton.onDown.add(audio.muteMusicVolume, this);
         musicPlus1Button.onDown.add(audio.increaseMusicVolume, this);
         musicPlus2Button.onDown.add(audio.increaseMusicVolume, this);
