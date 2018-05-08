@@ -36,6 +36,7 @@ var gameOver;
 var youwinscreen;
 var titlescreen;
 var titlescreenbool = true;
+var endGame = false;
 var sci;
 var jan;
 
@@ -91,7 +92,6 @@ var player2AttackGroup;
 
 var range = Phaser.ArrayUtils.numberArray;
 
-var endGame = false;
 
 function preload() {
     // Preload images and audio
@@ -105,6 +105,8 @@ function cleanUp() {
     clean.cleanGround(groundGroup);
     clean.cleanPlatforms(platformGroup);
     clean.cleanBackground(backgroundGroup);
+    sci.destroy();
+    jan.destroy();
 }
 
 function youLose(player) {
@@ -134,8 +136,8 @@ function startGame() {
     game.world.bringToTop(player2Group);
     game.world.bringToTop(platformGroup);
 
-    //sci = game.add.image(0, game.world.height - 64, 'sci');
-    //jan = game.add.image(game.world.width - 64, game.world.height - 64, 'jan');
+    sci = game.add.image(0, game.world.height - 64, 'sci');
+    jan = game.add.image(game.world.width - 64, game.world.height - 64, 'jan');
 }
 
 function create() {
