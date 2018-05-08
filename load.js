@@ -8,29 +8,32 @@ var load = {
         game.load.image('sky4', 'assets/sprites/maps/sky4.png');
         game.load.image('mountain', 'assets/sprites/maps/mountain.png');
         game.load.image('cloud', 'assets/sprites/maps/cloud.png');
+
         // Load images platforms
         game.load.image('platform', 'assets/sprites/maps/stage.png');
+
         // Load images ground
         game.load.image('ground', 'assets/sprites/maps/ground.png');
+
         // Attack boxes
         game.load.image('blank', 'assets/sprites/characters/blank.png');
         game.load.image('green', 'assets/sprites/characters/blank.png');
 
-        // Win screen
+        // Title screen and win screen
         game.load.image('youwin', 'assets/sprites/ui/ui_winscreen.png');
         game.load.image('title', 'assets/sprites/ui/ui_titleScreen.png');
+
+        // Portraits for each character
         game.load.image('sci', 'assets/sprites/ui/ui_portrait_sci03.png');
         game.load.image('jan', 'assets/sprites/ui/ui_portrait_jan03.png');
     },
-    // Load spritesheets
+    // Load spritesheets for each character
     loadSpriteSheets: function() {
         game.load.spritesheet('battery', 'assets/sprites/characters/battery-spritesheet.png', 64, 64);
         game.load.spritesheet('mech', 'assets/sprites/characters/sci_spritesheet.png', 128, 128);
         game.load.spritesheet('knight', 'assets/sprites/characters/knight_spritesheet.png', 128, 128);
-
-
     },
-    // Load music
+    // Load music and audio files
     loadMusic: function () {
         game.load.audio('bgmusic', ['assets/audio/bgmusic.mp3']);
     }

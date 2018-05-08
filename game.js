@@ -13,9 +13,10 @@ var config = {
 }
 var game = new Phaser.Game(config);
 
-// Load code into game in order
-game.state.add('controller', controller);
-game.state.add('load', load);
+
+game.state.add('load', load); // load contains everything for preload
+game.state.add('controller', controller); // controller contains setup for keyboard and controller support
+game.state.add('audio', audio); // functions for controlling the audio
 
 
 // Run the code so you have access to the WTF DOES THIS EVEN DO? THAT THE ABOVE DOESN"T ALREADY DO?
@@ -96,39 +97,7 @@ function toggleFullscreen() {
 
 
 
-function muteMusicVolume() {
-    console.log('music mute');
-    if (music.mute == true) {
-        music.mute = false;
-    } else {
-        music.mute = true;
-    }if (player2Group.length > 0) {
-        player2Group.forEach(function(player) {controlPlayer(player, player2Group);}, this);
-    }
-}
 
-function increaseMusicVolume() {
-    if (music.mute == true) {
-        music.mute = false
-    }
-    music.volume += 1;
-    console.log('music plus', music.volume);
-
-}
-
-
-function decreaseMusicVolume() {
-    if (music.volume > 0 && music.mute == true) {
-        music.mute = false;
-    }
-    if (music.volume > 0){
-        music.volume -= 1;
-    } else {
-        music.mute = true;
-    }
-    console.log('music minus', music.volume);
-
-}
 
 // Create a second and 3rd map off screen so the doubles never get out of sync
 function createMap1(groundGroup, worldWrapGroup, platformGroup) {
@@ -600,21 +569,7 @@ function worldWrapDieLoser (player) {
 }
 
 
-function resumeMusic() {
-    music.mute = false;
-    //music.resumeAll();
-    music.resume();
-}
 
-function pauseMusic() {
-    music.mute = false;
-    music.pause();
-}
-
-function startMusic() {
-    music.mute = false;
-    music.play();
-}
 
 
 function preload() {
@@ -748,9 +703,8 @@ function create() {
 
     // bgMusic
     music = game.add.audio('bgmusic');
-    music.volume = 5;
-    music.mute = false;
-    music.play();
+    audio.startMusic();
+
 
     // Setup controls
 
@@ -790,8 +744,8 @@ function create() {
     console.log(player2Group);
     console.log(groundGroup);
     //console.log(test(1,10));
-    this.game.onPause.add(pauseMusic, this);
-    this.game.onResume.add(resumeMusic, this);
+    this.game.onPause.add(audio.pauseMusic, this);
+    this.game.onResume.add(audio.resumeMusic, this);
     startMusic();
 }
 
