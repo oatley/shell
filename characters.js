@@ -179,7 +179,7 @@ var characters = {
         player.animations.add(player.playerStage + '_fall_left', [532], 10, false);
         player.animations.add(player.playerStage + '_fall_right', [551], 10, false);
 
-        switchPlayerStage(player, stage=stage);
+        this.switchPlayerStage(player, stage=stage);
 
         // Add to group player1 or player2
         playerGroup.add(player);
@@ -275,7 +275,7 @@ var characters = {
         player.animations.add(player.playerStage + '_fall_left', [532], 10, false);
         player.animations.add(player.playerStage + '_fall_right', [551], 10, false);
 
-        switchPlayerStage(player, stage=stage);
+        this.switchPlayerStage(player, stage=stage);
 
         // Add to group player1 or player2
         playerGroup.add(player);
