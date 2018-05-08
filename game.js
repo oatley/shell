@@ -703,7 +703,7 @@ function create() {
 
     // bgMusic
     music = game.add.audio('bgmusic');
-    audio.startMusic();
+    //audio.startMusic();
 
 
     // Setup controls
@@ -740,13 +740,10 @@ function create() {
     titlescreen = game.add.sprite(game.world.width/2, game.world.height/2, 'title');
     titlescreen.anchor.setTo(0.5, 0.5);
 
-    console.log(player1Group);
-    console.log(player2Group);
-    console.log(groundGroup);
-    //console.log(test(1,10));
+    // Start background music and on resume and pause callbacks
     this.game.onPause.add(audio.pauseMusic, this);
     this.game.onResume.add(audio.resumeMusic, this);
-    startMusic();
+    audio.startMusic();
 }
 
 function update() {
