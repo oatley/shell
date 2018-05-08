@@ -16,8 +16,8 @@ var load = {
         game.load.image('ground', 'assets/sprites/maps/ground.png');
 
         // Attack boxes
-        game.load.image('blank', 'assets/sprites/characters/blank.png');
-        game.load.image('green', 'assets/sprites/characters/blank.png');
+        game.load.image('blank', 'assets/sprites/characters/green.png');
+        game.load.image('green', 'assets/sprites/characters/green.png');
 
         // Title screen and win screen
         game.load.image('youwin', 'assets/sprites/ui/ui_winscreen.png');
