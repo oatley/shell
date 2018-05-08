@@ -80,6 +80,7 @@ var playerJumping = false;
 var groundGroup;
 var worldBoundsGroup;
 var platformGroup;
+var skyGroup;
 
 // music
 var music;
@@ -114,33 +115,52 @@ function dealDamage(bounds, player) {
     characters.switchPlayerStage(player);
 }
 
-function cleanCharacter(player) {
-    player.attackTimer.stop();
-    player.attackTimer2.stop();
-    player.attackBox.destroy();
-    player.destroy();
+function cleanPlayers() {
+    if (player1Group.length > 0) {
+        player1Group.forEach(function(player) {
+            player.attackTimer.stop();
+            player.attackTimer2.stop();
+            player.attackBox.destroy();
+            player.destroy();
+        }, this);
+    }
+    if (player2Group.length > 0) {
+        player2Group.forEach(function(player) {
+            player.attackTimer.stop();
+            player.attackTimer2.stop();
+            player.attackBox.destroy();
+            player.destroy();
+        }, this);
+    }
+
 }
 
 function cleanPlatform(platform) {
-    platform.destroy();
+    if (platformGroup.length > 0) {
+        while(platformGroup.length > 0) { // Because it refuses to run the function on all items in the group
+            console.log(platformGroup.length);
+            platformGroup.forEach(function(platform) {
+                platform.destroy();
+            }, this);
+        }
+    }
+}
+
+function cleanGround() {
+    if (groundGroup.length > 0) {
+        while(groundGroup.length > 0) { // Because it refuses to run the function on all items in the group
+            console.log(groundGroup.length);
+            groundGroup.forEach(function(ground) {
+                ground.destroy();
+            }, this);
+        }
+    }
 }
 
 function cleanUp() {
-    if (player1Group.length > 0) {
-        player1Group.forEach(function(player) {cleanCharacter(player);}, this);
-    }
-    if (player2Group.length > 0) {
-        player2Group.forEach(function(player) {cleanCharacter(player);}, this);
-    }
-    if (platformGroup.length > 0) {
-        while(platformGroup.length > 0) {
-            console.log(platformGroup.length);
-            platformGroup.forEach(function(platform) {console.log('deleting platform');cleanPlatform(platform);}, this);
-        }
-
-
-
-    }
+    cleanPlayers();
+    cleanGround();
+    cleanPlatforms();
 }
 
 
