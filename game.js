@@ -114,11 +114,25 @@ function dealDamage(bounds, player) {
     characters.switchPlayerStage(player);
 }
 
-function youLose(player) {
+function cleanUp() {
+    if (player1Group.length > 0) {
+        player1Group.forEach(function(player) {cleanCharacter(player);}, this);
+    }
+    // Control movement and animations for player 2
+    if (player2Group.length > 0) {
+        player2Group.forEach(function(player) {cleanCharacter(player);}, this);
+    }
+}
+
+function cleanPlayer(player) {
     player.attackTimer.stop();
     player.attackTimer2.stop();
     player.attackBox.destroy();
     player.destroy();
+}
+
+function youLose(player) {
+    cleanCharacter(player);
     youwinscreen = game.add.sprite(game.world.width/2, game.world.height/2, 'youwin');
     youwinscreen.anchor.setTo(0.5, 0.5);
     gameOver = true;
@@ -242,6 +256,7 @@ function update() {
 
     if (gameOver && resetGameButton.isDown) {
         console.log('resetting the game');
+        cleanUp();
         startGame();
     } else if (titlescreenbool && resetGameButton.isDown) {
         titlescreenbool = false;
