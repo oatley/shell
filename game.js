@@ -121,13 +121,19 @@ function cleanCharacter(player) {
     player.destroy();
 }
 
+function cleanPlatform(platform) {
+    platform.destroy();
+}
+
 function cleanUp() {
     if (player1Group.length > 0) {
         player1Group.forEach(function(player) {cleanCharacter(player);}, this);
     }
-    // Control movement and animations for player 2
     if (player2Group.length > 0) {
         player2Group.forEach(function(player) {cleanCharacter(player);}, this);
+    }
+    if (platformGroup.length > 0) {
+        platformGroup.forEach(function(platform) {cleanPlatform(platform);}, this);
     }
 }
 
@@ -140,18 +146,7 @@ function youLose(player) {
 }
 
 function startGame() {
-    if (player1Group.length > 0) {
-        player1Group.forEach(function(player) {
-            player.destroy()
-        }, this);
-    }
 
-    // Control movement and animations for player 2
-    if (player2Group.length > 0) {
-        player2Group.forEach(function(player) {
-            player.destroy()
-        }, this);
-    }
     if (youwinscreen) {
         youwinscreen.destroy();
     }
