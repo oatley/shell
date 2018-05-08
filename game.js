@@ -710,6 +710,7 @@ function create() {
 
     controller.player1Controls();
     controller.player2Controls();
+    controller.musicControls();
     cursors = game.input.keyboard.createCursorKeys();
     game.input.mouse.capture = true;
 
