@@ -1,8 +1,8 @@
 var clean = {
     // Delete all players from game
     cleanPlayers: function(player1Group, player2Group) {
-        while(player1Group.length > 0) { // Because it refuses to run the function on all items in the group
-            if (player1Group.length > 0) {
+        if (player1Group.length > 0) {
+            while(player1Group.length > 0) { // Because it refuses to run the function on all items in the group
                 player1Group.forEach(function(player) {
                     if (!player) return;
                     if (player.attackTimer) player.attackTimer.stop();
@@ -12,8 +12,8 @@ var clean = {
                 }, this);
             }
         }
-        while(player2Group.length > 0) { // Because it refuses to run the function on all items in the group
-            if (player2Group.length > 0) {
+        if (player2Group.length > 0) {
+            while(player2Group.length > 0) { // Because it refuses to run the function on all items in the group
                 player2Group.forEach(function(player) {
                     if (!player) return;
                     if (player.attackTimer) player.attackTimer.stop();
@@ -28,7 +28,6 @@ var clean = {
     cleanPlatforms: function(platformGroup) {
         if (platformGroup.length > 0) {
             while(platformGroup.length > 0) { // Because it refuses to run the function on all items in the group
-                console.log('platform', platformGroup.length);
                 platformGroup.forEach(function(platform) {
                     platform.destroy();
                 }, this);
@@ -39,7 +38,6 @@ var clean = {
     cleanGround: function(groundGroup) {
         if (groundGroup.length > 0) {
             while(groundGroup.length > 0) { // Because it refuses to run the function on all items in the group
-                console.log('ground', groundGroup.length);
                 groundGroup.forEach(function(ground) {
                     ground.destroy();
                 }, this);
@@ -50,7 +48,6 @@ var clean = {
     cleanBackground: function(backgroundGroup) {
         if (backgroundGroup.length > 0) {
             while(backgroundGroup.length > 0) { // Because it refuses to run the function on all items in the group
-                console.log('cleanBackground', backgroundGroup.length);
                 backgroundGroup.forEach(function(background) {
                     background.destroy();
                 }, this);
