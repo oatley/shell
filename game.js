@@ -1,4 +1,6 @@
-var config = {
+
+
+let config = {
     width: 480,
     height: 270,
     renderer: Phaser.AUTO,
@@ -11,70 +13,70 @@ var config = {
         render: render
     }
 }
-var game = new Phaser.Game(config);
+let game = new Phaser.Game(config);
 
 // Player objects
-var player1;
-var player2;
+let player1;
+let player2;
 
-var gameOver;
-var youwinscreen;
-var titlescreen;
-var titlescreenbool = true;
-var sci;
-var jan;
+let gameOver;
+let youwinscreen;
+let titlescreen;
+let titlescreenbool = true;
+let sci;
+let jan;
 
 // Player 1 group
-var player1Group;
+let player1Group;
 
 // Player 2 group
-var player2Group;
+let player2Group;
 
 // Player1Controls objects
-var upPlayer1Button;
-var downPlayer1Button;
-var leftPlayer1Button;
-var rightPlayer1Button;
-var attackPlayer1Button;
-var switchPlayer1Button;
+let upPlayer1Button;
+let downPlayer1Button;
+let leftPlayer1Button;
+let rightPlayer1Button;
+let attackPlayer1Button;
+let switchPlayer1Button;
 
 // Player2Controls objects
-var upPlayer2Button;
-var downPlayer2Button;
-var leftPlayer2Button;
-var rightPlayer2Button;
-var attackPlayer2Button;
-var switchPlayer2Button;
+let upPlayer2Button;
+let downPlayer2Button;
+let leftPlayer2Button;
+let rightPlayer2Button;
+let attackPlayer2Button;
+let switchPlayer2Button;
 
 // Music Player1Controls
-var musicMuteButton;
-var musicPlus1Button;
-var musicPlus2Button;
-var musicMinus1Button;
-var musicMinus2Button;
+let musicMuteButton;
+let musicPlus1Button;
+let musicPlus2Button;
+let musicMinus1Button;
+let musicMinus2Button;
 
 
 // Default player stats
-var playerDirection = 'left';
-var playerJumpSensitivity = -5; // Negative number, default is about -2.8 falling always
-var playerMoveSpeed = 50; // 50
-var playerJumpSpeed = -650; // Negative number // -350
-var playerJumping = false;
+let playerDirection = 'left';
+let playerJumpSensitivity = -5; // Negative number, default is about -2.8 falling always
+let playerMoveSpeed = 50; // 50
+let playerJumpSpeed = -650; // Negative number // -350
+let playerJumping = false;
 
 // maps
-var groundGroup;
-var worldBoundsGroup;
-var platformGroup;
+let groundGroup;
+let worldBoundsGroup;
+let platformGroup;
 
 // music
-var music;
+let music;
 
 // Hitbox
-var player1AttackGroup;
-var player2AttackGroup;
+let player1AttackGroup;
+let player2AttackGroup;
 
-var range = Phaser.ArrayUtils.numberArray;
-//var numbers = new Phaser.ArrayUtils();
+let range = Phaser.ArrayUtils.numberArray;
+//let numbers = new Phaser.ArrayUtils();
 
 function toggleFullscreen() {
     if (game.scale.isFullScreen) {
@@ -201,28 +203,28 @@ function decreaseMusicVolume() {
 
 // Create a second and 3rd map off screen so the doubles never get out of sync
 function createMap1(groundGroup, worldWrapGroup, platformGroup) {
-    for (var i = 0; i < 8; i++) {
-        var sky = game.add.sprite(0 + (64*i), 0, 'sky1');
+    for (let i = 0; i < 8; i++) {
+        let sky = game.add.sprite(0 + (64*i), 0, 'sky1');
     }
-    for (var i = 0; i < 8; i++) {
-        var sky = game.add.sprite(0 + (64*i), 64, 'sky2');
+    for (let i = 0; i < 8; i++) {
+        let sky = game.add.sprite(0 + (64*i), 64, 'sky2');
     }
-    for (var i = 0; i < 8; i++) {
-        var sky = game.add.sprite(0 + (64*i), 128, 'sky3');
+    for (let i = 0; i < 8; i++) {
+        let sky = game.add.sprite(0 + (64*i), 128, 'sky3');
     }
-    for (var i = 0; i < 8; i++) {
-        var sky = game.add.sprite(0 + (64*i), 192, 'sky4');
+    for (let i = 0; i < 8; i++) {
+        let sky = game.add.sprite(0 + (64*i), 192, 'sky4');
     }
-    var mountain = game.add.sprite(0, -48, 'mountain');
-    var mountain2 = game.add.sprite(game.world.width + 64, -48, 'mountain');
+    let mountain = game.add.sprite(0, -48, 'mountain');
+    let mountain2 = game.add.sprite(game.world.width + 64, -48, 'mountain');
     mountain2.scale.x *=-1;
-    var cloud = game.add.sprite(game.world.width - 100, -32, 'cloud');
-    var cloud2 = game.add.sprite(220, -10 , 'cloud');
-    var cloud22 = game.add.sprite(-32, -10 , 'cloud');
+    let cloud = game.add.sprite(game.world.width - 100, -32, 'cloud');
+    let cloud2 = game.add.sprite(220, -10 , 'cloud');
+    let cloud22 = game.add.sprite(-32, -10 , 'cloud');
     cloud2.scale.x *= -1;
 
 
-    var platform = platformGroup.create(game.world.width/2 - 64, -40, 'platform');
+    let platform = platformGroup.create(game.world.width/2 - 64, -40, 'platform');
     platform.body.immovable = true;
     platform.body.setSize(100, 4, 14, 110);
     platform.body.onCollide = new Phaser.Signal();
@@ -230,7 +232,7 @@ function createMap1(groundGroup, worldWrapGroup, platformGroup) {
     platform.body.checkCollision.down = false;
     platform.body.checkCollision.left = false;
     platform.body.checkCollision.right = false;
-    var platform2 = platformGroup.create(48, 24, 'platform');
+    let platform2 = platformGroup.create(48, 24, 'platform');
     platform2.body.immovable = true;
     platform2.body.setSize(100, 4, 14, 110);
     platform2.body.onCollide = new Phaser.Signal();
@@ -238,7 +240,7 @@ function createMap1(groundGroup, worldWrapGroup, platformGroup) {
     platform2.body.checkCollision.down = false;
     platform2.body.checkCollision.left = false;
     platform2.body.checkCollision.right = false;
-    var platform3 = platformGroup.create(game.world.width - 128 - 48, 24, 'platform');
+    let platform3 = platformGroup.create(game.world.width - 128 - 48, 24, 'platform');
     platform3.body.immovable = true;
     platform3.body.setSize(100, 4, 14, 110);
     platform3.body.onCollide = new Phaser.Signal();
@@ -247,24 +249,24 @@ function createMap1(groundGroup, worldWrapGroup, platformGroup) {
     platform3.body.checkCollision.left = false;
     platform3.body.checkCollision.right = false;
 
-    for (var i = 0; i < 10; i++) {
-        var ground = groundGroup.create(-64 + (64*i), game.world.height - 64, 'ground');
+    for (let i = 0; i < 10; i++) {
+        let ground = groundGroup.create(-64 + (64*i), game.world.height - 64, 'ground');
         ground.body.immovable = true;
         ground.body.setSize(64, 32, 0, 32);
         ground.body.onCollide = new Phaser.Signal();
         ground.body.onCollide.add(groundPlayer);
-        var roof = groundGroup.create(-64 + (64*i), 0 - 64, 'ground');
+        let roof = groundGroup.create(-64 + (64*i), 0 - 64, 'ground');
         roof.body.setSize(64, 32, 0, 0);
         roof.body.immovable = true;
     }
-    //var worldWrapTile = worldWrapGroup.create(-64, game.world.height - 64, 'ground');
-    var worldWrapTile = worldWrapGroup.create(-64, 0, 'ground');
+    //let worldWrapTile = worldWrapGroup.create(-64, game.world.height - 64, 'ground');
+    let worldWrapTile = worldWrapGroup.create(-64, 0, 'ground');
     worldWrapTile.body.immovable = true;
     worldWrapTile.body.onOverlap = new Phaser.Signal();
     worldWrapTile.body.onOverlap.add(worldWrap);
     worldWrapTile.body.setSize(4, 1000, 60)
-    //var worldWrapTile2 = worldWrapGroup.create(game.world.width, game.world.height -64, 'ground');
-    var worldWrapTile2 = worldWrapGroup.create(game.world.width, 0, 'ground');
+    //let worldWrapTile2 = worldWrapGroup.create(game.world.width, game.world.height -64, 'ground');
+    let worldWrapTile2 = worldWrapGroup.create(game.world.width, 0, 'ground');
     worldWrapTile2.body.immovable = true;
     worldWrapTile2.body.onOverlap = new Phaser.Signal();
     worldWrapTile2.body.onOverlap.add(worldWrap)
@@ -276,15 +278,15 @@ function createKnight(playerGroup, x = 0, y = 0, level = 'level1') {
     // Design each character with custom stuff
     // Positions
     if (playerGroup === player1Group && (x == 0 && y == 0) ) {
-        var x = Number(game.world.width/2 - 200) ;
-        var y = Number(game.world.height - 200)
+        let x = Number(game.world.width/2 - 200) ;
+        let y = Number(game.world.height - 200)
     } else if (playerGroup === player2Group && (x == 0 && y == 0)) {
-        var x = Number(game.world.width/2 + 100) ;
-        var y = Number(game.world.height - 200)
+        let x = Number(game.world.width/2 + 100) ;
+        let y = Number(game.world.height - 200)
     }
 
     // Design each character with custom stuff
-    var player = game.add.sprite(x, y, 'knight');
+    let player = game.add.sprite(x, y, 'knight');
     game.physics.arcade.enable(player);
 
     // Custom attributes
@@ -366,23 +368,23 @@ function createKnight(playerGroup, x = 0, y = 0, level = 'level1') {
 
     // Add to group player1 or player2
     playerGroup.add(player);
-    var groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
-    var groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
+    let groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
+    let groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
 }
 
 function createMech(playerGroup, x = 0, y = 0, level = 'level1') {
     // Design each character with custom stuff
     // Positions
     if (playerGroup === player1Group && (x == 0 && y == 0) ) {
-        var x = Number(game.world.width/2 - 200) ;
-        var y = Number(game.world.height - 200)
+        let x = Number(game.world.width/2 - 200) ;
+        let y = Number(game.world.height - 200)
     } else if (playerGroup === player2Group && (x == 0 && y == 0)) {
-        var x = Number(game.world.width/2 + 200) ;
-        var y = Number(game.world.height - 200)
+        let x = Number(game.world.width/2 + 200) ;
+        let y = Number(game.world.height - 200)
     }
 
     // Design each character with custom stuff
-    var player = game.add.sprite(x, y, 'mech');
+    let player = game.add.sprite(x, y, 'mech');
     game.physics.arcade.enable(player);
 
     // Custom attributes
@@ -462,8 +464,8 @@ function createMech(playerGroup, x = 0, y = 0, level = 'level1') {
 
     // Add to group player1 or player2
     playerGroup.add(player);
-    var groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
-    var groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
+    let groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
+    let groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
 }
 
 function switchAllLevel() {
@@ -514,19 +516,19 @@ function controlPlayer(player, group) {
     //console.log(player.body.touching)
     // Function accept the character (knight, mech, etc) and "player1" or "player2"
     if (group === player1Group) {
-        var upButton = upPlayer1Button;
-        var downButton = downPlayer1Button;
-        var leftButton = leftPlayer1Button;
-        var rightButton = rightPlayer1Button;
-        var attackButton = attackPlayer1Button;
-        //var switchButton = switchPlayer1Button;
+        let upButton = upPlayer1Button;
+        let downButton = downPlayer1Button;
+        let leftButton = leftPlayer1Button;
+        let rightButton = rightPlayer1Button;
+        let attackButton = attackPlayer1Button;
+        //let switchButton = switchPlayer1Button;
     } else if (group == player2Group) {
-        var upButton = upPlayer2Button;
-        var downButton = downPlayer2Button;
-        var leftButton = leftPlayer2Button;
-        var rightButton = rightPlayer2Button;
-        var attackButton = attackPlayer2Button;
-        //var switchButton = switchPlayer2Button;
+        let upButton = upPlayer2Button;
+        let downButton = downPlayer2Button;
+        let leftButton = leftPlayer2Button;
+        let rightButton = rightPlayer2Button;
+        let attackButton = attackPlayer2Button;
+        //let switchButton = switchPlayer2Button;
     }
 /*
     if (switchButton.onPress) {
@@ -543,7 +545,7 @@ function controlPlayer(player, group) {
 
 // PLatform collisions are based on player only
     if (!downButton.isDown) {
-        var platformCollision = game.physics.arcade.collide(player, platformGroup);
+        let platformCollision = game.physics.arcade.collide(player, platformGroup);
     }
     //  Reset the players velocity (movement)
     player.body.velocity.x = 0;
@@ -629,23 +631,23 @@ function worldWrap(bounds, player) {
     if (player.group.length == 1) {
         // game.world.width - 64 is the bounds for rigth side
         // 0 is the bounds for left side
-        var y = player.body.y;
+        let y = player.body.y;
         if (player.body.x < 0) {
             if (player.playerLevel == 'level1') {
-                var x = game.world.width -32;
+                let x = game.world.width -32;
             } else if (player.playerLevel == 'level2') {
-                var x = game.world.width -48;
+                let x = game.world.width -48;
             } else if (player.playerLevel == 'level3') {
-                var x = game.world.width -48;
+                let x = game.world.width -48;
             }
 
         } else if (player.body.x > (game.world.width - 128)) {
             if (player.playerLevel == 'level1') {
-                var x = -96;
+                let x = -96;
             } else if (player.playerLevel == 'level2') {
-                var x = -80;
+                let x = -80;
             } else if (player.playerLevel == 'level3') {
-                var x = -80;
+                let x = -80;
             }
         }
 
@@ -865,13 +867,13 @@ function create() {
 
 function update() {
     // Colliders
-    var groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
-    var groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
-    var worldWrapCollision = game.physics.arcade.overlap(player1Group, worldWrapGroup);
-    var worldWrapCollision = game.physics.arcade.overlap(player2Group, worldWrapGroup);
-    var charColliders = game.physics.arcade.collide(player1Group, player2Group);
-    var attackColliders = game.physics.arcade.overlap(player1Group, player2AttackGroup);
-    var attackColliders = game.physics.arcade.overlap(player2Group, player1AttackGroup);
+    let groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
+    let groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
+    let worldWrapCollision = game.physics.arcade.overlap(player1Group, worldWrapGroup);
+    let worldWrapCollision = game.physics.arcade.overlap(player2Group, worldWrapGroup);
+    let charColliders = game.physics.arcade.collide(player1Group, player2Group);
+    let attackColliders = game.physics.arcade.overlap(player1Group, player2AttackGroup);
+    let attackColliders = game.physics.arcade.overlap(player2Group, player1AttackGroup);
 
     // Control movement and animations for player 1
     if (player1Group.length > 0) {
