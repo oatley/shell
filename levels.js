@@ -61,13 +61,13 @@ var levels = {
         var worldWrapTile = worldWrapGroup.create(-64, 0, 'ground');
         worldWrapTile.body.immovable = true;
         worldWrapTile.body.onOverlap = new Phaser.Signal();
-        worldWrapTile.body.onOverlap.add(screen.screenWrap);
+        worldWrapTile.body.onOverlap.add(screen.worldWrap);
         worldWrapTile.body.setSize(4, 1000, 60)
         //var worldWrapTile2 = worldWrapGroup.create(game.world.width, game.world.height -64, 'ground');
         var worldWrapTile2 = worldWrapGroup.create(game.world.width, 0, 'ground');
         worldWrapTile2.body.immovable = true;
         worldWrapTile2.body.onOverlap = new Phaser.Signal();
-        worldWrapTile2.body.onOverlap.add(screen.screenWrap)
+        worldWrapTile2.body.onOverlap.add(screen.worldWrap)
         worldWrapTile2.body.setSize(4, 1000)
 
     }

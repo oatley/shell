@@ -7,7 +7,7 @@ var screen = {
         }
     },
     // Create a second version of the player wallwrapping
-    screenWrap: function(bounds, player) {
+    worldWrap: function(bounds, player) {
         //player.brokenCollide = true;
         //console.log(player.brokenCollide);
         if (player.group.length == 1) {
