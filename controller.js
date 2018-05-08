@@ -155,8 +155,7 @@ var controller = {
         }
 
         //  Allow the player to jump if they are touching the ground.
-        //console.log(player.isGrounded);
-        if (!upButton.isDown && player.playerJumping && player.body.velocity.y < 0 && player.isGrounded) {
+        if (!upButton.isDown && player.playerJumping && player.body.velocity.y < 0) {
             player.body.velocity.y = player.body.velocity.y * 0.5;
             player.playerJumping = false;
         } else if (upButton.isDown && (player.body.touching.down && !player.body.touching.up && player.isGrounded )) {
