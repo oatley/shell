@@ -115,7 +115,7 @@ function dealDamage(bounds, player) {
     characters.switchPlayerStage(player);
 }
 
-function cleanPlayers() {
+function cleanPlayers(player1Group, player2Group) {
     if (player1Group.length > 0) {
         player1Group.forEach(function(player) {
             player.attackTimer.stop();
@@ -134,7 +134,7 @@ function cleanPlayers() {
     }
 }
 
-function cleanPlatforms(platform) {
+function cleanPlatforms(platformGroup) {
     if (platformGroup.length > 0) {
         while(platformGroup.length > 0) { // Because it refuses to run the function on all items in the group
             console.log('platform', platformGroup.length);
@@ -145,7 +145,7 @@ function cleanPlatforms(platform) {
     }
 }
 
-function cleanGround() {
+function cleanGround(groundGroup) {
     if (groundGroup.length > 0) {
         while(groundGroup.length > 0) { // Because it refuses to run the function on all items in the group
             console.log('ground', groundGroup.length);
@@ -156,7 +156,7 @@ function cleanGround() {
     }
 }
 
-function cleanBackground() {
+function cleanBackground(backgroundGroup) {
     if (backgroundGroup.length > 0) {
         while(backgroundGroup.length > 0) { // Because it refuses to run the function on all items in the group
             console.log('cleanBackground', backgroundGroup.length);
@@ -168,15 +168,15 @@ function cleanBackground() {
 }
 
 function cleanUp() {
-    cleanPlayers();
-    cleanGround();
-    cleanPlatforms();
-    cleanBackground();
+    cleanPlayers(player1Group, player2Group);
+    cleanGround(groundGroup);
+    cleanPlatforms(platformGroup);
+    cleanBackground(backgroundGroup);
 }
 
 
 function youLose(player) {
-    cleanCharacter(player);
+    cleanPlayers();
     youwinscreen = game.add.sprite(game.world.width/2, game.world.height/2, 'youwin');
     youwinscreen.anchor.setTo(0.5, 0.5);
     gameOver = true;
