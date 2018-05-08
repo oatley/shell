@@ -79,21 +79,25 @@ let controller = {
         }
     },
     controlPlayer: function(player, group) {
+        let upButton;
+        let downButton;
+        let leftButton;
+        let rightButton;
+        let attackButton;
         // Function accept the character (knight, mech, etc) and "player1" or "player2"
         if (group === player1Group) {
-            let upButton = upPlayer1Button;
-            let downButton = downPlayer1Button;
-            let leftButton = leftPlayer1Button;
-            let rightButton = rightPlayer1Button;
-            let attackButton = attackPlayer1Button;
-            //let switchButton = switchPlayer1Button;
+            upButton = upPlayer1Button;
+            downButton = downPlayer1Button;
+            leftButton = leftPlayer1Button;
+            rightButton = rightPlayer1Button;
+            attackButton = attackPlayer1Button;
         } else if (group == player2Group) {
-            let upButton = upPlayer2Button;
-            let downButton = downPlayer2Button;
-            let leftButton = leftPlayer2Button;
-            let rightButton = rightPlayer2Button;
-            let attackButton = attackPlayer2Button;
-            //let switchButton = switchPlayer2Button;
+            upButton = upPlayer2Button;
+            downButton = downPlayer2Button;
+            leftButton = leftPlayer2Button;
+            rightButton = rightPlayer2Button;
+            attackButton = attackPlayer2Button;
+
         }
 
         // PLatform collisions are based on player only
