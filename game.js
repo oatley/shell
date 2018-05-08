@@ -13,6 +13,7 @@ var config = {
 }
 var game = new Phaser.Game(config);
 
+/* Don't need game state?
 console.log('load.js');
 game.state.add('load', load); // load contains everything for preload
 console.log('audio.js');
@@ -23,7 +24,7 @@ console.log('levels.js');
 game.state.add('levels', levels);
 console.log('character.js');
 game.state.add('characters', characters);
-
+*/
 
 
 
