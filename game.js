@@ -132,7 +132,6 @@ function cleanPlayers() {
             player.destroy();
         }, this);
     }
-
 }
 
 function cleanPlatforms(platform) {
@@ -204,8 +203,8 @@ function startGame() {
     game.world.bringToTop(player2Group);
     game.world.bringToTop(platformGroup);
 
-    sci = game.add.image(0, game.world.height - 64, 'sci');
-    jan = game.add.image(game.world.width - 64, game.world.height - 64, 'jan');
+    //sci = game.add.image(0, game.world.height - 64, 'sci');
+    //jan = game.add.image(game.world.width - 64, game.world.height - 64, 'jan');
 }
 
 function create() {
@@ -224,15 +223,12 @@ function create() {
     game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     game.stage.smoothed = false;
-    //game.input.activePointer.leftButton.onDown.add(screen.toggleFullscreen, this);
+    game.input.activePointer.leftButton.onDown.add(screen.toggleFullscreen, this);
 
     // bgMusic
     music = game.add.audio('bgmusic');
-    //audio.startMusic();
-
 
     // Setup controls
-
     controller.player1Controls();
     controller.player2Controls();
     controller.musicControls();
