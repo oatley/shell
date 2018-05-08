@@ -90,93 +90,25 @@ var player1AttackGroup;
 var player2AttackGroup;
 
 var range = Phaser.ArrayUtils.numberArray;
-//var numbers = new Phaser.ArrayUtils();
-
-
-
-
-
-
 
 function preload() {
-    // Preload loadImages
+    // Preload images and audio
     load.loadImages();
     load.loadSpriteSheets();
     load.loadMusic();
-
 }
 
 
-
-function dealDamage(bounds, player) {
-    console.log('dealing dmg to', player.model);
-    // destroy hitbox created to detect a hit on player
-    bounds.destroy();
-    characters.switchPlayerStage(player);
-}
-
-function cleanPlayers(player1Group, player2Group) {
-    if (player1Group.length > 0) {
-        player1Group.forEach(function(player) {
-            player.attackTimer.stop();
-            player.attackTimer2.stop();
-            player.attackBox.destroy();
-            player.destroy();
-        }, this);
-    }
-    if (player2Group.length > 0) {
-        player2Group.forEach(function(player) {
-            player.attackTimer.stop();
-            player.attackTimer2.stop();
-            player.attackBox.destroy();
-            player.destroy();
-        }, this);
-    }
-}
-
-function cleanPlatforms(platformGroup) {
-    if (platformGroup.length > 0) {
-        while(platformGroup.length > 0) { // Because it refuses to run the function on all items in the group
-            console.log('platform', platformGroup.length);
-            platformGroup.forEach(function(platform) {
-                platform.destroy();
-            }, this);
-        }
-    }
-}
-
-function cleanGround(groundGroup) {
-    if (groundGroup.length > 0) {
-        while(groundGroup.length > 0) { // Because it refuses to run the function on all items in the group
-            console.log('ground', groundGroup.length);
-            groundGroup.forEach(function(ground) {
-                ground.destroy();
-            }, this);
-        }
-    }
-}
-
-function cleanBackground(backgroundGroup) {
-    if (backgroundGroup.length > 0) {
-        while(backgroundGroup.length > 0) { // Because it refuses to run the function on all items in the group
-            console.log('cleanBackground', backgroundGroup.length);
-            backgroundGroup.forEach(function(background) {
-                background.destroy();
-            }, this);
-        }
-    }
-}
 
 function cleanUp() {
-    cleanPlayers(player1Group, player2Group);
-    cleanGround(groundGroup);
-    cleanPlatforms(platformGroup);
-    cleanBackground(backgroundGroup);
+    clean.cleanPlayers(player1Group, player2Group);
+    clean.cleanGround(groundGroup);
+    clean.cleanPlatforms(platformGroup);
+    clean.cleanBackground(backgroundGroup);
 }
 
-
 function youLose(player) {
-    cleanPlayers(player1Group, player2Group);
+    clean.cleanPlayers(player1Group, player2Group);
     youwinscreen = game.add.sprite(game.world.width/2, game.world.height/2, 'youwin');
     youwinscreen.anchor.setTo(0.5, 0.5);
     gameOver = true;

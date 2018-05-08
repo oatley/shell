@@ -40,6 +40,13 @@ var characters = {
         }
         player.isGrounded = true;
     },
+    // Callback for the hitbox that deals damage
+    dealDamage: function(bounds, player) {
+        // destroy hitbox created to detect a hit on player
+        bounds.destroy();
+        // Send player to next stage
+        this.switchPlayerStage(player);
+    },
     // Creates hitbox and forces animation to stay in attack
     attackPlayer: function(player) {
         if (!player) {
