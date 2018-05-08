@@ -98,8 +98,6 @@ function preload() {
     load.loadMusic();
 }
 
-
-
 function cleanUp() {
     clean.cleanPlayers(player1Group, player2Group);
     clean.cleanGround(groundGroup);
