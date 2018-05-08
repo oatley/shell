@@ -113,40 +113,7 @@ function toggleFullscreen() {
 //    player2Group.forEach(function(player) {switchPlayerStage(player);}, this);
 //}
 
-function switchPlayerStage(player, stage = null) {
-    if (stage) {
-        player.playerStage = stage;
-    } else if (player.playerStage == 'Stage1') {
-        player.playerStage = 'Stage2';
-    } else if (player.playerStage == 'Stage2') {
-        player.playerStage = 'Stage3';
-    } else if (player.playerStage == 'Stage3') {
-        player.playerStage = 'Stage1';
-        youLose(player);
-        console.log('YOU LOSE', player.model);
-        return;
-    }
-    if (player.playerStage == 'Stage1') {
-        player.body.bounce.y = 0;
-        player.body.gravity.y = 1000;
-        player.body.setSize(64, 64, 32, 64);
-        player.playerMoveSpeed = 50;
-        player.playerJumpSpeed = -250;
-    } else if (player.playerStage == 'Stage2') {
-        player.body.bounce.y = 0.1;
-        player.body.gravity.y = 600;
-        player.body.setSize(32, 47, 48, 83);
-        player.playerMoveSpeed = 100;
-        player.playerJumpSpeed = -375;
-    } else if (player.playerStage == 'Stage3') {
-        player.body.bounce.y = 0.2;
-        player.body.gravity.y = 600;
-        player.body.setSize(32, 47, 48, 83);
-        player.playerMoveSpeed = 150;
-        player.playerJumpSpeed = -400;
-    }
 
-}
 
 
 
@@ -208,63 +175,7 @@ function preload() {
 
 }
 
-function attackPlayer(player) {
-    console.log('attacking');
 
-    player.attackTimer2.stop();
-
-    player.attackBox = game.add.sprite(player.body.x + player.body.width/2,  player.body.y + player.body.height/2, 'green');
-    game.physics.arcade.enable(player.attackBox);
-    player.attackBox.anchor.setTo(0.5, 0.5);
-    if (player.playerDirection == 'left') {
-        player.attackBox.x -= 64;
-    } else if (player.playerDirection == 'right') {
-        player.attackBox.x += 64;
-    }
-    player.attackTimer = game.time.create(true);
-    if (player.playerStage == 'Stage1') {
-        player.attackTimer.loop(600, player.attackTimerFunction, this);
-    } else if (player.playerStage == 'Stage2') {
-        player.attackTimer.loop(500, player.attackTimerFunction, this);
-    } else if (player.playerStage == 'Stage3') {
-        player.attackTimer.loop(250, player.attackTimerFunction, this);
-    }
-
-    player.attackTimer.start();
-
-    player.attackBox.body.onOverlap = new Phaser.Signal();
-    player.attackBox.body.onOverlap.add(dealDamage);
-    player.attackGroup.add(player.attackBox);
-    game.world.bringToTop(player1AttackGroup);
-    game.world.bringToTop(player2AttackGroup);
-
-
-}
-
-function stopAttackPlayer1() {
-    console.log('timer ended player 1');
-    // Control movement and animations for player 1
-    player1Group.forEach(function(player) {
-        player.isAttacking = false;
-        player.attackTimer.stop()
-        if (player.attackBox) {
-            player.attackBox.destroy();
-        }
-    }, this);
-
-}
-
-function stopAttackPlayer2() {
-    console.log('timer ended player 2');
-    player2Group.forEach(function(player) {
-        player.isAttacking = false;
-        player.attackTimer.stop()
-        if (player.attackBox) {
-            player.attackBox.destroy();
-        }
-    }, this);
-
-}
 
 function dealDamage(bounds, player) {
     console.log('dealing dmg to', player.model);
