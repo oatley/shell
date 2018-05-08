@@ -124,7 +124,7 @@ function cleanUp() {
     }
 }
 
-function cleanPlayer(player) {
+function cleanCharacter(player) {
     player.attackTimer.stop();
     player.attackTimer2.stop();
     player.attackBox.destroy();
