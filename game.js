@@ -137,23 +137,23 @@ function cleanPlayers() {
 
 function cleanPlatforms(platform) {
     if (platformGroup.length > 0) {
-        //while(platformGroup.length > 0) { // Because it refuses to run the function on all items in the group
+        while(platformGroup.length > 0) { // Because it refuses to run the function on all items in the group
             console.log('platform', platformGroup.length);
             platformGroup.forEach(function(platform) {
                 platform.destroy();
             }, this);
-        //}
+        }
     }
 }
 
 function cleanGround() {
     if (groundGroup.length > 0) {
-        //while(groundGroup.length > 0) { // Because it refuses to run the function on all items in the group
+        while(groundGroup.length > 0) { // Because it refuses to run the function on all items in the group
             console.log('ground', groundGroup.length);
             groundGroup.forEach(function(ground) {
                 ground.destroy();
             }, this);
-        //}
+        }
     }
 }
 
