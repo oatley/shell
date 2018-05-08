@@ -68,7 +68,7 @@ var controller = {
             if (!player.isAttacking) {
                 player.isAttacking = true;
                 player.attackTimer2 = game.time.create(true);
-                player.attackTimer2.loop(300, attackPlayer, this, player);
+                player.attackTimer2.loop(300, characters.attackPlayer, this, player);
                 player.attackTimer2.start();
                 //attackPlayer(player);
             }
