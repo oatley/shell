@@ -6,7 +6,7 @@ var audio = {
         } else {
             music.mute = true;
         }if (player2Group.length > 0) {
-            player2Group.forEach(function(player) {controlPlayer(player, player2Group);}, this);
+            player2Group.forEach(function(player) {controller.controlPlayer(player, player2Group);}, this);
         }
     },
     // Increase background music volume
