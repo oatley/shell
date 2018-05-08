@@ -15,8 +15,9 @@ var game = new Phaser.Game(config);
 
 
 game.state.add('load', load); // load contains everything for preload
-game.state.add('controller', controller); // controller contains setup for keyboard and controller support
 game.state.add('audio', audio); // functions for controlling the audio
+game.state.add('controller', controller); // controller contains setup for keyboard and controller support
+
 
 
 // Run the code so you have access to the WTF DOES THIS EVEN DO? THAT THE ABOVE DOESN"T ALREADY DO?
