@@ -26,7 +26,7 @@ var levels = {
         platform.body.immovable = true;
         platform.body.setSize(100, 4, 14, 110);
         platform.body.onCollide = new Phaser.Signal();
-        platform.body.onCollide.add(groundPlayer);
+        platform.body.onCollide.add(characters.groundPlayer);
         platform.body.checkCollision.down = false;
         platform.body.checkCollision.left = false;
         platform.body.checkCollision.right = false;
@@ -34,7 +34,7 @@ var levels = {
         platform2.body.immovable = true;
         platform2.body.setSize(100, 4, 14, 110);
         platform2.body.onCollide = new Phaser.Signal();
-        platform2.body.onCollide.add(groundPlayer);
+        platform2.body.onCollide.add(characters.groundPlayer);
         platform2.body.checkCollision.down = false;
         platform2.body.checkCollision.left = false;
         platform2.body.checkCollision.right = false;
@@ -42,7 +42,7 @@ var levels = {
         platform3.body.immovable = true;
         platform3.body.setSize(100, 4, 14, 110);
         platform3.body.onCollide = new Phaser.Signal();
-        platform3.body.onCollide.add(groundPlayer);
+        platform3.body.onCollide.add(characters.groundPlayer);
         platform3.body.checkCollision.down = false;
         platform3.body.checkCollision.left = false;
         platform3.body.checkCollision.right = false;
