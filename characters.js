@@ -45,7 +45,7 @@ var characters = {
         // destroy hitbox created to detect a hit on player
         bounds.destroy();
         // Send player to next stage
-        this.switchPlayerStage(player);
+        characters.switchPlayerStage(player);
     },
     // Creates hitbox and forces animation to stay in attack
     attackPlayer: function(player) {
@@ -130,11 +130,11 @@ var characters = {
         if (playerGroup === player1Group) {
             player.playerDirection = 'right';
             player.attackGroup = player1AttackGroup;
-            player.attackTimerFunction = this.stopAttackPlayer1;
+            player.attackTimerFunction = characters.stopAttackPlayer1;
         } else if (playerGroup === player2Group) {
             player.playerDirection = 'left';
             player.attackGroup = player2AttackGroup;
-            player.attackTimerFunction = this.stopAttackPlayer2;
+            player.attackTimerFunction = characters.stopAttackPlayer2;
         }
         player.playerJumpSensitivity = playerJumpSensitivity;
         player.playerMoveSpeed = playerMoveSpeed;
@@ -198,7 +198,7 @@ var characters = {
         player.animations.add(player.playerStage + '_fall_left', [532], 10, false);
         player.animations.add(player.playerStage + '_fall_right', [551], 10, false);
 
-        this.switchPlayerStage(player, stage=stage);
+        characters.switchPlayerStage(player, stage=stage);
 
         // Add to group player1 or player2
         playerGroup.add(player);
@@ -228,11 +228,11 @@ var characters = {
         if (playerGroup === player1Group) {
             player.playerDirection = 'right';
             player.attackGroup = player1AttackGroup;
-            player.attackTimerFunction = this.stopAttackPlayer1;
+            player.attackTimerFunction = characters.stopAttackPlayer1;
         } else if (playerGroup === player2Group) {
             player.playerDirection = 'left';
             player.attackGroup = player2AttackGroup;
-            player.attackTimerFunction = this.stopAttackPlayer2;
+            player.attackTimerFunction = characters.stopAttackPlayer2;
         }
         player.playerJumpSensitivity = playerJumpSensitivity;
         player.playerMoveSpeed = playerMoveSpeed;
@@ -243,6 +243,8 @@ var characters = {
 
         // World bounds
         player.checkWorldBounds = true;
+
+        // Destroy character if they leave screen
         player.events.onOutOfBounds.add(screen.destroyCharacter, this);
 
         //  Player physics properties. Give the little guy a slight bounce.
@@ -294,7 +296,7 @@ var characters = {
         player.animations.add(player.playerStage + '_fall_left', [532], 10, false);
         player.animations.add(player.playerStage + '_fall_right', [551], 10, false);
 
-        this.switchPlayerStage(player, stage=stage);
+        characters.switchPlayerStage(player, stage=stage);
 
         // Add to group player1 or player2
         playerGroup.add(player);
