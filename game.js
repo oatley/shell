@@ -133,11 +133,13 @@ function cleanUp() {
         player2Group.forEach(function(player) {cleanCharacter(player);}, this);
     }
     if (platformGroup.length > 0) {
-        console.log(platformGroup.length);
-        platformGroup.forEach(function(platform) {console.log('deleting platform');cleanPlatform(platform);}, this);
-        platformGroup.forEach(function(platform) {console.log('deleting platform');cleanPlatform(platform);}, this);
-        platformGroup.forEach(function(platform) {console.log('deleting platform');cleanPlatform(platform);}, this);
-        platformGroup.forEach(function(platform) {console.log('deleting platform');cleanPlatform(platform);}, this);
+        while(platformGroup.length > 0) {
+            console.log(platformGroup.length);
+            platformGroup.forEach(function(platform) {console.log('deleting platform');cleanPlatform(platform);}, this);
+        }
+
+
+
     }
 }
 
