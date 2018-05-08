@@ -120,6 +120,7 @@ function startGame() {
         youwinscreen.destroy();
     }
     gameOver = false;
+    endGame = false;
 
     // Create map1
     levels.createMap1(groundGroup, worldWrapGroup, platformGroup, backgroundGroup);
