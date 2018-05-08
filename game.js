@@ -169,7 +169,7 @@ function create() {
     game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     game.stage.smoothed = false;
-    game.input.activePointer.leftButton.onDown.add(toggleFullscreen, this);
+    game.input.activePointer.leftButton.onDown.add(screen.toggleFullscreen, this);
 
     // bgMusic
     music = game.add.audio('bgmusic');
