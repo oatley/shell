@@ -255,6 +255,10 @@ function create() {
     platformGroup = game.add.group();
     platformGroup.enableBody = true;
 
+    // background
+    backgroundGroup = game.add.group();
+
+
     // Attack groups
     player1AttackGroup  = game.add.group();
     player2AttackGroup  = game.add.group();
