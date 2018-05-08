@@ -13,8 +13,12 @@ var config = {
 }
 var game = new Phaser.Game(config);
 
+// Load code into game in order
 game.state.add('controller', controller);
-game.state.start('controller');
+
+
+// Run the code so you have access to the
+//game.state.start('controller');
 
 
 // Player objects
