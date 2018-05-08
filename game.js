@@ -191,7 +191,6 @@ function startGame() {
 
     // Create map1
     levels.createMap1(groundGroup, worldWrapGroup, platformGroup, backgroundGroup);
-    cleanUp();
     // Create characters
     //createBattery(player1Group);
     characters.createMech(player1Group);
