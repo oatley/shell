@@ -111,11 +111,11 @@ var characters = {
         if (playerGroup === player1Group) {
             player.playerDirection = 'right';
             player.attackGroup = player1AttackGroup;
-            player.attackTimerFunction = stopAttackPlayer1;
+            player.attackTimerFunction = this.stopAttackPlayer1;
         } else if (playerGroup === player2Group) {
             player.playerDirection = 'left';
             player.attackGroup = player2AttackGroup;
-            player.attackTimerFunction = stopAttackPlayer2;
+            player.attackTimerFunction = this.stopAttackPlayer2;
         }
         //player.playerDirection = playerDirection;
         player.playerJumpSensitivity = playerJumpSensitivity;
@@ -209,10 +209,10 @@ var characters = {
         if (playerGroup === player1Group) {
             player.playerDirection = 'right';
             player.attackGroup = player1AttackGroup;
-            player.attackTimerFunction = stopAttackPlayer1;
+            player.attackTimerFunction = this.stopAttackPlayer1;
         } else if (playerGroup === player2Group) {
             player.playerDirection = 'left';
-            player.attackGroup = player2AttackGroup;
+            player.attackGroup = this.player2AttackGroup;
             player.attackTimerFunction = stopAttackPlayer2;
         }
         player.playerJumpSensitivity = playerJumpSensitivity;

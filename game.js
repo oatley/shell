@@ -180,7 +180,7 @@ function preload() {
 function dealDamage(bounds, player) {
     console.log('dealing dmg to', player.model);
     bounds.destroy();
-    switchPlayerStage(player);
+    characters.switchPlayerStage(player);
 }
 
 function youLose(player) {
