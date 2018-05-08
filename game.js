@@ -160,7 +160,7 @@ function cleanGround() {
 function cleanBackground() {
     if (backgroundGroup.length > 0) {
         while(backgroundGroup.length > 0) { // Because it refuses to run the function on all items in the group
-            console.log('cleanBackground', cleanBackground.length);
+            console.log('cleanBackground', backgroundGroup.length);
             backgroundGroup.forEach(function(background) {
                 background.destroy();
             }, this);
