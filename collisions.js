@@ -1,4 +1,4 @@
-var collisions = {
+let collisions = {
     collide: function () {
         // Collide players with ground
         game.physics.arcade.collide(player1Group, groundGroup);

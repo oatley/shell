@@ -1,27 +1,27 @@
 // Player1Controls objects
-var upPlayer1Button;
-var downPlayer1Button;
-var leftPlayer1Button;
-var rightPlayer1Button;
-var attackPlayer1Button;
-var switchPlayer1Button;
+let upPlayer1Button;
+let downPlayer1Button;
+let leftPlayer1Button;
+let rightPlayer1Button;
+let attackPlayer1Button;
+let switchPlayer1Button;
 
 // Player2Controls objects
-var upPlayer2Button;
-var downPlayer2Button;
-var leftPlayer2Button;
-var rightPlayer2Button;
-var attackPlayer2Button;
-var switchPlayer2Button;
+let upPlayer2Button;
+let downPlayer2Button;
+let leftPlayer2Button;
+let rightPlayer2Button;
+let attackPlayer2Button;
+let switchPlayer2Button;
 
 // Music Player1Controls
-var musicMuteButton;
-var musicPlus1Button;
-var musicPlus2Button;
-var musicMinus1Button;
-var musicMinus2Button;
+let musicMuteButton;
+let musicPlus1Button;
+let musicPlus2Button;
+let musicMinus1Button;
+let musicMinus2Button;
 
-var controller = {
+let controller = {
     prepController: function () {
         cursors = game.input.keyboard.createCursorKeys();
         game.input.mouse.capture = true;
@@ -81,24 +81,24 @@ var controller = {
     controlPlayer: function(player, group) {
         // Function accept the character (knight, mech, etc) and "player1" or "player2"
         if (group === player1Group) {
-            var upButton = upPlayer1Button;
-            var downButton = downPlayer1Button;
-            var leftButton = leftPlayer1Button;
-            var rightButton = rightPlayer1Button;
-            var attackButton = attackPlayer1Button;
-            //var switchButton = switchPlayer1Button;
+            let upButton = upPlayer1Button;
+            let downButton = downPlayer1Button;
+            let leftButton = leftPlayer1Button;
+            let rightButton = rightPlayer1Button;
+            let attackButton = attackPlayer1Button;
+            //let switchButton = switchPlayer1Button;
         } else if (group == player2Group) {
-            var upButton = upPlayer2Button;
-            var downButton = downPlayer2Button;
-            var leftButton = leftPlayer2Button;
-            var rightButton = rightPlayer2Button;
-            var attackButton = attackPlayer2Button;
-            //var switchButton = switchPlayer2Button;
+            let upButton = upPlayer2Button;
+            let downButton = downPlayer2Button;
+            let leftButton = leftPlayer2Button;
+            let rightButton = rightPlayer2Button;
+            let attackButton = attackPlayer2Button;
+            //let switchButton = switchPlayer2Button;
         }
 
         // PLatform collisions are based on player only
         if (!downButton.isDown) {
-            var platformCollision = game.physics.arcade.collide(player, platformGroup);
+            let platformCollision = game.physics.arcade.collide(player, platformGroup);
         }
         //  Reset the players velocity (movement)
         player.body.velocity.x = 0;

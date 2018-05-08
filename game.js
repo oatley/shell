@@ -1,4 +1,4 @@
-var config = {
+let config = {
     width: 480,
     height: 270,
     renderer: Phaser.AUTO,
@@ -11,46 +11,44 @@ var config = {
         render: render
     }
 }
-var game = new Phaser.Game(config);
+let game = new Phaser.Game(config);
 
 // State control
-var isTitleScreen = true;
-var isGameOver = false;
-
-
+let isTitleScreen = true;
+let isGameOver = false;
 
 // JUNK CLEANUP
-var gameOver;
-var youwinscreen;
-var titlescreen;
-var titlescreenbool = true;
-var endGame = false;
-var sci;
-var jan;
+let gameOver;
+let youwinscreen;
+let titlescreen;
+let titlescreenbool = true;
+let endGame = false;
+let sci;
+let jan;
 
 // Player 1 group
-var player1Group;
+let player1Group;
 
 // Player 2 group
-var player2Group;
+let player2Group;
 
 // maps
-var groundGroup;
-var worldBoundsGroup;
-var platformGroup;
-var backgroundGroup;
+let groundGroup;
+let worldBoundsGroup;
+let platformGroup;
+let backgroundGroup;
 
 // screens/ui
-var displayScreensGroup;
+let displayScreensGroup;
 
 // music
-var music;
+let music;
 
 // Hitbox
-var player1AttackGroup;
-var player2AttackGroup;
+let player1AttackGroup;
+let player2AttackGroup;
 
-var range = Phaser.ArrayUtils.numberArray;
+let range = Phaser.ArrayUtils.numberArray;
 
 // Preload images, spritesheets, and audio
 function preload() {
@@ -164,27 +162,20 @@ function update() {
     }
 
     // Colliders
-
-
     collisions.collide();
     collisions.overlap();
 
-
+    // Accept controller input for players
     controller.controlAllPlayers(player1Group, player2Group);
 
+    // Control game state (title screen, game over screen, in game)
     if (gameOver && resetGameButton.isDown) {
         console.log('resetting the game');
         cleanUp();
         startGame();
     } else if (isTitleScreen && resetGameButton.isDown) {
         isTitleScreen = false;
-        //titlescreen.destroy();
         startGame();
     }
-
-}
-
-function render () {
-    //game.debug.geom(rect,'#0fffff');
 
 }

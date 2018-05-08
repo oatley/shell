@@ -1,4 +1,4 @@
-var screen = {
+let screen = {
     displayConfiguration: function() {
         // Background colour
         game.stage.backgroundColor = '#6bc4ff';
@@ -15,7 +15,7 @@ var screen = {
         game.input.activePointer.leftButton.onDown.add(screen.toggleFullscreen, this);
     },
     displayTitleScreen: function(displayScreensGroup) {
-        var titlescreen = displayScreensGroup.create(game.world.width/2, game.world.height/2, 'title');
+        let titlescreen = displayScreensGroup.create(game.world.width/2, game.world.height/2, 'title');
         titlescreen.anchor.setTo(0.5, 0.5);
     },
     toggleFullscreen: function() {
@@ -30,23 +30,23 @@ var screen = {
         if (player.group.length == 1) {
             // game.world.width - 64 is the bounds for rigth side
             // 0 is the bounds for left side
-            var y = player.body.y;
+            let y = player.body.y;
             if (player.body.x < 0) {
                 if (player.playerStage == 'Stage1') {
-                    var x = game.world.width -32;
+                    let x = game.world.width -32;
                 } else if (player.playerStage == 'Stage2') {
-                    var x = game.world.width -48;
+                    let x = game.world.width -48;
                 } else if (player.playerStage == 'Stage3') {
-                    var x = game.world.width -48;
+                    let x = game.world.width -48;
                 }
 
             } else if (player.body.x > (game.world.width - 128)) {
                 if (player.playerStage == 'Stage1') {
-                    var x = -96;
+                    let x = -96;
                 } else if (player.playerStage == 'Stage2') {
-                    var x = -80;
+                    let x = -80;
                 } else if (player.playerStage == 'Stage3') {
-                    var x = -80;
+                    let x = -80;
                 }
             }
 

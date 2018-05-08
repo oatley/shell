@@ -1,4 +1,4 @@
-var characters = {
+let characters = {
     switchPlayerStage: function(player, stage = null) {
         if (stage) {
             player.playerStage = stage;
@@ -116,15 +116,15 @@ var characters = {
         // Design each character with custom stuff
         // Positions
         if (playerGroup === player1Group && (x == 0 && y == 0) ) {
-            var x = Number(game.world.width/2 - 200) ;
-            var y = Number(game.world.height - 200)
+            let x = Number(game.world.width/2 - 200) ;
+            let y = Number(game.world.height - 200)
         } else if (playerGroup === player2Group && (x == 0 && y == 0)) {
-            var x = Number(game.world.width/2 + 100) ;
-            var y = Number(game.world.height - 200)
+            let x = Number(game.world.width/2 + 100) ;
+            let y = Number(game.world.height - 200)
         }
 
         // Design each character with custom stuff
-        var player = game.add.sprite(x, y, 'knight');
+        let player = game.add.sprite(x, y, 'knight');
         game.physics.arcade.enable(player);
 
         // Custom attributes
@@ -203,23 +203,23 @@ var characters = {
 
         // Add to group player1 or player2
         playerGroup.add(player);
-        //var groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
-        //var groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
+        //let groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
+        //let groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
     },
     // Create mech character and animations
     createMech: function(playerGroup, x = 0, y = 0, stage = 'Stage1') {
         // Design each character with custom stuff
         // Positions
         if (playerGroup === player1Group && (x == 0 && y == 0) ) {
-            var x = Number(game.world.width/2 - 200) ;
-            var y = Number(game.world.height - 200)
+            let x = Number(game.world.width/2 - 200) ;
+            let y = Number(game.world.height - 200)
         } else if (playerGroup === player2Group && (x == 0 && y == 0)) {
-            var x = Number(game.world.width/2 + 200) ;
-            var y = Number(game.world.height - 200)
+            let x = Number(game.world.width/2 + 200) ;
+            let y = Number(game.world.height - 200)
         }
 
         // Design each character with custom stuff
-        var player = game.add.sprite(x, y, 'mech');
+        let player = game.add.sprite(x, y, 'mech');
         game.physics.arcade.enable(player);
 
         // Custom attributes
@@ -294,7 +294,7 @@ var characters = {
 
         // Add to group player1 or player2
         playerGroup.add(player);
-        //var groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
-        //var groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
+        //let groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
+        //let groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
     }
 };

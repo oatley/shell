@@ -1,4 +1,4 @@
-var clean = {
+let clean = {
     // Delete all screens
     cleanScreens: function(displayScreensGroup) {
         while(displayScreensGroup.length > 0) { // Because it refuses to run the function on all items in the group

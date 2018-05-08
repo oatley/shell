@@ -1,4 +1,4 @@
-var load = {
+let load = {
     // Load images
     loadImages: function() {
         // Load images background

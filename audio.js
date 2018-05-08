@@ -1,4 +1,4 @@
-var audio = {
+let audio = {
     prepAudio: function() {
         music = game.add.audio('bgmusic');
     },
