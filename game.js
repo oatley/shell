@@ -13,11 +13,17 @@ var config = {
 }
 var game = new Phaser.Game(config);
 
-
+console.log('load.js');
 game.state.add('load', load); // load contains everything for preload
+console.log('audio.js');
 game.state.add('audio', audio); // functions for controlling the audio
+console.log('controller.js');
 game.state.add('controller', controller); // controller contains setup for keyboard and controller support
-game.state.add('levels', levels)
+console.log('levels.js');
+game.state.add('levels', levels);
+console.log('character.js');
+game.state.add('characters', characters);
+
 
 
 
