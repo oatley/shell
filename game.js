@@ -14,6 +14,8 @@ var config = {
 var game = new Phaser.Game(config);
 
 game.state.add('controller', controller);
+game.state.start('controller');
+
 
 // Player objects
 var player1;
@@ -782,7 +784,7 @@ function create() {
     music.play();
 
     // Setup controls
-    game.state.start('controller');
+
     controller.player1Controls();
     controller.player2Controls();
     cursors = game.input.keyboard.createCursorKeys();
