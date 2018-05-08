@@ -1,4 +1,7 @@
 var audio = {
+    prepAudio: function() {
+        music = game.add.audio('bgmusic');
+    },
     // Mute background music
     muteMusicVolume: function() {
         if (music.mute == true) {

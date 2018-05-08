@@ -1,4 +1,31 @@
+// Player1Controls objects
+var upPlayer1Button;
+var downPlayer1Button;
+var leftPlayer1Button;
+var rightPlayer1Button;
+var attackPlayer1Button;
+var switchPlayer1Button;
+
+// Player2Controls objects
+var upPlayer2Button;
+var downPlayer2Button;
+var leftPlayer2Button;
+var rightPlayer2Button;
+var attackPlayer2Button;
+var switchPlayer2Button;
+
+// Music Player1Controls
+var musicMuteButton;
+var musicPlus1Button;
+var musicPlus2Button;
+var musicMinus1Button;
+var musicMinus2Button;
+
 var controller = {
+    prepController: function () {
+        cursors = game.input.keyboard.createCursorKeys();
+        game.input.mouse.capture = true;
+    },
     // Set player 1 controls
     player1Controls: function() {
         // Keyboard controls

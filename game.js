@@ -46,28 +46,7 @@ var player1Group;
 // Player 2 group
 var player2Group;
 
-// Player1Controls objects
-var upPlayer1Button;
-var downPlayer1Button;
-var leftPlayer1Button;
-var rightPlayer1Button;
-var attackPlayer1Button;
-var switchPlayer1Button;
 
-// Player2Controls objects
-var upPlayer2Button;
-var downPlayer2Button;
-var leftPlayer2Button;
-var rightPlayer2Button;
-var attackPlayer2Button;
-var switchPlayer2Button;
-
-// Music Player1Controls
-var musicMuteButton;
-var musicPlus1Button;
-var musicPlus2Button;
-var musicMinus1Button;
-var musicMinus2Button;
 
 
 // Default player stats
@@ -82,6 +61,9 @@ var groundGroup;
 var worldBoundsGroup;
 var platformGroup;
 var backgroundGroup;
+
+// screens/ui
+var displayScreensGroup;
 
 // music
 var music;
@@ -148,44 +130,46 @@ function create() {
     screen.displayConfiguration();
 
     // bgMusic
-    music = game.add.audio('bgmusic');
+    audio.prepAudio();
 
     // Setup controls
+    controller.prepController();
     controller.player1Controls();
     controller.player2Controls();
     controller.musicControls();
-    cursors = game.input.keyboard.createCursorKeys();
-    game.input.mouse.capture = true;
+
 
     // Create player groups
     player1Group = game.add.group();
     player2Group = game.add.group();
 
-    // Ground
-    groundGroup = game.add.group();
-    groundGroup.enableBody = true;
-
-    // World wrap
-    worldWrapGroup = game.add.group();
-    worldWrapGroup.enableBody = true;
-
-    // platforms
-    platformGroup = game.add.group();
-    platformGroup.enableBody = true;
-
-    // background
-    backgroundGroup = game.add.group();
-
-
     // Attack groups
     player1AttackGroup  = game.add.group();
     player2AttackGroup  = game.add.group();
 
+    // Ground group
+    groundGroup = game.add.group();
+    groundGroup.enableBody = true;
+
+    // World wrap group
+    worldWrapGroup = game.add.group();
+    worldWrapGroup.enableBody = true;
+
+    // platforms group
+    platformGroup = game.add.group();
+    platformGroup.enableBody = true;
+
+    // background group
+    backgroundGroup = game.add.group();
+
+    // displayScreensGroup
+    displayScreensGroup = game.add.group();
 
 
-    //startGame();
-    titlescreen = game.add.sprite(game.world.width/2, game.world.height/2, 'title');
-    titlescreen.anchor.setTo(0.5, 0.5);
+
+
+    screens.displayTitleScreen(displayScreensGroup);
+
 
     // Start background music and on resume and pause callbacks
     this.game.onPause.add(audio.pauseMusic, this);

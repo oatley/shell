@@ -14,6 +14,10 @@ var screen = {
         game.stage.smoothed = false;
         game.input.activePointer.leftButton.onDown.add(screen.toggleFullscreen, this);
     },
+    displayTitleScreen: function(displayScreensGroup) {
+        var titlescreen = displayScreensGroup.create(game.world.width/2, game.world.height/2, 'title');
+        titlescreen.anchor.setTo(0.5, 0.5);
+    },
     toggleFullscreen: function() {
         if (game.scale.isFullScreen) {
             game.scale.stopFullScreen();
