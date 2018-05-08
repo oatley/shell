@@ -31,22 +31,22 @@ let screen = {
             // game.world.width - 64 is the bounds for rigth side
             // 0 is the bounds for left side
             let y = player.body.y;
+            let x = 0;
             if (player.body.x < 0) {
                 if (player.playerStage == 'Stage1') {
-                    let x = game.world.width -32;
+                    x = game.world.width -32;
                 } else if (player.playerStage == 'Stage2') {
-                    let x = game.world.width -48;
+                    x = game.world.width -48;
                 } else if (player.playerStage == 'Stage3') {
-                    let x = game.world.width -48;
+                    x = game.world.width -48;
                 }
-
             } else if (player.body.x > (game.world.width - 128)) {
                 if (player.playerStage == 'Stage1') {
-                    let x = -96;
+                    x = -96;
                 } else if (player.playerStage == 'Stage2') {
-                    let x = -80;
+                    x = -80;
                 } else if (player.playerStage == 'Stage3') {
-                    let x = -80;
+                    x = -80;
                 }
             }
 
