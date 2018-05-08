@@ -91,77 +91,7 @@ var player2AttackGroup;
 var range = Phaser.ArrayUtils.numberArray;
 //var numbers = new Phaser.ArrayUtils();
 
-function toggleFullscreen() {
-    if (game.scale.isFullScreen) {
-        game.scale.stopFullScreen();
-    } else {
-        game.scale.startFullScreen(false);
-    }
-}
 
-
-
-
-
-
-
-
-
-
-//function switchAllStages() {
-//    player1Group.forEach(function(player) {switchPlayerStage(player);}, this);
-//    player2Group.forEach(function(player) {switchPlayerStage(player);}, this);
-//}
-
-
-
-
-
-
-function worldWrap(bounds, player) {
-    //player.brokenCollide = true;
-    //console.log(player.brokenCollide);
-    if (player.group.length == 1) {
-        // game.world.width - 64 is the bounds for rigth side
-        // 0 is the bounds for left side
-        var y = player.body.y;
-        if (player.body.x < 0) {
-            if (player.playerStage == 'Stage1') {
-                var x = game.world.width -32;
-            } else if (player.playerStage == 'Stage2') {
-                var x = game.world.width -48;
-            } else if (player.playerStage == 'Stage3') {
-                var x = game.world.width -48;
-            }
-
-        } else if (player.body.x > (game.world.width - 128)) {
-            if (player.playerStage == 'Stage1') {
-                var x = -96;
-            } else if (player.playerStage == 'Stage2') {
-                var x = -80;
-            } else if (player.playerStage == 'Stage3') {
-                var x = -80;
-            }
-        }
-
-        if (player.model == 'mech') {
-            characters.createMech(player.group, x, y - 64 - 20, stage=player.playerStage);
-        } else {
-            characters.createKnight(player.group, x, y - 64 - 20, stage=player.playerStage);
-        }
-
-        game.world.bringToTop(player.group);
-        game.world.bringToTop(platformGroup);
-    }
-}
-
-function groundPlayer(bounds, player) {
-    player.isGrounded = true;
-}
-
-function worldWrapDieLoser (player) {
-    player.destroy();
-}
 
 
 
@@ -179,6 +109,7 @@ function preload() {
 
 function dealDamage(bounds, player) {
     console.log('dealing dmg to', player.model);
+    // destroy hitbox created to detect a hit on player
     bounds.destroy();
     characters.switchPlayerStage(player);
 }

@@ -33,6 +33,11 @@ var characters = {
         }
 
     },
+    // Callback runs when player touches ground
+    groundPlayer: function(bounds, player) {
+        player.isGrounded = true;
+    },
+    // Creates hitbox and forces animation to stay in attack
     attackPlayer: function(player) {
         console.log('attacking');
 
@@ -117,7 +122,6 @@ var characters = {
             player.attackGroup = player2AttackGroup;
             player.attackTimerFunction = this.stopAttackPlayer2;
         }
-        //player.playerDirection = playerDirection;
         player.playerJumpSensitivity = playerJumpSensitivity;
         player.playerMoveSpeed = playerMoveSpeed;
         player.playerJumpSpeed = playerJumpSpeed;
@@ -125,10 +129,11 @@ var characters = {
         player.brokenCollide = false;
         player.isAttacking = false;
 
-
         // World bounds
         player.checkWorldBounds = true;
-        player.events.onOutOfBounds.add(worldWrapDieLoser, this);
+
+        // Destroy character if they leave screen
+        player.events.onOutOfBounds.add(screen.destroyCharacter, this);
 
         //  Player physics properties. Give the little guy a slight bounce.
         player.body.bounce.y = 0.2;
@@ -212,8 +217,8 @@ var characters = {
             player.attackTimerFunction = this.stopAttackPlayer1;
         } else if (playerGroup === player2Group) {
             player.playerDirection = 'left';
-            player.attackGroup = this.player2AttackGroup;
-            player.attackTimerFunction = stopAttackPlayer2;
+            player.attackGroup = player2AttackGroup;
+            player.attackTimerFunction = this.stopAttackPlayer2;
         }
         player.playerJumpSensitivity = playerJumpSensitivity;
         player.playerMoveSpeed = playerMoveSpeed;
@@ -224,7 +229,7 @@ var characters = {
 
         // World bounds
         player.checkWorldBounds = true;
-        player.events.onOutOfBounds.add(worldWrapDieLoser, this);
+        player.events.onOutOfBounds.add(screen.destroyCharacter, this);
 
         //  Player physics properties. Give the little guy a slight bounce.
         player.body.bounce.y = 0.2;
