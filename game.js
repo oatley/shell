@@ -117,7 +117,6 @@ function dealDamage(bounds, player) {
 function youLose(player) {
     player.attackTimer.stop();
     player.attackTimer2.stop();
-    player.attackTimerFunction.stop();
     player.attackBox.destroy();
     player.destroy();
     youwinscreen = game.add.sprite(game.world.width/2, game.world.height/2, 'youwin');
