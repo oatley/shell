@@ -157,6 +157,17 @@ function cleanGround() {
     }
 }
 
+function cleanSky() {
+    if (skyGroup.length > 0) {
+        while(skyGroup.length > 0) { // Because it refuses to run the function on all items in the group
+            console.log('ground', skyGroup.length);
+            skyGroup.forEach(function(ground) {
+                ground.destroy();
+            }, this);
+        }
+    }
+}
+
 function cleanUp() {
     cleanPlayers();
     cleanGround();
@@ -179,7 +190,7 @@ function startGame() {
     gameOver = false;
 
     // Create map1
-    levels.createMap1(groundGroup, worldWrapGroup, platformGroup);
+    levels.createMap1();
     cleanUp();
     // Create characters
     //createBattery(player1Group);

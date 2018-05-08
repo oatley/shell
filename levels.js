@@ -1,17 +1,17 @@
 var levels = {
     // Create a second and 3rd map off screen so the doubles never get out of sync
-    createMap1: function(groundGroup, worldWrapGroup, platformGroup) {
+    createMap1: function() {
         for (var i = 0; i < 8; i++) {
-            var sky = game.add.sprite(0 + (64*i), 0, 'sky1');
+            var sky = skyGroup.create(0 + (64*i), 0, 'sky1');
         }
         for (var i = 0; i < 8; i++) {
-            var sky = game.add.sprite(0 + (64*i), 64, 'sky2');
+            var sky = skyGroup.create(0 + (64*i), 64, 'sky2');
         }
         for (var i = 0; i < 8; i++) {
-            var sky = game.add.sprite(0 + (64*i), 128, 'sky3');
+            var sky = skyGroup.create(0 + (64*i), 128, 'sky3');
         }
         for (var i = 0; i < 8; i++) {
-            var sky = game.add.sprite(0 + (64*i), 192, 'sky4');
+            var sky = skyGroup.create(0 + (64*i), 192, 'sky4');
         }
         var mountain = game.add.sprite(0, -48, 'mountain');
         var mountain2 = game.add.sprite(game.world.width + 64, -48, 'mountain');
