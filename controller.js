@@ -125,7 +125,7 @@ let controller = {
            player.body.velocity.x = -player.playerMoveSpeed;
            player.playerDirection = 'left';
            if (player.body.velocity.y < player.playerJumpSensitivity || !(player.body.touching.down || player.body.blocked.down)) {
-               if (player.body.velocity.y < player.playerJumpSensitivity) {
+               if (player.body.velocity.y < player.playerJumpSensitivity || isJumping) {
                    player.animations.play(player.playerStage + '_jump_left');
                } else {
                    player.animations.play(player.playerStage + '_fall_left');
@@ -138,7 +138,7 @@ let controller = {
            player.body.velocity.x = player.playerMoveSpeed;
            player.playerDirection = 'right';
            if (player.body.velocity.y < player.playerJumpSensitivity || !(player.body.touching.down || player.body.blocked.down)) {
-               if (player.body.velocity.y < player.playerJumpSensitivity) {
+               if (player.body.velocity.y < player.playerJumpSensitivity || isJumping) {
                    player.animations.play(player.playerStage + '_jump_right');
                } else {
                    player.animations.play(player.playerStage + '_fall_right');
