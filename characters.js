@@ -122,7 +122,7 @@ let characters = {
         }, this);
     },
     // Create knight character and animations
-    createKnight: function(playerGroup, x = 0, y = 0, stage = 'Stage1') {
+    createPlayer: function(playerGroup, x = 0, y = 0, stage = 'Stage1', velocityx = 0, velocityy = 0, isJumping = false) {
 
         // Positions
         if (playerGroup === player1Group && (x == 0 && y == 0) ) {
@@ -133,37 +133,32 @@ let characters = {
             y = Number(game.world.height - 200);
         }
 
-        // Design each character with custom stuff
-        let player = game.add.sprite(x, y, 'jan');
-        game.physics.arcade.enable(player);
-
-        // Custom attributes
-        player.a = 'meow';
-        player.model = 'jan';
-        player.group = playerGroup;
-
-
         if (playerGroup === player1Group) {
+            let player = game.add.sprite(x, y, 'sci');
+            player.model = 'sci';
+            characters.addMechAnimations(player);
             player.playerDirection = 'right';
             player.attackGroup = player1AttackGroup;
             player.attackTimerFunction = characters.stopAttackPlayer1;
             player.portraitX = 0;
             player.portraitY = game.world.height - 64;
         } else if (playerGroup === player2Group) {
+            let player = game.add.sprite(x, y, 'jan');
+            player.model = 'jan';
+            characters.addKnightAnimations(player);
             player.playerDirection = 'left';
             player.attackGroup = player2AttackGroup;
             player.attackTimerFunction = characters.stopAttackPlayer2;
             player.portraitX = game.world.width - 64;
             player.portraitY = game.world.height - 64;
         }
-        //player.portrait = game.add.sprite(player.portraitX, player.portraitY, player.model + '1');
-        //portraitsGroup.add(player.portrait);
+        player.group = playerGroup;
         player.playerJumpSensitivity = -5;
-        player.playerMoveSpeed = 50;
-        player.playerJumpSpeed = -650;
-        player.playerJumping = false;
-        player.brokenCollide = false;
         player.isAttacking = false;
+        game.physics.arcade.enable(player);
+        if (velocityx) player.body.velocity.x = velocityx;
+        if (velocityy) player.body.velocity.y = velocityy;
+        if (isJumping) player.isJumping = isJumping;
 
         // World bounds
         player.checkWorldBounds = true;
@@ -171,12 +166,15 @@ let characters = {
         // Destroy character if they leave screen
         player.events.onOutOfBounds.add(screen.destroyCharacter, this);
 
-        //  Player physics properties. Give the little guy a slight bounce.
-        player.body.bounce.y = 0.2;
-        player.body.gravity.y = 1000;
-        player.body.setSize(64, 64, 32, 64);
+        // Sets player body and attributes based on stage
+        characters.switchPlayerStage(player, stage=stage);
 
-
+        // Add to group player1 or player2 and bring to front
+        playerGroup.add(player);
+        game.world.bringToTop(playerGroup);
+        game.world.bringToTop(platformGroup);
+    },
+    addKnightAnimations: function(player) {
         //  Stage 1 animations
         let range = Phaser.ArrayUtils.numberArray;
         player.playerStage = 'Stage1';
@@ -217,13 +215,48 @@ let characters = {
         player.animations.add(player.playerStage + '_jump_right', [513], 10, false);
         player.animations.add(player.playerStage + '_fall_left', [532], 10, false);
         player.animations.add(player.playerStage + '_fall_right', [551], 10, false);
+    },
+    addMechAnimations: function(player) {
+        //  Stage 1 animations
+        let range = Phaser.ArrayUtils.numberArray;
+        player.playerStage = 'Stage1';
+        player.animations.add(player.playerStage + '_idle_left', range(0,7), 10, true);
+        player.animations.add(player.playerStage + '_idle_right', range(19,26), 10, true);
+        player.animations.add(player.playerStage + '_walk_left', range(38,56), 20, true);
+        player.animations.add(player.playerStage + '_walk_right', range(57,75), 20, true);
+        player.animations.add(player.playerStage + '_attack_left', range(76,87), 10, false);
+        player.animations.add(player.playerStage + '_attack_right', range(95,106), 10, false);
+        player.animations.add(player.playerStage + '_jump_left', [114], 10, false);
+        player.animations.add(player.playerStage + '_jump_right', [133], 10, false);
+        player.animations.add(player.playerStage + '_fall_left', [152], 10, false);
+        player.animations.add(player.playerStage + '_fall_right', [171], 10, false);
 
-        characters.switchPlayerStage(player, stage=stage);
 
-        // Add to group player1 or player2 and bring to front
-        playerGroup.add(player);
-        game.world.bringToTop(playerGroup);
-        game.world.bringToTop(platformGroup);
+        // Stage 2 animation
+        player.playerStage = 'Stage2';
+        player.animations.add(player.playerStage + '_idle_left', range(190,197), 10, true);
+        player.animations.add(player.playerStage + '_idle_right', range(209,216), 10, true);
+        player.animations.add(player.playerStage + '_walk_left', range(228,237), 10, true);
+        player.animations.add(player.playerStage + '_walk_right', range(247,256), 10, true);
+        player.animations.add(player.playerStage + '_attack_left', range(266,273), 10, false);
+        player.animations.add(player.playerStage + '_attack_right', range(285,292), 10, false);
+        player.animations.add(player.playerStage + '_jump_left', [304], 10, false);
+        player.animations.add(player.playerStage + '_jump_right', [323], 10, false);
+        player.animations.add(player.playerStage + '_fall_left', [342], 10, false);
+        player.animations.add(player.playerStage + '_fall_right', [361], 10, false);
+
+        // Stage 3 animation
+        player.playerStage = 'Stage3';
+        player.animations.add(player.playerStage + '_idle_left', range(380,387), 10, true);
+        player.animations.add(player.playerStage + '_idle_right', range(399,406), 10, true);
+        player.animations.add(player.playerStage + '_walk_left', range(418,423), 10, true);
+        player.animations.add(player.playerStage + '_walk_right', range(437,442), 10, true);
+        player.animations.add(player.playerStage + '_attack_left', range(456,461), 10, false);
+        player.animations.add(player.playerStage + '_attack_right', range(475,480), 10, false);
+        player.animations.add(player.playerStage + '_jump_left', [494], 10, false);
+        player.animations.add(player.playerStage + '_jump_right', [513], 10, false);
+        player.animations.add(player.playerStage + '_fall_left', [532], 10, false);
+        player.animations.add(player.playerStage + '_fall_right', [551], 10, false);
     },
     // Create mech character and animations
     createMech: function(playerGroup, x = 0, y = 0, stage = 'Stage1') {

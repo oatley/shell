@@ -55,10 +55,23 @@ let screen = {
             }
 
             if (player.model == 'sci') {
-                characters.createMech(player.group, x, y - 64 - 20, stage=player.playerStage);
+                characters.createMech(player.group, x, y - 64 - 20,
+                                      stage=player.playerStage,
+                                      velocityx=player.body.velocity.x,
+                                      velocityy=player.body.velocity.y,
+                                      isJumping=player.isJumping
+                                    );
             } else {
-                characters.createKnight(player.group, x, y - 64 - 20, stage=player.playerStage);
+                characters.createKnight(player.group, x, y - 64 - 20,
+                                        stage=player.playerStage,
+                                        velocityx=player.body.velocity.x,
+                                        velocityy=player.body.velocity.y,
+                                        isJumping=player.isJumping
+                                        );
             }
+
+
+
 
             game.world.bringToTop(player.group);
             game.world.bringToTop(platformGroup);
