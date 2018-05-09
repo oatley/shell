@@ -88,7 +88,7 @@ function create() {
 }
 
 function update() {
-    if (isGameOver) {
+    if (isGameOver && !isGameOverScreen) {
         state.gameOver();
     }
 
@@ -103,9 +103,13 @@ function update() {
     if (isGameOver && resetGameButton.isDown) {
         clean.cleanUpAll();
         isGameOver = false;
+        isGameOverScreen = false;
+        isGameRunning = true;
         startGame();
     } else if (isTitleScreen && resetGameButton.isDown) {
         isTitleScreen = false;
+        isGameOverScreen = false;
+        isGameRunning = true;
         startGame();
     }
 

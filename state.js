@@ -1,6 +1,7 @@
 // State control
 let isTitleScreen = true;
 let isGameOver = false;
+let isGameOverScreen = false;
 
 var state = {
     gameOver: function () {
@@ -17,6 +18,7 @@ var state = {
                 player.portrait.anchor.setTo(0.5, 0.5);
                 portraitsGroup.add(player.portrait);
                 game.world.bringToTop(portraitsGroup);
+                game.world.bringToTop(player.group);
             }, this);
         } else if (player2Group.length > 0) {
             console.log('you win player2');
@@ -26,8 +28,9 @@ var state = {
                 player.portrait.anchor.setTo(0.5, 0.5);
                 portraitsGroup.add(player.portrait);
                 game.world.bringToTop(portraitsGroup);
+                game.world.bringToTop(player.group);
             }, this);
         }
-        //clean.cleanPlayers();
+        isGameOverScreen = true;
     }
 };
