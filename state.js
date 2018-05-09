@@ -18,7 +18,7 @@ var state = {
                 game.world.bringToTop(portraitsGroup);
             }, this);
         } else if (player2Group.length > 0) {
-            console.log('you win player1');
+            console.log('you win player2');
             player2Group.forEach(function(player) {
                 console.log(player.model);
                 player.portrait = game.add.sprite(game.world.width / 2, game.world.height / 2, player.model + player.playerStage);
