@@ -45,7 +45,6 @@ function startGame() {
     characters.createMech(player1Group);
     characters.createKnight(player2Group);
 
-    game.add.sprite(0, game.world.height -64,'sciStage1')
 }
 
 function create() {
@@ -103,6 +102,7 @@ function update() {
     // Control game state (title screen, game over screen, in game)
     if (isGameOver && resetGameButton.isDown) {
         clean.cleanUpAll();
+        isGameOver = false;
         startGame();
     } else if (isTitleScreen && resetGameButton.isDown) {
         isTitleScreen = false;
