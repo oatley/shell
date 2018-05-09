@@ -1,6 +1,6 @@
 let levels = {
     // Create a second and 3rd map off screen so the doubles never get out of sync
-    createMap1: function(groundGroup, worldWrapGroup, platformGroup, backgroundGroup) {
+    createMap1: function() {
         for (let i = 0; i < 8; i++) {
             let sky = backgroundGroup.create(0 + (64*i), 0, 'sky1');
         }

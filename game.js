@@ -71,9 +71,8 @@ function startGame() {
     gameOver = false;
 
     // Create map1
-    levels.createMap1(groundGroup, worldWrapGroup, platformGroup, backgroundGroup);
+    levels.createMap1();
     // Create characters
-    //createBattery(player1Group);
     characters.createMech(player1Group);
     characters.createKnight(player2Group);
 
