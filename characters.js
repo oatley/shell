@@ -11,6 +11,7 @@ let characters = {
             //youLose(player);
             isGameOver = true;
             console.log('YOU LOSE', player.model);
+            clean.cleanPlayer(player);
             return;
         }
         if (player.playerStage == 'Stage1') {

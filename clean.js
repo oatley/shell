@@ -24,6 +24,18 @@ let clean = {
             }, this);
         }
     },
+    cleanPlayer: function(player) {
+        let group = player.group;
+        while(group.length > 0) { // Because it refuses to run the function on all items in the group
+            group.forEach(function(p) {
+                if (!p) return;
+                if (p.attackTimer) player.attackTimer.stop();
+                if (p.attackTimer2) player.attackTimer2.stop();
+                if (p.attackBox) player.attackBox.destroy();
+                p.destroy();
+            }, this);
+        }
+    },
     // Delete all players from game
     cleanPlayers: function() {
         while(player1Group.length > 0) { // Because it refuses to run the function on all items in the group
