@@ -36,8 +36,7 @@ let characters = {
         if (player.portrait) {
             player.portrait.destroy();
         }
-        console.log(player.model + player.playerStage);
-        player.portrait = game.add.image(player.portraitX, player.portraitY, player.model + player.playerStage);
+        player.portrait = game.add.sprite(player.portraitX, player.portraitY, player.model + player.playerStage);
         portraitsGroup.add(player.portrait);
     },
     // Callback runs when player touches ground
@@ -152,7 +151,7 @@ let characters = {
             player.portraitX = game.world.width - 64;
             player.portraitY = game.world.height - 64;
         }
-        player.portrait = game.add.image(player.portraitX, player.portraitY, player.model + '1');
+        player.portrait = game.add.sprite(player.portraitX, player.portraitY, player.model + '1');
         portraitsGroup.add(player.portrait);
         player.playerJumpSensitivity = -5;
         player.playerMoveSpeed = 50;
@@ -253,7 +252,8 @@ let characters = {
             player.portraitX = game.world.width - 64;
             player.portraitY = game.world.height - 64;
         }
-        player.portrait = portraitsGroup.create(player.portraitX, player.portraitY, player.model + '1');
+        player.portrait = game.add.sprite(player.portraitX, player.portraitY, player.model + '1');
+        portraitsGroup.add(player.portrait);
         player.playerJumpSensitivity = -5;
         player.playerJumping = false;
         player.isAttacking = false;
