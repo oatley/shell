@@ -150,7 +150,8 @@ let characters = {
             player.portraitX = game.world.width - 64;
             player.portraitY = game.world.height - 64;
         }
-        player.portrait = portraitsGroup.create(player.portraitX, player.portraitY, player.model + '1');
+        player.portrait = game.add.image(player.portraitX, player.portraitY, player.model + '1');
+        portraitsGroup.add(player.portrait);
         player.playerJumpSensitivity = -5;
         player.playerMoveSpeed = 50;
         player.playerJumpSpeed = -650;
