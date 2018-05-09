@@ -56,7 +56,6 @@ let levels = {
             roof.body.setSize(64, 32, 0, 0);
             roof.body.immovable = true;
         }
-        //let worldWrapTile = worldWrapGroup.create(-64, game.world.height - 64, 'ground');
         let worldWrapTile = worldWrapGroup.create(-64, 0, 'ground');
         worldWrapTile.body.immovable = true;
         worldWrapTile.body.onOverlap = new Phaser.Signal();
@@ -68,6 +67,10 @@ let levels = {
         worldWrapTile2.body.onOverlap = new Phaser.Signal();
         worldWrapTile2.body.onOverlap.add(screen.worldWrap)
         worldWrapTile2.body.setSize(4, 1000)
+
+        // Bring ground and platforms to front
+        game.world.bringToTop(platformGroup);
+        game.world.bringToTop(groundGroup);
 
     }
 };

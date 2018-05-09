@@ -6,8 +6,15 @@ let clean = {
         clean.cleanPlatforms();
         clean.cleanBackground();
         clean.cleanScreens();
-        if(sci)sci.destroy();
-        if(jan)jan.destroy();
+        clean.cleanPortraits();
+    },
+    // Delete player portraits
+    cleanPortraits: function () {
+        while(portraitsGroup.length > 0) { // Because it refuses to run the function on all items in the group
+            portraitsGroup.forEach(function(portrait) {
+                portrait.destroy();
+            }, this);
+        }
     },
     // Delete all screens
     cleanScreens: function() {

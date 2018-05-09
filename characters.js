@@ -32,7 +32,11 @@ let characters = {
             player.playerMoveSpeed = 150;
             player.playerJumpSpeed = -400;
         }
-
+        // Update portrait to next stage
+        if (player.portrait) {
+            player.portrait.destroy();
+        }
+        player.portrait = portraitsGroup.create(player.portraitX, player.portraitY, player.model + player.playerStage);
     },
     // Callback runs when player touches ground
     groundPlayer: function(bounds, player) {
@@ -124,22 +128,29 @@ let characters = {
         }
 
         // Design each character with custom stuff
-        let player = game.add.sprite(x, y, 'knight');
+        let player = game.add.sprite(x, y, 'jan');
         game.physics.arcade.enable(player);
 
         // Custom attributes
         player.a = 'meow';
-        player.model = 'knight';
+        player.model = 'jan';
         player.group = playerGroup;
+
+
         if (playerGroup === player1Group) {
             player.playerDirection = 'right';
             player.attackGroup = player1AttackGroup;
             player.attackTimerFunction = characters.stopAttackPlayer1;
+            player.portraitX = 0;
+            player.portraitY = game.world.height - 64;
         } else if (playerGroup === player2Group) {
             player.playerDirection = 'left';
             player.attackGroup = player2AttackGroup;
             player.attackTimerFunction = characters.stopAttackPlayer2;
+            player.portraitX = game.world.width - 64;
+            player.portraitY = game.world.height - 64;
         }
+        player.portrait = portraitsGroup.create(player.portraitX, player.portraitY, player.model + '1');
         player.playerJumpSensitivity = -5;
         player.playerMoveSpeed = 50;
         player.playerJumpSpeed = -650;
@@ -202,10 +213,9 @@ let characters = {
 
         characters.switchPlayerStage(player, stage=stage);
 
-        // Add to group player1 or player2
+        // Add to group player1 or player2 and bring to front
         playerGroup.add(player);
-        //let groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
-        //let groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
+        game.world.bringToTop(playerGroup);
     },
     // Create mech character and animations
     createMech: function(playerGroup, x = 0, y = 0, stage = 'Stage1') {
@@ -220,22 +230,27 @@ let characters = {
         }
 
         // Design each character with custom stuff
-        let player = game.add.sprite(x, y, 'mech');
+        let player = game.add.sprite(x, y, 'sci');
         game.physics.arcade.enable(player);
 
         // Custom attributes
         player.a = 'meow';
-        player.model = 'mech';
+        player.model = 'sci';
         player.group = playerGroup;
         if (playerGroup === player1Group) {
             player.playerDirection = 'right';
             player.attackGroup = player1AttackGroup;
             player.attackTimerFunction = characters.stopAttackPlayer1;
+            player.portraitX = 0;
+            player.portraitY = game.world.height - 64;
         } else if (playerGroup === player2Group) {
             player.playerDirection = 'left';
             player.attackGroup = player2AttackGroup;
             player.attackTimerFunction = characters.stopAttackPlayer2;
+            player.portraitX = game.world.width - 64;
+            player.portraitY = game.world.height - 64;
         }
+        player.portrait = portraitsGroup.create(player.portraitX, player.portraitY, player.model + '1');
         player.playerJumpSensitivity = -5;
         player.playerJumping = false;
         player.isAttacking = false;
@@ -294,9 +309,8 @@ let characters = {
 
         characters.switchPlayerStage(player, stage=stage);
 
-        // Add to group player1 or player2
+        // Add to group player1 or player2 and bring to front
         playerGroup.add(player);
-        //let groundCollision = game.physics.arcade.collide(player1Group, groundGroup);
-        //let groundCollision2 = game.physics.arcade.collide(player2Group, groundGroup);
+        game.world.bringToTop(playerGroup);
     }
 };

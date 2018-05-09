@@ -24,14 +24,18 @@ let load = {
         game.load.image('title', 'assets/sprites/ui/ui_titleScreen.png');
 
         // Portraits for each character
-        game.load.image('sci', 'assets/sprites/ui/ui_portrait_sci03.png');
-        game.load.image('jan', 'assets/sprites/ui/ui_portrait_jan03.png');
+        game.load.image('sciStage1', 'assets/sprites/ui/ui_portrait_sci01.png');
+        game.load.image('janStage1', 'assets/sprites/ui/ui_portrait_jan01.png');
+        game.load.image('sciStage2', 'assets/sprites/ui/ui_portrait_sci02.png');
+        game.load.image('janStage2', 'assets/sprites/ui/ui_portrait_jan02.png');
+        game.load.image('sciStage3', 'assets/sprites/ui/ui_portrait_sci03.png');
+        game.load.image('janStage3', 'assets/sprites/ui/ui_portrait_jan03.png');
     },
     // Load spritesheets for each character
     loadSpriteSheets: function() {
         game.load.spritesheet('battery', 'assets/sprites/characters/battery-spritesheet.png', 64, 64);
-        game.load.spritesheet('mech', 'assets/sprites/characters/sci_spritesheet.png', 128, 128);
-        game.load.spritesheet('knight', 'assets/sprites/characters/knight_spritesheet.png', 128, 128);
+        game.load.spritesheet('sci', 'assets/sprites/characters/sci_spritesheet.png', 128, 128);
+        game.load.spritesheet('jan', 'assets/sprites/characters/knight_spritesheet.png', 128, 128);
     },
     // Load music and audio files
     loadMusic: function () {

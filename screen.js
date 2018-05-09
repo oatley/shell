@@ -1,3 +1,7 @@
+// Screens
+let screenGameOver;
+let screenTitle;
+
 let screen = {
     displayConfiguration: function() {
         // Background colour
@@ -50,7 +54,7 @@ let screen = {
                 }
             }
 
-            if (player.model == 'mech') {
+            if (player.model == 'sci') {
                 characters.createMech(player.group, x, y - 64 - 20, stage=player.playerStage);
             } else {
                 characters.createKnight(player.group, x, y - 64 - 20, stage=player.playerStage);
