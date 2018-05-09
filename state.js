@@ -46,6 +46,8 @@ let state = {
         characters.createMech(player1Group);
         characters.createKnight(player2Group);
 
+        // Resume music if it stopped
+        audio.resumeMusic();
     },
     startGameCheck: function() {
         // Control game state (title screen, game over screen, in game)
