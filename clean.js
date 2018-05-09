@@ -1,6 +1,6 @@
 let clean = {
     // Delete all screens
-    cleanScreens: function(displayScreensGroup) {
+    cleanScreens: function() {
         while(displayScreensGroup.length > 0) { // Because it refuses to run the function on all items in the group
             displayScreensGroup.forEach(function(displayedScreen) {
                 displayedScreen.destroy();
@@ -8,7 +8,7 @@ let clean = {
         }
     },
     // Delete all players from game
-    cleanPlayers: function(player1Group, player2Group) {
+    cleanPlayers: function() {
         while(player1Group.length > 0) { // Because it refuses to run the function on all items in the group
             player1Group.forEach(function(player) {
                 if (!player) return;
@@ -29,7 +29,7 @@ let clean = {
         }
     },
     // Delete all platforms from game
-    cleanPlatforms: function(platformGroup) {
+    cleanPlatforms: function() {
             while(platformGroup.length > 0) { // Because it refuses to run the function on all items in the group
                 platformGroup.forEach(function(platform) {
                     platform.destroy();
@@ -37,7 +37,7 @@ let clean = {
             }
     },
     // Delete all ground from game
-    cleanGround: function(groundGroup) {
+    cleanGround: function() {
             while(groundGroup.length > 0) { // Because it refuses to run the function on all items in the group
                 groundGroup.forEach(function(ground) {
                     ground.destroy();
@@ -45,7 +45,7 @@ let clean = {
             }
     },
     // Delete all backgrounds from game
-    cleanBackground: function(backgroundGroup) {
+    cleanBackground: function() {
             while(backgroundGroup.length > 0) { // Because it refuses to run the function on all items in the group
                 backgroundGroup.forEach(function(background) {
                     background.destroy();
