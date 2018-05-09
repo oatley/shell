@@ -123,7 +123,7 @@ let characters = {
     },
     // Create knight character and animations
     createPlayer: function(playerGroup, x = 0, y = 0, stage = 'Stage1', velocityx = 0, velocityy = 0, isJumping = false) {
-
+        let player
         // Positions
         if (playerGroup === player1Group && (x == 0 && y == 0) ) {
             x = Number(game.world.width/2 - 200) ;
@@ -133,11 +133,9 @@ let characters = {
             y = Number(game.world.height - 200);
         }
 
-
-
-
         if (playerGroup === player1Group) {
-            let player = game.add.sprite(x, y, 'sci');
+            console.log('player 1 selecting sci');
+            player = game.add.sprite(x, y, 'sci');
             player.model = 'sci';
             characters.addMechAnimations(player);
             player.playerDirection = 'right';
@@ -146,7 +144,8 @@ let characters = {
             player.portraitX = 0;
             player.portraitY = game.world.height - 64;
         } else if (playerGroup === player2Group) {
-            let player = game.add.sprite(x, y, 'jan');
+            console.log('player 1 selecting jan');
+            player = game.add.sprite(x, y, 'jan');
             player.model = 'jan';
             characters.addKnightAnimations(player);
             player.playerDirection = 'left';
