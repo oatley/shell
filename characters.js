@@ -37,9 +37,12 @@ let characters = {
         if (player.portrait) {
             player.portrait.destroy();
         }
-        player.portrait = game.add.sprite(player.portraitX, player.portraitY, player.model + player.playerStage);
-        portraitsGroup.add(player.portrait);
-        game.world.bringToTop(portraitsGroup);
+        if (!isGameOver) {
+            player.portrait = game.add.sprite(player.portraitX, player.portraitY, player.model + player.playerStage);
+            portraitsGroup.add(player.portrait);
+            game.world.bringToTop(portraitsGroup);
+        }
+
     },
     // Callback runs when player touches ground
     groundPlayer: function(bounds, player) {
@@ -153,8 +156,8 @@ let characters = {
             player.portraitX = game.world.width - 64;
             player.portraitY = game.world.height - 64;
         }
-        player.portrait = game.add.sprite(player.portraitX, player.portraitY, player.model + '1');
-        portraitsGroup.add(player.portrait);
+        //player.portrait = game.add.sprite(player.portraitX, player.portraitY, player.model + '1');
+        //portraitsGroup.add(player.portrait);
         player.playerJumpSensitivity = -5;
         player.playerMoveSpeed = 50;
         player.playerJumpSpeed = -650;
@@ -255,8 +258,8 @@ let characters = {
             player.portraitX = game.world.width - 64;
             player.portraitY = game.world.height - 64;
         }
-        player.portrait = game.add.sprite(player.portraitX, player.portraitY, player.model + '1');
-        portraitsGroup.add(player.portrait);
+        //player.portrait = game.add.sprite(player.portraitX, player.portraitY, player.model + '1');
+        //portraitsGroup.add(player.portrait);
         player.playerJumpSensitivity = -5;
         player.playerJumping = false;
         player.isAttacking = false;
