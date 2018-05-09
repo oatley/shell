@@ -5,13 +5,12 @@ let config = {
     antialias: false,
     multiTexture: true,
     state: {
-        preload: preload,
+        preload: load.preload,
         create: create,
         update: update
     }
 }
 let game = new Phaser.Game(config);
-
 
 // Groups for all game objects
 let player1Group; // player 1
@@ -24,28 +23,6 @@ let displayScreensGroup; // titlescreen, end game screen
 let player1AttackGroup; // hitbox for player 1
 let player2AttackGroup; // hitbox for player 2
 let portraitsGroup; // Player portraits
-
-
-
-// Preload images, spritesheets, and audio
-function preload() {
-    load.loadImages();
-    load.loadSpriteSheets();
-    load.loadMusic();
-}
-
-function startGame() {
-    // Clean up all left over sprites
-    clean.cleanUpAll();
-
-    // Create map1
-    levels.createMap1();
-
-    // Create characters
-    characters.createMech(player1Group);
-    characters.createKnight(player2Group);
-
-}
 
 function create() {
     // Start the simple physics
@@ -63,22 +40,8 @@ function create() {
     controller.player2Controls();
     controller.musicControls();
 
-    // Create phaser groups
-    player1Group = game.add.group();
-    player2Group = game.add.group();
-    player1AttackGroup  = game.add.group();
-    player2AttackGroup  = game.add.group();
-    groundGroup = game.add.group();
-    worldWrapGroup = game.add.group();
-    platformGroup = game.add.group();
-    backgroundGroup = game.add.group();
-    displayScreensGroup = game.add.group();
-    portraitsGroup = game.add.group();
-
-    // Create
-    platformGroup.enableBody = true;
-    worldWrapGroup.enableBody = true;
-    groundGroup.enableBody = true;
+    // Create groups
+    groups.createGroups();
 
     // Display the title screen
     screen.displayTitleScreen(displayScreensGroup);
@@ -90,6 +53,8 @@ function create() {
 function update() {
     if (isGameOver && !isGameOverScreen) {
         state.gameOver();
+    } else if (resetGameButton.isDown) {
+        state.startGameCheck();
     }
 
     // Colliders
@@ -98,19 +63,4 @@ function update() {
 
     // Accept controller input for players
     controller.controlAllPlayers(player1Group, player2Group);
-
-    // Control game state (title screen, game over screen, in game)
-    if (isGameOver && resetGameButton.isDown) {
-        clean.cleanUpAll();
-        isGameOver = false;
-        isGameOverScreen = false;
-        isGameRunning = true;
-        startGame();
-    } else if (isTitleScreen && resetGameButton.isDown) {
-        isTitleScreen = false;
-        isGameOverScreen = false;
-        isGameRunning = true;
-        startGame();
-    }
-
 }

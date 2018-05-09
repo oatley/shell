@@ -32,5 +32,30 @@ var state = {
             }, this);
         }
         isGameOverScreen = true;
+    },
+    startGame: function () {
+        // Clean up all left over sprites
+        clean.cleanUpAll();
+
+        // Create map1
+        levels.createMap1();
+
+        // Create characters
+        characters.createMech(player1Group);
+        characters.createKnight(player2Group);
+
+    },
+    startGameCheck: function() {
+        // Control game state (title screen, game over screen, in game)
+        if (isGameOver && resetGameButton.isDown) {
+            clean.cleanUpAll();
+            isGameOver = false;
+            isGameOverScreen = false;
+            state.startGame();
+        } else if (isTitleScreen && resetGameButton.isDown) {
+            isTitleScreen = false;
+            isGameOverScreen = false;
+            state.startGame();
+        }
     }
 };

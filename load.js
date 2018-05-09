@@ -40,6 +40,11 @@ let load = {
     // Load music and audio files
     loadMusic: function () {
         game.load.audio('bgmusic', ['assets/audio/bgmusic.mp3']);
+    },
+    // Preload images, spritesheets, and audio
+    preload: function () {
+        load.loadImages();
+        load.loadSpriteSheets();
+        load.loadMusic();
     }
-
 };
