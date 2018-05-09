@@ -9,7 +9,7 @@ let characters = {
         } else if (player.playerStage == 'Stage3') {
             player.playerStage = 'Stage1';
             //youLose(player);
-            endGame = true;
+            isGameOver = true;
             console.log('YOU LOSE', player.model);
             return;
         }
