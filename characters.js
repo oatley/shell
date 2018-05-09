@@ -220,6 +220,7 @@ let characters = {
         // Add to group player1 or player2 and bring to front
         playerGroup.add(player);
         game.world.bringToTop(playerGroup);
+        game.world.bringToTop(platformGroup);
     },
     // Create mech character and animations
     createMech: function(playerGroup, x = 0, y = 0, stage = 'Stage1') {

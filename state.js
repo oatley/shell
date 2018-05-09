@@ -19,6 +19,7 @@ let state = {
                 portraitsGroup.add(player.portrait);
                 game.world.bringToTop(portraitsGroup);
                 game.world.bringToTop(player.group);
+                game.world.bringToTop(platformGroup);
             }, this);
         } else if (player2Group.length > 0) {
             console.log('you win player2');
@@ -29,6 +30,7 @@ let state = {
                 portraitsGroup.add(player.portrait);
                 game.world.bringToTop(portraitsGroup);
                 game.world.bringToTop(player.group);
+                game.world.bringToTop(platformGroup);
             }, this);
         }
         isGameOverScreen = true;
