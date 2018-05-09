@@ -160,6 +160,7 @@ let characters = {
 
 
         //  Stage 1 animations
+        let range = Phaser.ArrayUtils.numberArray;
         player.playerStage = 'Stage1';
         player.animations.add(player.playerStage + '_idle_left', range(0,5), 10, true);
         player.animations.add(player.playerStage + '_idle_right', range(19,24), 10, true);
@@ -251,6 +252,7 @@ let characters = {
         player.body.setSize(64, 64, 32, 64);
 
         //  Stage 1 animations
+        let range = Phaser.ArrayUtils.numberArray;
         player.playerStage = 'Stage1';
         player.animations.add(player.playerStage + '_idle_left', range(0,7), 10, true);
         player.animations.add(player.playerStage + '_idle_right', range(19,26), 10, true);

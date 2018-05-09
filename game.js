@@ -25,29 +25,18 @@ let endGame = false;
 let sci;
 let jan;
 
-// Player 1 group
-let player1Group;
+// Groups for all game objects
+let player1Group; // player 1
+let player2Group; // player 2
+let groundGroup; // the ground
+let worldBoundsGroup; // invisible borders
+let platformGroup; // platforms
+let backgroundGroup; // sky, clouds, mountains
+let displayScreensGroup; // titlescreen, end game screen
+let player1AttackGroup; // hitbox for player 1
+let player2AttackGroup; // hitbox for player 2
 
-// Player 2 group
-let player2Group;
 
-// maps
-let groundGroup;
-let worldBoundsGroup;
-let platformGroup;
-let backgroundGroup;
-
-// screens/ui
-let displayScreensGroup;
-
-// music
-let music;
-
-// Hitbox
-let player1AttackGroup;
-let player2AttackGroup;
-
-let range = Phaser.ArrayUtils.numberArray;
 
 // Preload images, spritesheets, and audio
 function preload() {
@@ -58,17 +47,17 @@ function preload() {
 
 // cleanUp clears all sprites from the screen and deletes the data associated with them
 function cleanUp() {
-    clean.cleanPlayers(player1Group, player2Group);
-    clean.cleanGround(groundGroup);
-    clean.cleanPlatforms(platformGroup);
-    clean.cleanBackground(backgroundGroup);
-    clean.cleanScreens(displayScreensGroup);
+    clean.cleanPlayers();
+    clean.cleanGround();
+    clean.cleanPlatforms();
+    clean.cleanBackground();
+    clean.cleanScreens();
     if(sci)sci.destroy();
     if(jan)jan.destroy();
 }
 
 function youLose(player) {
-    clean.cleanPlayers(player1Group, player2Group);
+    clean.cleanPlayers();
     youwinscreen = game.add.sprite(game.world.width/2, game.world.height/2, 'youwin');
     youwinscreen.anchor.setTo(0.5, 0.5);
     gameOver = true;

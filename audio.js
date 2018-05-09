@@ -1,3 +1,6 @@
+// music
+let music;
+
 let audio = {
     prepAudio: function() {
         music = game.add.audio('bgmusic');
