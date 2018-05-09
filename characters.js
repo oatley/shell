@@ -38,6 +38,7 @@ let characters = {
         }
         player.portrait = game.add.sprite(player.portraitX, player.portraitY, player.model + player.playerStage);
         portraitsGroup.add(player.portrait);
+        game.world.bringToTop(portraitsGroup);
     },
     // Callback runs when player touches ground
     groundPlayer: function(bounds, player) {
