@@ -45,7 +45,7 @@ function startGame() {
     characters.createMech(player1Group);
     characters.createKnight(player2Group);
 
-    game.image.add(0, game.world.height -64,'sciStage1')
+    game.add.sprite(0, game.world.height -64,'sciStage1')
 }
 
 function create() {
