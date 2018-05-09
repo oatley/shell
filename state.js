@@ -3,7 +3,7 @@ let isTitleScreen = true;
 let isGameOver = false;
 let isGameOverScreen = false;
 
-var state = {
+let state = {
     gameOver: function () {
         clean.cleanPortraits();
         let screenGameOver = game.add.sprite(game.world.width/2, game.world.height/2, 'youwin');
