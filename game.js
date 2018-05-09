@@ -46,15 +46,7 @@ function preload() {
 }
 
 // cleanUp clears all sprites from the screen and deletes the data associated with them
-function cleanUp() {
-    clean.cleanPlayers();
-    clean.cleanGround();
-    clean.cleanPlatforms();
-    clean.cleanBackground();
-    clean.cleanScreens();
-    if(sci)sci.destroy();
-    if(jan)jan.destroy();
-}
+
 
 function youLose(player) {
     clean.cleanPlayers();
@@ -93,7 +85,7 @@ function create() {
     // Configure resolution and scale
     screen.displayConfiguration();
 
-    // bgMusic
+    // Setup audio
     audio.prepAudio();
 
     // Setup controls
@@ -103,43 +95,27 @@ function create() {
     controller.musicControls();
 
 
-    // Create player groups
+    // Create phaser groups
     player1Group = game.add.group();
     player2Group = game.add.group();
-
-    // Attack groups
     player1AttackGroup  = game.add.group();
     player2AttackGroup  = game.add.group();
-
-    // Ground group
     groundGroup = game.add.group();
-    groundGroup.enableBody = true;
-
-    // World wrap group
     worldWrapGroup = game.add.group();
-    worldWrapGroup.enableBody = true;
-
-    // platforms group
     platformGroup = game.add.group();
-    platformGroup.enableBody = true;
-
-    // background group
     backgroundGroup = game.add.group();
-
-    // displayScreensGroup
     displayScreensGroup = game.add.group();
 
+    // Create
+    platformGroup.enableBody = true;
+    worldWrapGroup.enableBody = true;
+    groundGroup.enableBody = true;
 
-
-
+    // Display the title screen
     screen.displayTitleScreen(displayScreensGroup);
 
-
     // Start background music and on resume and pause callbacks
-    this.game.onPause.add(audio.pauseMusic, this);
-    this.game.onResume.add(audio.resumeMusic, this);
     audio.startMusic();
-    //startGame();
 }
 
 function update() {

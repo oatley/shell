@@ -2,8 +2,13 @@
 let music;
 
 let audio = {
+    // Initial prep for music
     prepAudio: function() {
+        // Setup the background music
         music = game.add.audio('bgmusic');
+        // Setup callbacks to resume and pause the music
+        this.game.onPause.add(audio.pauseMusic, this);
+        this.game.onResume.add(audio.resumeMusic, this);
     },
     // Mute background music
     muteMusicVolume: function() {

@@ -1,4 +1,14 @@
 let clean = {
+    // Run all cleanup functions
+    cleanUpAll: function() {
+        clean.cleanPlayers();
+        clean.cleanGround();
+        clean.cleanPlatforms();
+        clean.cleanBackground();
+        clean.cleanScreens();
+        if(sci)sci.destroy();
+        if(jan)jan.destroy();
+    },
     // Delete all screens
     cleanScreens: function() {
         while(displayScreensGroup.length > 0) { // Because it refuses to run the function on all items in the group
