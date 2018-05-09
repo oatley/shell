@@ -88,7 +88,7 @@ function create() {
 }
 
 function update() {
-    if (state.isGameOver) {
+    if (isGameOver) {
         state.gameOver();
     }
 
@@ -100,7 +100,7 @@ function update() {
     controller.controlAllPlayers(player1Group, player2Group);
 
     // Control game state (title screen, game over screen, in game)
-    if (state.isGameOver && resetGameButton.isDown) {
+    if (isGameOver && resetGameButton.isDown) {
         clean.cleanUpAll();
         startGame();
     } else if (isTitleScreen && resetGameButton.isDown) {
