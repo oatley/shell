@@ -44,8 +44,8 @@ let state = {
         levels.createMap1();
 
         // Create characters
-        characters.createMech(player1Group);
-        characters.createKnight(player2Group);
+        characters.createPlayer(player1Group);
+        characters.createPlayer(player2Group);
 
         // Resume music if it stopped
         audio.resumeMusic();

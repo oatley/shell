@@ -133,6 +133,9 @@ let characters = {
             y = Number(game.world.height - 200);
         }
 
+
+
+
         if (playerGroup === player1Group) {
             let player = game.add.sprite(x, y, 'sci');
             player.model = 'sci';
