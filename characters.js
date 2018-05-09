@@ -36,7 +36,9 @@ let characters = {
         if (player.portrait) {
             player.portrait.destroy();
         }
-        player.portrait = portraitsGroup.create(player.portraitX, player.portraitY, player.model + player.playerStage);
+        console.log(player.model + player.playerStage);
+        player.portrait = game.add.image(player.portraitX, player.portraitY, player.model + player.playerStage);
+        portraitsGroup.add(player.portrait);
     },
     // Callback runs when player touches ground
     groundPlayer: function(bounds, player) {
