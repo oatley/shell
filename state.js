@@ -10,10 +10,14 @@ var state = {
         game.world.bringToTop(displayScreensGroup);
         if (player1Group.length > 0) {
             console.log('you win player1');
-            console.log(player1Group[0].model);
+            player1Group.forEach(function(player) {
+                console.log(player.model);
+            }, this);
         } else if (player2Group.length > 0) {
             console.log('you win player1');
-            console.log(player1Group);
+            player2Group.forEach(function(player) {
+                console.log(player.model);
+            }, this);
         }
         clean.cleanPlayers();
     }
