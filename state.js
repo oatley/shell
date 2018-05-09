@@ -13,7 +13,7 @@ var state = {
             console.log(player1Group[0].model);
         } else if (player2Group.length > 0) {
             console.log('you win player1');
-            console.log(player1Group[0].model);
+            console.log(player1Group);
         }
         clean.cleanPlayers();
     }
