@@ -25,6 +25,6 @@ var state = {
                 game.world.bringToTop(portraitsGroup);
             }, this);
         }
-        clean.cleanPlayers();
+        //clean.cleanPlayers();
     }
 };
