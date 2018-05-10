@@ -78,6 +78,30 @@ let controller = {
             player2Group.forEach(function(player) {controller.controlPlayer(player, player2Group);}, this);
         }
     },
+    // When both players attack at the same time
+    clashPlayers: function (hitbox1, hitbox2) {
+        // These are not really player1 and player2, could be swapped?
+        let p1 = hitbox1.player;
+        let p2 = hitbox2.player;
+
+        if (p1.playerDirection == 'left') { // if facing left then move player to the right +num
+            p1.body.velocity.x = 300;
+            p1.body.velocity.y = -100;
+        } else if (p1.playerDirection == 'right') { // if facing right then move player to the left -num
+            p1.body.velocity.x = -300;
+            p1.body.velocity.y = -100;
+        }
+
+        if (p2.playerDirection == 'left') { // if facing left then move player to the right +num
+            p2.body.velocity.x = 300;
+            p2.body.velocity.y = -100;
+        } else if (p2.playerDirection == 'right') { // if facing right then move player to the left -num
+            p2.body.velocity.x = -300;
+            p2.body.velocity.y = -100;
+        }
+
+
+    },
     controlPlayer: function(player, group) {
         let upButton;
         let downButton;
@@ -107,6 +131,7 @@ let controller = {
         //  Reset the players velocity (movement)
         player.body.velocity.x = 0;
         if (attackButton.isDown || player.isAttacking) {
+            // Attacking
             if (!player.isAttacking) {
                 player.isAttacking = true;
                 player.attackTimer2 = game.time.create(true);
@@ -121,7 +146,7 @@ let controller = {
             }
 
         } else if (leftButton.isDown) {
-           //  Move to the right
+           //  Move to the left
            player.body.velocity.x = -player.playerMoveSpeed;
            player.playerDirection = 'left';
            if (player.body.velocity.y < player.playerJumpSensitivity || !(player.body.touching.down || player.body.blocked.down)) {
@@ -148,6 +173,7 @@ let controller = {
                player.animations.play(player.playerStage + '_walk_right');
            }
         } else {
+            // Standing still idle
             if (player.playerDirection == 'left') {
                if (player.body.velocity.y < player.playerJumpSensitivity) {
                    player.animations.play(player.playerStage + '_jump_left');
@@ -165,11 +191,9 @@ let controller = {
                    player.animations.play(player.playerStage + '_idle_right');
                }
             }
-
-
         }
 
-        //  Allow the player to jump if they are touching the ground.
+        //  Allow the player to jump if they are touching the ground + dynamic height
         if (!upButton.isDown && player.playerJumping && player.body.velocity.y < 0) {
             player.body.velocity.y = player.body.velocity.y * 0.5;
             player.playerJumping = false;

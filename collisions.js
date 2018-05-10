@@ -13,5 +13,17 @@ let collisions = {
         // Allow hitboxs to be detected on other players
         game.physics.arcade.overlap(player1Group, player2AttackGroup);
         game.physics.arcade.overlap(player2Group, player1AttackGroup);
+        // Allows for detection of hitbox overlap
+        game.physics.arcade.overlap(player1AttackGroup, player2AttackGroup);
+
+    },
+    // Check if hitbox collided with player or other hitbox
+    playerCollide: function (bounds, otherTarget) {
+        // Collided with the player
+        if (otherTarget.group && (otherTarget.group === player1Group || otherTarget.group === player2Group)) {
+            character.dealDamage(bounds, otherTarget);
+        } else { // Assume it collided with hitbox? maybe fine tune detection later
+            controller.clashPlayers(bounds, otherTarget);
+        }
     }
 };

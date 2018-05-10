@@ -69,6 +69,7 @@ let characters = {
 
         player.attackTimer2.stop();
         player.attackBox = game.add.sprite(player.body.x + player.body.width/2,  player.body.y + player.body.height/2, 'green');
+        player.attackBox.player = player;
         game.physics.arcade.enable(player.attackBox);
         player.attackBox.anchor.setTo(0.5, 0.5);
         if (player.playerDirection == 'left') {
@@ -88,7 +89,8 @@ let characters = {
         player.attackTimer.start();
 
         player.attackBox.body.onOverlap = new Phaser.Signal();
-        player.attackBox.body.onOverlap.add(characters.dealDamage);
+        player.attackBox.body.onOverlap.add(collisions.playerCollide);
+        //player.attackBox.body.onOverlap.add(characters.dealDamage);
         player.attackGroup.add(player.attackBox);
         game.world.bringToTop(player1AttackGroup);
         game.world.bringToTop(player2AttackGroup);
