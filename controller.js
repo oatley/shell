@@ -89,11 +89,11 @@ let controller = {
             p1Group.forEach(function(p) {
                 if (!p) return;
                 p.isClashing = true;
-                p.body.velocity.y = -100;
+                p.body.velocity.y = -50;
                 if (p.playerDirection == 'left') { // if facing left then move player to the right +num
-                    p.body.velocity.x = 300;
+                    p.body.velocity.x = 100;
                 } else if (p.playerDirection == 'right') { // if facing right then move player to the left -num
-                    p.body.velocity.x = -300;
+                    p.body.velocity.x = -100;
                 }
             }, this);
         }
@@ -101,11 +101,11 @@ let controller = {
             p2Group.forEach(function(p) {
                 if (!p) return;
                 p.isClashing = true;
-                p.body.velocity.y = -100;
+                p.body.velocity.y = -50;
                 if (p.playerDirection == 'left') { // if facing left then move player to the right +num
-                    p.body.velocity.x = 300;
+                    p.body.velocity.x = 100;
                 } else if (p.playerDirection == 'right') { // if facing right then move player to the left -num
-                    p.body.velocity.x = -300;
+                    p.body.velocity.x = -100;
                 }
             }, this);
         }
