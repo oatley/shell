@@ -93,6 +93,7 @@ let controller = {
         } else {
             p2group = player2Group;
         }
+        console.log('clashing?');
         //hitbox1.destroy();
         //hitbox2.destroy();
         if (p1Group.length > 0) {
