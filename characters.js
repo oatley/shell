@@ -118,7 +118,7 @@ let characters = {
         }
         player2Group.forEach(function(player) {
             player.isAttacking = false;
-            player.attackTimer.stop()
+            if (player.attackTimer) player.attackTimer.stop()
             if (player.attackBox) {
                 player.attackBox.destroy();
             }
