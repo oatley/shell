@@ -81,25 +81,32 @@ let controller = {
     // When both players attack at the same time
     clashPlayers: function (hitbox1, hitbox2) {
         // These are not really player1 and player2, could be swapped?
-        let p1 = hitbox1.player;
-        let p2 = hitbox2.player;
-        p1.isClashing = true;
-        p2.isClashing = true;
-        p1.body.velocity.y = -100;
-        p2.body.velocity.y = -100;
-        if (p1.playerDirection == 'left') { // if facing left then move player to the right +num
-            p1.body.velocity.x = 300;
-        } else if (p1.playerDirection == 'right') { // if facing right then move player to the left -num
-            p1.body.velocity.x = -300;
+        let p1Group = hitbox1.player.group;
+        let p2Group = hitbox2.player.group;
+        if (p1Group.length > 0) {
+            p1Group.forEach(function(p) {
+                if (!p) return;
+                p.isClashing = true;
+                p.body.velocity.y = -100;
+                if (p.playerDirection == 'left') { // if facing left then move player to the right +num
+                    p.body.velocity.x = 300;
+                } else if (p.playerDirection == 'right') { // if facing right then move player to the left -num
+                    p.body.velocity.x = -300;
+                }
+            }, this);
         }
-
-        if (p2.playerDirection == 'left') { // if facing left then move player to the right +num
-            p2.body.velocity.x = 300;
-        } else if (p2.playerDirection == 'right') { // if facing right then move player to the left -num
-            p2.body.velocity.x = -300;
+        if (p2Group.length > 0) {
+            p2Group.forEach(function(p) {
+                if (!p) return;
+                p.isClashing = true;
+                p.body.velocity.y = -100;
+                if (p.playerDirection == 'left') { // if facing left then move player to the right +num
+                    p.body.velocity.x = 300;
+                } else if (p.playerDirection == 'right') { // if facing right then move player to the left -num
+                    p.body.velocity.x = -300;
+                }
+            }, this);
         }
-
-
     },
     controlPlayer: function(player, group) {
         let upButton;
