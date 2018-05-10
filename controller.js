@@ -83,6 +83,16 @@ let controller = {
         // These are not really player1 and player2, could be swapped?
         let p1Group = hitbox1.player.group;
         let p2Group = hitbox2.player.group;
+        if (p1Group === player1Group) {
+            p1group = player1Group;
+        } else {
+            p1group = player2Group;
+        }
+        if (p2Group === player1Group) {
+            p2group = player1Group;
+        } else {
+            p2group = player2Group;
+        }
         hitbox1.destroy();
         hitbox2.destroy();
         if (p1Group.length > 0) {
