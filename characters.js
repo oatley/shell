@@ -64,7 +64,7 @@ let characters = {
     },
     // Creates hitbox and forces animation to stay in attack
     attackPlayer: function(player) {
-        if (!player) {
+        if (!player || isClashing) {
             return;
         }
 
