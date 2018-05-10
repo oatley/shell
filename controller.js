@@ -83,6 +83,8 @@ let controller = {
         // These are not really player1 and player2, could be swapped?
         let p1Group = hitbox1.player.group;
         let p2Group = hitbox2.player.group;
+        hitbox1.destroy();
+        hitbox2.destroy();
         if (p1Group.length > 0) {
             p1Group.forEach(function(p) {
                 if (!p) return;
