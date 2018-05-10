@@ -93,8 +93,8 @@ let controller = {
         } else {
             p2group = player2Group;
         }
-        hitbox1.destroy();
-        hitbox2.destroy();
+        //hitbox1.destroy();
+        //hitbox2.destroy();
         if (p1Group.length > 0) {
             p1Group.forEach(function(p) {
                 if (!p) return;
