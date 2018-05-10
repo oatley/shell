@@ -19,6 +19,7 @@ let collisions = {
     },
     // Check if hitbox collided with player or other hitbox
     playerCollide: function (bounds, otherTarget) {
+        if (!otherTarget.group) return; // uhhh race condition? This is failing on code that hasn't run yet in clashPlayers
         // Collided with the player
         if (otherTarget.group && (otherTarget.group === player1Group || otherTarget.group === player2Group)) {
             characters.dealDamage(bounds, otherTarget);
