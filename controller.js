@@ -128,7 +128,7 @@ let controller = {
             let platformCollision = game.physics.arcade.collide(player, platformGroup);
         }
         //  Reset the players velocity (movement)
-        if(!isClashing) {
+        if(!player.isClashing) {
             player.body.velocity.x = 0;
         }
         if (attackButton.isDown || player.isAttacking) {
@@ -140,9 +140,9 @@ let controller = {
                 player.attackTimer2.start();
                 //attackPlayer(player);
             }
-            if (isClashing && player.playerDirection == 'left') {
+            if (player.isClashing && player.playerDirection == 'left') {
                 player.animations.play(player.playerStage + '_fall_left');
-            } else if (isClashing && player.playerDirection == 'right') {
+            } else if (player.isClashing && player.playerDirection == 'right') {
                 player.animations.play(player.playerStage + '_fall_right');
             } else if (player.playerDirection == 'left') {
                 player.animations.play(player.playerStage + '_attack_left');
