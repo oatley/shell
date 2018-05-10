@@ -83,21 +83,20 @@ let controller = {
         // These are not really player1 and player2, could be swapped?
         let p1 = hitbox1.player;
         let p2 = hitbox2.player;
-
+        p1.isClashing = true;
+        p2.isClashing = true;
+        p1.body.velocity.y = -100;
+        p2.body.velocity.y = -100;
         if (p1.playerDirection == 'left') { // if facing left then move player to the right +num
             p1.body.velocity.x = 300;
-            p1.body.velocity.y = -100;
         } else if (p1.playerDirection == 'right') { // if facing right then move player to the left -num
             p1.body.velocity.x = -300;
-            p1.body.velocity.y = -100;
         }
 
         if (p2.playerDirection == 'left') { // if facing left then move player to the right +num
             p2.body.velocity.x = 300;
-            p2.body.velocity.y = -100;
         } else if (p2.playerDirection == 'right') { // if facing right then move player to the left -num
             p2.body.velocity.x = -300;
-            p2.body.velocity.y = -100;
         }
 
 
@@ -129,7 +128,9 @@ let controller = {
             let platformCollision = game.physics.arcade.collide(player, platformGroup);
         }
         //  Reset the players velocity (movement)
-        player.body.velocity.x = 0;
+        if(!isClashing) {
+            player.body.velocity.x = 0;
+        }
         if (attackButton.isDown || player.isAttacking) {
             // Attacking
             if (!player.isAttacking) {
@@ -139,7 +140,11 @@ let controller = {
                 player.attackTimer2.start();
                 //attackPlayer(player);
             }
-            if (player.playerDirection == 'left') {
+            if (isClashing && player.playerDirection == 'left') {
+                player.animations.play(player.playerStage + '_fall_left');
+            } else if (isClashing && player.playerDirection == 'right') {
+                player.animations.play(player.playerStage + '_fall_right');
+            } else if (player.playerDirection == 'left') {
                 player.animations.play(player.playerStage + '_attack_left');
             } else if (player.playerDirection == 'right') {
                 player.animations.play(player.playerStage + '_attack_right');

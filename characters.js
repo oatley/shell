@@ -50,6 +50,7 @@ let characters = {
             return;
         }
         player.isGrounded = true;
+        if (player.isClashing) player.isClashing = false;
     },
     // Callback for the hitbox that deals damage
     dealDamage: function(bounds, player) {
@@ -159,6 +160,7 @@ let characters = {
         player.group = playerGroup;
         player.playerJumpSensitivity = -5;
         player.isAttacking = false;
+        player.isClashing = false;
         game.physics.arcade.enable(player);
         if (velocityx) player.body.velocity.x = velocityx;
         if (velocityy) player.body.velocity.y = velocityy;
