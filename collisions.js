@@ -19,13 +19,13 @@ let collisions = {
     },
     // Check if hitbox collided with player or other hitbox
     playerCollide: function (bounds, otherTarget) {
-        
+
         // Collided with the player
         if (otherTarget.group && (otherTarget.group === player1Group || otherTarget.group === player2Group)) {
-            console.log('dealing dmg');
+            //console.log('dealing dmg');
             characters.dealDamage(bounds, otherTarget);
         } else { // Assume it collided with hitbox? maybe fine tune detection later
-            console.log('clashing players');
+            //console.log('clashing players');
             controller.clashPlayers(bounds, otherTarget);
         }
     }
