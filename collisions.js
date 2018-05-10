@@ -21,7 +21,7 @@ let collisions = {
     playerCollide: function (bounds, otherTarget) {
         // Collided with the player
         if (otherTarget.group && (otherTarget.group === player1Group || otherTarget.group === player2Group)) {
-            character.dealDamage(bounds, otherTarget);
+            characters.dealDamage(bounds, otherTarget);
         } else { // Assume it collided with hitbox? maybe fine tune detection later
             controller.clashPlayers(bounds, otherTarget);
         }
