@@ -35,7 +35,7 @@ function create() {
     screen.displayTitleScreen(displayScreensGroup);
 
     // Start background music and on resume and pause callbacks
-    audio.startMusic();
+    //audio.startMusic(); // Instead wait for prepaudio to finish
 }
 
 function update() {
