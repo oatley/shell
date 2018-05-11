@@ -56,7 +56,7 @@ let characters = {
     dealDamage: function(bounds, player) {
         // destroy hitbox created to detect a hit on player
         bounds.destroy();
-        audio.playSFXHit();
+        //audio.playSFXHit();
         // Send player to next stage
         player.group.forEach(function(player) {
             characters.switchPlayerStage(player);
