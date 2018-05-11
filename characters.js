@@ -46,10 +46,10 @@ let characters = {
     },
     // Callback runs when player touches ground
     groundPlayer: function(bounds, player) {
+        audio.playSFXLand();
         if (!player) {
             return;
         }
-        audio.playSFXLand();
         player.isGrounded = true;
         if (player.isClashing) player.isClashing = false;
     },
