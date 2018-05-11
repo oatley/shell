@@ -210,6 +210,7 @@ let controller = {
                } else if (!(player.body.touching.down || player.body.blocked.down)) {
                    player.animations.play(player.playerStage + '_fall_left');
                } else {
+                   audio.pauseSFXRun();
                    player.animations.play(player.playerStage + '_idle_left');
                }
             } else if (player.playerDirection == 'right') {
@@ -218,6 +219,7 @@ let controller = {
                } else if (!(player.body.touching.down || player.body.blocked.down)) {
                    player.animations.play(player.playerStage + '_fall_right');
                } else {
+                   audio.pauseSFXRun();
                    player.animations.play(player.playerStage + '_idle_right');
                }
             }

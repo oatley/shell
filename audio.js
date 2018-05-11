@@ -104,6 +104,12 @@ let audio = {
     playSFXRun: function () {
         audioRun.play();
     },
+    resumeSFXRun: function () {
+        audioRun.resume();
+    },
+    pauseSFXRun: function () {
+        audioRun.pause();
+    },
     playSFXHit: function () {
         audioHit.play();
     },
