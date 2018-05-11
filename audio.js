@@ -97,6 +97,16 @@ let audio = {
         audioHit.mute = false;
         audioLand.mute = false;
         music.play();
-    }
+    },
+    playSFXRun: function () {
+        audioRun.play();
+    },
+    playSFXHit: function () {
+        console.log('playing sound effects hit');
+        audioHit.play();
+    },
+    playSFXLand: function () {
+        audioLand.play();
+    },
 
 };
