@@ -182,9 +182,10 @@ let characters = {
         player.isAudioRunReady = false;
         player.audioRunStopped = function () {player.audioRunPlaying = false;player.isAudioRunStopped = true;};
         // This only runs once, when audio is decoded; Sets up callback to notify player when audio stops, also sets a bool to notify decode complete
-        player.setAudioRunReady = function() {player.audioRun.onStop.add(player.audioRunStopped, this); player.isAudioRunReady = true;};
+        player.setAudioRunReady = function() {player.isAudioRunReady = true;};
         // Create the audio run object which can be played if it's ready
         player.audioRun = audio.getAudioRun(player);
+        player.audioRun.onStop.add(player.audioRunStopped, this); 
 
 
 
