@@ -158,6 +158,7 @@ let characters = {
             player.portraitX = game.world.width - 64;
             player.portraitY = game.world.height - 64;
         }
+        player.audioRun = getAudioRun();
         player.group = playerGroup;
         player.playerJumpSensitivity = -5;
         player.isAttacking = false;

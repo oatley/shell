@@ -185,6 +185,7 @@ let controller = {
                }
            } else {
                //audio.playSFXRun();
+               console.log(player.audioRun.ready);
                player.animations.play(player.playerStage + '_walk_left');
            }
         } else if (rightButton.isDown) {
