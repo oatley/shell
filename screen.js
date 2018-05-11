@@ -70,7 +70,7 @@ let screen = {
         if (!player.isCopy) {
             player.group.forEach(function(p) {
                 p.isCopy = false;
-            }
+            });
             player.isCopy = true;
         }
         player.isAudioRunPlaying = false;
