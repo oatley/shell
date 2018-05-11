@@ -80,17 +80,14 @@ let audio = {
 
         music.play();
     },
-    getAudioRun: function () {
+    getAudioRun: function (player) {
         // SoundFX
         let audioRun = game.add.audio('run');
         audioRun.ready = false;
-        game.sound.setDecodedCallback([audioRun], audio.setAudioReady, this, audioRun);
+        game.sound.setDecodedCallback([audioRun], player.setAudioRunReady, this);
         return audioRun;
         //audioHit = game.add.audio('hit');
         //audioLand = game.add.audio('land');
-    },
-    setAudioReady: function (audio) {
-        audio.ready = true;
     }
 
 

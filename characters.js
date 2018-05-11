@@ -158,7 +158,6 @@ let characters = {
             player.portraitX = game.world.width - 64;
             player.portraitY = game.world.height - 64;
         }
-        player.audioRun = audio.getAudioRun();
         player.group = playerGroup;
         player.playerJumpSensitivity = -5;
         player.isAttacking = false;
@@ -176,6 +175,12 @@ let characters = {
 
         // Sets player body and attributes based on stage
         characters.switchPlayerStage(player, stage=stage);
+
+        // Prepare run auidio for players
+        player.audioRun = audio.getAudioRun(player);
+        player.setAudioRunReady = function() {player.audioRun.ready = true;}
+        
+
 
         // Add to group player1 or player2 and bring to front
         playerGroup.add(player);
