@@ -178,8 +178,8 @@ let characters = {
 
         // Prepare run auidio for players
         player.audioRun = audio.getAudioRun(player);
-        player.setAudioRunReady = function() {player.audioRun.ready = true;}
-        
+        player.setAudioRunReady = function() {player.audioRunReady = true;}
+
 
 
         // Add to group player1 or player2 and bring to front
