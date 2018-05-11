@@ -90,6 +90,7 @@ let audio = {
     },
     audioRunCheck: function (player) {
         if (player.isAudioRunReady && !player.isAudioRunPlaying && player.isAudioRunStopped && !player.isCopy) {
+            player.audioRun.stop();
             player.isAudioRunPlaying = true;
             player.isAudioRunStopped = false;
             player.audioRun.play();
