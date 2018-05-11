@@ -16,7 +16,7 @@ let audio = {
         audioLand = game.add.audio('land');
 
         // Decodes all sounds, only after this is complete will startMusic run
-        game.sound.setDecodedCallback([ music, audioRun, audioHit, audioLand ], startMusic, this);
+        game.sound.setDecodedCallback([ music, audioRun, audioHit, audioLand ], audio.startMusic, this);
 
         // Setup callbacks to resume and pause the music
         game.onPause.add(audio.pauseMusic, this);
