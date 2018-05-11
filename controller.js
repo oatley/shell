@@ -184,6 +184,7 @@ let controller = {
                    player.animations.play(player.playerStage + '_fall_left');
                }
            } else {
+               audio.playSFXRun();
                player.animations.play(player.playerStage + '_walk_left');
            }
         } else if (rightButton.isDown) {
@@ -198,6 +199,7 @@ let controller = {
                }
 
            } else {
+               audio.playSFXRun();
                player.animations.play(player.playerStage + '_walk_right');
            }
         } else {
@@ -226,7 +228,7 @@ let controller = {
             player.body.velocity.y = player.body.velocity.y * 0.5;
             player.playerJumping = false;
         } else if (upButton.isDown && (player.body.touching.down && !player.body.touching.up && player.isGrounded )) {
-            audio.playSFXLand();
+            //audio.playSFXLand();
             player.body.velocity.y = player.playerJumpSpeed;
             player.playerJumping = true;
             player.isGrounded = false;
