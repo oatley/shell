@@ -91,7 +91,7 @@ let audio = {
     },
     // Initial start of background music
     startMusic: function() {
-        music.volume = 5;
+        music.volume = 0;
         audioRun.mute = 10;
         audioHit.mute = 10;
         audioLand.mute = 10;
