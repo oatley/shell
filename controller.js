@@ -185,17 +185,7 @@ let controller = {
                }
            } else {
                //audio.playSFXRun();
-               if (player.isAudioRunReady && !player.isAudioRunPlaying && player.isAudioRunStopped && !player.isCopy) {
-                   player.isAudioRunPlaying = true;
-                   player.isAudioRunStopped = false;
-                   player.audioRun.play();
-               } else if (player.isAudioRunReady && player.isAudioRunPlaying && !player.isAudioRunStopped && !player.isCopy) {
-                   //do nothing because it's playing?
-               } else if (player.isAudioRunReady && !player.isAudioRunPlaying && !player.isAudioRunStopped && !player.isCopy) {
-                   // The audio is paused because it hasn't finished playing and it's not playing
-                   player.isAudioRunPlaying = true;
-                   player.audioRun.resume();
-               }
+               audio.audioRunCheck(player);
                player.animations.play(player.playerStage + '_walk_left');
            }
         } else if (rightButton.isDown) {
@@ -211,6 +201,7 @@ let controller = {
 
            } else {
                //udio.playSFXRun();
+               audio.audioRunCheck(player);
                player.animations.play(player.playerStage + '_walk_right');
            }
         } else {
@@ -222,10 +213,7 @@ let controller = {
                    player.animations.play(player.playerStage + '_fall_left');
                } else {
                    //audio.pauseSFXRun();
-                   if (player.isAudioRunReady && player.isAudioRunPlaying && !player.isCopy) {
-                       player.isAudioRunPlaying = false;
-                       player.audioRun.pause();
-                   }
+                   audio.audioRunPauseCheck(player);
                    player.animations.play(player.playerStage + '_idle_left');
                }
             } else if (player.playerDirection == 'right') {
@@ -235,6 +223,7 @@ let controller = {
                    player.animations.play(player.playerStage + '_fall_right');
                } else {
                    //audio.pauseSFXRun();
+                   audio.audioRunPauseCheck(player);
                    player.animations.play(player.playerStage + '_idle_right');
                }
             }
