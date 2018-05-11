@@ -57,7 +57,7 @@ let screen = {
                                   velocityx=player.body.velocity.x,
                                   velocityy=player.body.velocity.y,
                                   isJumping=player.isJumping,
-                                  isCopy = true;
+                                  isCopy = true
                                 );
 
             game.world.bringToTop(player.group);
