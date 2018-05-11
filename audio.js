@@ -99,11 +99,12 @@ let audio = {
             // The audio is paused because it hasn't finished playing and it's not playing
             player.isAudioRunPlaying = true;
             player.audioRun.resume();
-        }, audioRunPauseCheck: function (player) {
-            if (player.isAudioRunReady && player.isAudioRunPlaying && !player.isCopy) {
-                player.isAudioRunPlaying = false;
-                player.audioRun.pause();
-            }
+        }
+    },
+    audioRunPauseCheck: function (player) {
+        if (player.isAudioRunReady && player.isAudioRunPlaying && !player.isCopy) {
+            player.isAudioRunPlaying = false;
+            player.audioRun.pause();
         }
     }
 
