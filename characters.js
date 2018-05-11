@@ -49,6 +49,7 @@ let characters = {
         if (!player) {
             return;
         }
+        audio.playSFXLand();
         player.isGrounded = true;
         if (player.isClashing) player.isClashing = false;
     },

@@ -102,7 +102,6 @@ let audio = {
         audioRun.play();
     },
     playSFXHit: function () {
-        console.log('playing sound effects hit');
         audioHit.play();
     },
     playSFXLand: function () {
