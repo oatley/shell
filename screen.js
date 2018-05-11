@@ -65,6 +65,8 @@ let screen = {
     },
     // Callback to destroy character out of bounds
     destroyCharacter: function(player) {
+        player.isAudioRunPlaying = false;
+        player.audioRun.stop();
         player.destroy();
     }
 
