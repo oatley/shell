@@ -185,7 +185,17 @@ let controller = {
                }
            } else {
                //audio.playSFXRun();
-               if (player.audioRun) console.log(player.audioRunReady);
+               if (player.isAudioRunReady && !player.isAudioRunPlaying && player.isAudioRunStopped) {
+                   player.isAudioRunPlaying = true;
+                   player.isAudioRunStopped = false;
+                   player.audioRun.play();
+               } else if (player.isAudioRunReady && player.isAudioRunPlaying && !player.isAudioRunStopped) {
+                   //do nothing because it's playing?
+               } else if (player.isAudioRunReady && !player.isAudioRunPlaying && !player.isAudioRunStopped) {
+                   // The audio is paused because it hasn't finished playing and it's not playing
+                   player.isAudioRunPlaying = true;
+                   player.audioRun.resume();
+               }
                player.animations.play(player.playerStage + '_walk_left');
            }
         } else if (rightButton.isDown) {
@@ -212,6 +222,10 @@ let controller = {
                    player.animations.play(player.playerStage + '_fall_left');
                } else {
                    //audio.pauseSFXRun();
+                   if (player.isAudioRunReady && player.isAudioRunPlaying) {
+                       player.isAudioRunPlaying = false;
+                       player.audioRun.pause();
+                   }
                    player.animations.play(player.playerStage + '_idle_left');
                }
             } else if (player.playerDirection == 'right') {
