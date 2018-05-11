@@ -177,8 +177,9 @@ let characters = {
         characters.switchPlayerStage(player, stage=stage);
 
         // Prepare run auidio for players
-        player.audioRun = audio.getAudioRun(player);
         player.setAudioRunReady = function() {player.audioRunReady = true;};
+        player.audioRun = audio.getAudioRun(player);
+
 
 
 
