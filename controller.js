@@ -184,7 +184,7 @@ let controller = {
                    player.animations.play(player.playerStage + '_fall_left');
                }
            } else {
-               audio.playSFXRun();
+               //audio.playSFXRun();
                player.animations.play(player.playerStage + '_walk_left');
            }
         } else if (rightButton.isDown) {
@@ -199,7 +199,7 @@ let controller = {
                }
 
            } else {
-               audio.playSFXRun();
+               //udio.playSFXRun();
                player.animations.play(player.playerStage + '_walk_right');
            }
         } else {
@@ -210,7 +210,7 @@ let controller = {
                } else if (!(player.body.touching.down || player.body.blocked.down)) {
                    player.animations.play(player.playerStage + '_fall_left');
                } else {
-                   audio.pauseSFXRun();
+                   //audio.pauseSFXRun();
                    player.animations.play(player.playerStage + '_idle_left');
                }
             } else if (player.playerDirection == 'right') {
@@ -219,7 +219,7 @@ let controller = {
                } else if (!(player.body.touching.down || player.body.blocked.down)) {
                    player.animations.play(player.playerStage + '_fall_right');
                } else {
-                   audio.pauseSFXRun();
+                   //audio.pauseSFXRun();
                    player.animations.play(player.playerStage + '_idle_right');
                }
             }

@@ -12,6 +12,10 @@ let config = {
 }
 let game = new Phaser.Game(config);
 
+// Audio should be apart of each characters
+// Each character needs to keep track of when the audio starts, stops, and is pause/resume
+
+
 function create() {
     // Start the simple physics
     game.physics.startSystem(Phaser.Physics.ARCADE);
