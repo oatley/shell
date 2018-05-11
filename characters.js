@@ -46,7 +46,6 @@ let characters = {
     },
     // Callback runs when player touches ground
     groundPlayer: function(bounds, player) {
-        audio.playSFXLand();
         if (!player) {
             return;
         }

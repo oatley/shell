@@ -226,6 +226,7 @@ let controller = {
             player.body.velocity.y = player.body.velocity.y * 0.5;
             player.playerJumping = false;
         } else if (upButton.isDown && (player.body.touching.down && !player.body.touching.up && player.isGrounded )) {
+            audio.playSFXLand();
             player.body.velocity.y = player.playerJumpSpeed;
             player.playerJumping = true;
             player.isGrounded = false;
