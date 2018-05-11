@@ -56,7 +56,8 @@ let screen = {
             characters.createPlayer(player.group, x, y - 64 - 20, stage=player.playerStage,
                                   velocityx=player.body.velocity.x,
                                   velocityy=player.body.velocity.y,
-                                  isJumping=player.isJumping
+                                  isJumping=player.isJumping,
+                                  isCopy = true;
                                 );
 
             game.world.bringToTop(player.group);
@@ -64,7 +65,14 @@ let screen = {
         }
     },
     // Callback to destroy character out of bounds
-    destroyCharacter: function(player) {
+    destroyCharacter: function (player) {
+        // for all copies in the same group, check if the other one isCopy, and tell them they are no longer a copy
+        if (!player.isCopy) {
+            player.group.forEach(function(p) {
+                p.isCopy = false;
+            }
+            player.isCopy = true;
+        }
         player.isAudioRunPlaying = false;
         player.audioRun.stop();
         player.destroy();

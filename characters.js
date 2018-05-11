@@ -126,7 +126,7 @@ let characters = {
         }, this);
     },
     // Create knight character and animations
-    createPlayer: function(playerGroup, x = 0, y = 0, stage = 'Stage1', velocityx = 0, velocityy = 0, isJumping = false) {
+    createPlayer: function(playerGroup, x = 0, y = 0, stage = 'Stage1', velocityx = 0, velocityy = 0, isJumping = false, isCopy = false) {
         let player
         // Positions
         if (playerGroup === player1Group && (x == 0 && y == 0) ) {
@@ -185,7 +185,7 @@ let characters = {
         player.setAudioRunReady = function() {player.isAudioRunReady = true;};
         // Create the audio run object which can be played if it's ready
         player.audioRun = audio.getAudioRun(player);
-        player.audioRun.onStop.add(player.audioRunStopped, this); 
+        player.audioRun.onStop.add(player.audioRunStopped, this);
 
 
 

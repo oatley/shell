@@ -185,13 +185,13 @@ let controller = {
                }
            } else {
                //audio.playSFXRun();
-               if (player.isAudioRunReady && !player.isAudioRunPlaying && player.isAudioRunStopped) {
+               if (player.isAudioRunReady && !player.isAudioRunPlaying && player.isAudioRunStopped && !player.isCopy) {
                    player.isAudioRunPlaying = true;
                    player.isAudioRunStopped = false;
                    player.audioRun.play();
-               } else if (player.isAudioRunReady && player.isAudioRunPlaying && !player.isAudioRunStopped) {
+               } else if (player.isAudioRunReady && player.isAudioRunPlaying && !player.isAudioRunStopped && !player.isCopy) {
                    //do nothing because it's playing?
-               } else if (player.isAudioRunReady && !player.isAudioRunPlaying && !player.isAudioRunStopped) {
+               } else if (player.isAudioRunReady && !player.isAudioRunPlaying && !player.isAudioRunStopped && !player.isCopy) {
                    // The audio is paused because it hasn't finished playing and it's not playing
                    player.isAudioRunPlaying = true;
                    player.audioRun.resume();
@@ -222,7 +222,7 @@ let controller = {
                    player.animations.play(player.playerStage + '_fall_left');
                } else {
                    //audio.pauseSFXRun();
-                   if (player.isAudioRunReady && player.isAudioRunPlaying) {
+                   if (player.isAudioRunReady && player.isAudioRunPlaying && !player.isCopy) {
                        player.isAudioRunPlaying = false;
                        player.audioRun.pause();
                    }
