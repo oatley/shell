@@ -41,10 +41,16 @@ let load = {
     loadMusic: function () {
         game.load.audio('bgmusic', ['assets/audio/bgmusic.mp3']);
     },
+    loadSoundFX: function () {
+        game.load.audio('run', ['assets/audio/running.mp3']);
+        game.load.audio('hit', ['assets/audio/hits.mp3']);
+        game.load.audio('land', ['assets/audio/land.mp3']);
+    },
     // Preload images, spritesheets, and audio
     preload: function () {
         load.loadImages();
         load.loadSpriteSheets();
         load.loadMusic();
+        load.loadSoundFX();
     }
 };

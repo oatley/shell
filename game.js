@@ -39,16 +39,17 @@ function create() {
 }
 
 function update() {
+    // Starts game from title, starts game from reset, and detects game over
     if (isGameOver && !isGameOverScreen) {
         state.gameOver();
     } else if (resetGameButton.isDown) {
         state.startGameCheck();
     }
 
-    // Colliders
+    // Colliders are loaded for overlap and physics collision
     collisions.collide();
     collisions.overlap();
 
-    // Accept controller input for players
+    // Accept controller input for players, checks every frame for keydowns
     controller.controlAllPlayers(player1Group, player2Group);
 }
